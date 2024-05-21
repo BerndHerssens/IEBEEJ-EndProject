@@ -1,0 +1,6 @@
+@IEBEEJ_HostAddress = http://localhost:5223
+
+GET {{IEBEEJ_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
