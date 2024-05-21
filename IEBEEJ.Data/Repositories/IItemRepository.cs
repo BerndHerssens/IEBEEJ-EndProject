@@ -21,7 +21,7 @@ namespace IEBEEJ.Data.Repositories
 
         public ItemEntity GetItemById(int id);
 
-        public UserEntity GetItemByUser (int userId);
+        public List<ItemEntity> GetItemByUser (int userId);
         
     }
 }

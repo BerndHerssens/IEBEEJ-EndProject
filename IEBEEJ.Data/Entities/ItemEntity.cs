@@ -7,22 +7,24 @@ using System.Threading.Tasks;
 
 namespace IEBEEJ.Data.Entities
 {
-    public class ItemEntity
+    public class ItemEntity : IEntity
     { 
         public ItemEntity(UserEntity seller) 
         {
         Seller = seller;
-        TimeCreated = DateTime.Now;
+        Created = DateTime.Now;
         }
-        
-        public int ID { get; set; }
+  
+        public int Id { get ; set; }
 
         [Required]
         [StringLength(50)]
         public string ItemName { get; set; }
 
+        public UserEntity Seller { get; } //UserEntity is een aparte tabel
+
         [Required]
-        public UserEntity Seller { get; }
+        public int SellerID { get; set; }
 
         [Required]
         [StringLength(200)]
@@ -31,30 +33,33 @@ namespace IEBEEJ.Data.Entities
         public List<BidEntity> AllBids { get; set; }
 
         [Required]
-        public int Views { get; set; } = 0;
+        public int Views { get; set; } = 0; //Nice To Have
 
         [Required]
-        public double EstimatedValueMin { get; set; }
+        public decimal EstimatedValueMin { get; set; } //Nice To Have
 
         [Required]
-        public double EstimatedValueMax { get; set; }
+        public decimal EstimatedValueMax { get; set; } //Nice To Have //decimal voor value's bij currency
 
         [Required]
-        public double StartingPrice { get; set; }
+        public decimal StartingPrice { get; set; }
 
         [Required]
+        public int CategoryId { get; set; }
         public CategoryEntity Category { get; set; }
 
         [Required]
         public DateTime EndDate { get; set; }
 
-        public AdressEntity SendingAdress { get; set; }
-
-        public Enum Status { get; set; }
+        public string SendingAdress { get; set; }
 
         [Required]
-        public DateTime TimeCreated { get ; set ; }
-
+        public int StatusId { get; set; }
+        public StatusEntity Status { get; set; }
         public DateTime LastModified { get; set; }
+        public bool IsActive { get; set; }
+
+        [Required]
+        public DateTime Created { get; set; }
     }
 }

@@ -16,13 +16,14 @@ namespace IEBEEJ.Data.Entities
         public string Name { get; set; }
 
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         public string Password { get; set; }
 
         [Required]
-        public List<AdressEntity> Adresses { get; set; }
+        public string Adress { get; set; }
 
         public List<BidEntity> Bids { get; set; }
 
@@ -33,7 +34,8 @@ namespace IEBEEJ.Data.Entities
         public List<UserEntity> LikedUsers { get; set; }
 
         [Required]
-        public int PhoneNumber { get; set; }
+        [Phone]
+        public string PhoneNumber { get; set; }
 
         [Required]
         public DateTime Birthday { get; set; }

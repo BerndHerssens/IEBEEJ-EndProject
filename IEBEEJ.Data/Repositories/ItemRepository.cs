@@ -29,7 +29,7 @@ namespace IEBEEJ.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public UserEntity GetItemByUser(int userId)
+        public List<ItemEntity> GetItemByUser(int userId)
         {
             throw new NotImplementedException();
         }
