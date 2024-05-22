@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IEBEEJ.Data.Repositories
 {
-    internal class BidRepository : IBidRepository
+    public class BidRepository : IBidRepository
     {
         private IEBEEJDBContext _dbContext;
 
