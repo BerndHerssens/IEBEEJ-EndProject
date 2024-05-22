@@ -5,7 +5,7 @@ namespace IEBEEJ.Data.Entities
 {
     public class BidEntity
     {
-        public BidEntity(UserEntity bidder, double bidValue) {
+        public BidEntity(UserEntity bidder, decimal bidValue) {
             Bidder = bidder;
             BidValue = bidValue;
         }

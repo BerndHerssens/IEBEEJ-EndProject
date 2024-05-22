@@ -9,19 +9,14 @@ namespace IEBEEJ.Data.Repositories
 {
     public interface IItemRepository
     {
-        public List<ItemEntity> GetAllItems(List<ItemEntity> itemList);
+        Task<IEnumerable<ItemEntity>> GetAllItemsAsync(int skip, int take);
+        Task CreateItemAsync(ItemEntity itemEntity);
+        Task RemoveItemByIDAsync(int id);
+        Task UpdateItemAsync(ItemEntity itemEntity);
+        Task<ItemEntity> GetItemByIdAsync(int id);
+        Task<List<ItemEntity>> GetItemsBySellerIDAsync (int userId);
 
-        public void AddItem();
-
-        public void RemoveItem(ItemEntity itemEntity);
-
-        public void UpdateItem(ItemEntity itemEntity);
-
-        public ItemEntity GetItemByName(string name);
-
-        public ItemEntity GetItemById(int id);
-
-        public List<ItemEntity> GetItemByUser (int userId);
+        //Task<List<ItemEntity>> GetItemsBySellerNameAsync (int userId);
         
     }
 }

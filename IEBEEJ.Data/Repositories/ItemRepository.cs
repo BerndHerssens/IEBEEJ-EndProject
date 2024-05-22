@@ -1,4 +1,5 @@
 ﻿using IEBEEJ.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,39 +10,58 @@ namespace IEBEEJ.Data.Repositories
 {
     internal class ItemRepository : IItemRepository
     {
-        public void AddItem()
+        private IEBEEJDBContext _dbcontext;
+        
+        public ItemRepository(IEBEEJDBContext dbcontext)
+        {
+            _dbcontext = dbcontext;
+        }
+
+        public async Task CreateItemAsync(ItemEntity itemEntity)
+        {
+            await _dbcontext.Items.AddAsync(itemEntity);
+            await _dbcontext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<ItemEntity>> GetAllItemsAsync(int skip, int take)
+        {
+            return await _dbcontext.Items
+                
+                .Skip(skip)
+                .Take(take)
+                .OrderByDescending(x => x.Id)
+                .ToListAsync();
+        }
+
+        public async Task<ItemEntity> GetItemByIdAsync(int id)
+        {
+            return await _dbcontext.Items
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<List<ItemEntity>> GetItemsBySellerIDAsync(int userId)
+        {
+            return await _dbcontext.Items.Where(x => x.SellerID == userId).ToListAsync();
+        }
+
+        public Task RemoveItemByIDAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<ItemEntity> GetAllItems(List<ItemEntity> itemList)
+        public Task UpdateItemAsync(ItemEntity itemEntity)
         {
             throw new NotImplementedException();
         }
 
-        public ItemEntity GetItemById(int id)
+        /*public async Task<List<ItemEntity>> GetFilteredDataAsync(string category, int skip, int take)
         {
-            throw new NotImplementedException();
-        }
-
-        public ItemEntity GetItemByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<ItemEntity> GetItemByUser(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveItem(ItemEntity itemEntity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateItem(ItemEntity itemEntity)
-        {
-            throw new NotImplementedException();
-        }
+            return await _dbcontext.Items
+                .Where(x => x.CategoryId = category )
+                .Skip(skip)
+                .Take(take)
+                .OrderByDescending(x => x.Id)
+                .ToListAsync();
+        }*/
     }
 }

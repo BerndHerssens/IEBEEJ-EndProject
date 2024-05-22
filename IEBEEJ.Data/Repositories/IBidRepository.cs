@@ -1,0 +1,16 @@
+﻿using IEBEEJ.Data.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace IEBEEJ.Data.Repositories
+{
+    internal interface IBidRepository
+    {
+        Task<BidEntity> GetBidByIDAsync(int bidID);
+        Task<IEnumerable<BidEntity>> GetAllBidsOfItemIDAsync(int itemID);
+        Task CreateItem
+    }
+}
