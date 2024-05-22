@@ -10,22 +10,22 @@ namespace IEBEEJ.Data.Repositories
 {
     internal class ItemRepository : IItemRepository
     {
-        private IEBEEJDBContext _dbcontext;
+        private IEBEEJDBContext _dbContext;
         
         public ItemRepository(IEBEEJDBContext dbcontext)
         {
-            _dbcontext = dbcontext;
+            _dbContext = dbcontext;
         }
 
         public async Task CreateItemAsync(ItemEntity itemEntity)
         {
-            await _dbcontext.Items.AddAsync(itemEntity);
-            await _dbcontext.SaveChangesAsync();
+            await _dbContext.Items.AddAsync(itemEntity);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ItemEntity>> GetAllItemsAsync(int skip, int take)
         {
-            return await _dbcontext.Items
+            return await _dbContext.Items
                 
                 .Skip(skip)
                 .Take(take)
@@ -35,28 +35,31 @@ namespace IEBEEJ.Data.Repositories
 
         public async Task<ItemEntity> GetItemByIdAsync(int id)
         {
-            return await _dbcontext.Items
+            return await _dbContext.Items
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<List<ItemEntity>> GetItemsBySellerIDAsync(int userId)
         {
-            return await _dbcontext.Items.Where(x => x.SellerID == userId).ToListAsync();
+            return await _dbContext.Items.Where(x => x.SellerID == userId).ToListAsync();
         }
 
-        public Task RemoveItemByIDAsync(int id)
+        public async Task RemoveItemByIDAsync(int id)
         {
-            throw new NotImplementedException();
+            ItemEntity walkEntity = new ItemEntity { Id = id };
+            _dbContext.Items.Remove(walkEntity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task UpdateItemAsync(ItemEntity itemEntity)
+        public async Task UpdateItemAsync(ItemEntity itemEntity)
         {
-            throw new NotImplementedException();
+            _dbContext.Items.Update(itemEntity);
+            await _dbContext.SaveChangesAsync();
         }
 
         /*public async Task<List<ItemEntity>> GetFilteredDataAsync(string category, int skip, int take)
         {
-            return await _dbcontext.Items
+            return await _dbContext.Items
                 .Where(x => x.CategoryId = category )
                 .Skip(skip)
                 .Take(take)

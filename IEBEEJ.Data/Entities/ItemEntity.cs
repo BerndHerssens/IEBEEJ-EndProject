@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace IEBEEJ.Data.Entities
 {
     public class ItemEntity : IEntity
-    { 
+    {
+        public ItemEntity() { }
         public ItemEntity(UserEntity seller) 
         {
         Seller = seller;
