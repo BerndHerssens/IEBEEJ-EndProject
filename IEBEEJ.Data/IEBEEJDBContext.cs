@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IEBEEJ.Data
 {
-    internal class IEBEEJDBContext : DbContext
+    public class IEBEEJDBContext : DbContext
     {
         public DbSet<ItemEntity> Items { get; set; }
         public DbSet<OrderEntity> Orders { get; set; }

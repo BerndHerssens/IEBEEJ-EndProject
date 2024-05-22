@@ -5,6 +5,9 @@ namespace IEBEEJ.Data.Entities
 {
     public class UserEntity
     {
+        public UserEntity()
+        {
+        }
 
         public UserEntity(Enum role) 
         {

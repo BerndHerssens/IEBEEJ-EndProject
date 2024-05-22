@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IEBEEJ.Data.Repositories
 {
-    internal class ItemRepository : IItemRepository
+    public class ItemRepository : IItemRepository
     {
         private IEBEEJDBContext _dbContext;
         

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IEBEEJ.Data.Repositories
 {
-    internal interface IBidRepository
+    public interface IBidRepository
     {
         Task<BidEntity> GetBidByIDAsync(int bidID);
         Task<IEnumerable<BidEntity>> GetAllBidsOfItemIDAsync(int itemID);
