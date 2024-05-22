@@ -18,8 +18,7 @@ namespace IEBEEJ.Business.Models
 
         public int BidderID { get; set; }
 
-        public virtual Item Item { get; set; }
+        public bool IsActive { get; set; }
 
-        public virtual User User { get; set; }
     }
 }
