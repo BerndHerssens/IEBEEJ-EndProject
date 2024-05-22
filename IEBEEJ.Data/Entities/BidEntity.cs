@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IEBEEJ.Data.Entities
 {
-    public class BidEntity
+    public class BidEntity : IEntity
     {
         public BidEntity() { }
         public BidEntity(UserEntity bidder, decimal bidValue, int itemID)
@@ -12,12 +12,14 @@ namespace IEBEEJ.Data.Entities
             BidValue = bidValue;
             ItemID = itemID;
         }
-        public int ID { get; set; }
+        public int Id { get; set; }
         public decimal BidValue { get; set; }
-        public DateTime TimeCreated { get; set; } = DateTime.Now;
-        public int ItemID {  get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
+        public int ItemID { get; set; }
 
+        public ItemEntity Item { get; set; }
         public int BidderId { get; set; }
         public UserEntity Bidder { get; set; }
+        public bool IsActive { get; set; }
     }
 }

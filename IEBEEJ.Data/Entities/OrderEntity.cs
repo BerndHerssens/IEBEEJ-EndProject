@@ -2,9 +2,9 @@
 
 namespace IEBEEJ.Data.Entities
 {
-    public class OrderEntity
+    public class OrderEntity : IEntity
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public List<string> PaymentMethod { get; set; }
 
         [Required]
@@ -14,5 +14,7 @@ namespace IEBEEJ.Data.Entities
         public BidEntity WonBidding { get; set; }
 
         public double TotalCost { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
     }
 }

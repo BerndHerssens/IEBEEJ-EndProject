@@ -3,7 +3,7 @@ using System.Security.Principal;
 
 namespace IEBEEJ.Data.Entities
 {
-    public class UserEntity
+    public class UserEntity : IEntity
     {
         public UserEntity()
         {
@@ -42,7 +42,8 @@ namespace IEBEEJ.Data.Entities
 
         [Required]
         public DateTime Birthday { get; set; }
-
+        public bool IsActive { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
         [Required]
         private Enum Role { get; set; }
     }
