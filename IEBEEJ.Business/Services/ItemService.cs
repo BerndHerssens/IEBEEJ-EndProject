@@ -5,7 +5,7 @@ using AutoMapper;
 
 namespace IEBEEJ.Business.Services
 {
-    public class ItemService
+    public class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepository;
         private IMapper _mapper;
@@ -18,31 +18,11 @@ namespace IEBEEJ.Business.Services
 
         public async Task<Item> GetItemByIdAsync(int id)
         {
-            Item item = new Item();
             ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(id);
 
             if (itemEntity != null)
             {
-                item.Id = itemEntity.Id;
-                item.ItemName = itemEntity.ItemName;
-                item.ItemDescription = itemEntity.ItemDescription;
-                item.StartingPrice = itemEntity.StartingPrice;
-                item.Created = itemEntity.Created;
-                item.IsActive = itemEntity.IsActive;
-                item.CategoryID = itemEntity.CategoryId;
-                item.SellerID = itemEntity.SellerID;
-                item.EndDate = itemEntity.EndDate;
-                item.IsSold = itemEntity.IsSold;
-                item.Category = (CategoryType)itemEntity.CategoryId;
-                item.AllBids = itemEntity.AllBids.Select(b => new Bid
-                {
-                    ID = b.Id,
-                    BidValue = b.BidValue,
-                    TimeCreated = b.Created,
-                    ItemID = b.ItemID,
-                    BidderID = b.BidderId,
-                    IsActive = b.IsActive
-                }).ToList();
+                Item item = _mapper.Map<Item>(itemEntity);
                 return item;
             }
             else
@@ -50,21 +30,7 @@ namespace IEBEEJ.Business.Services
                 return null;
             }
         }
-        public async Task<Item> GetItemByIdAsync2(int id)
-        {
-            Item item = new Item();
-            ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(id);
 
-            if (itemEntity != null)
-            {
-                item = _mapper.Map<Item>(itemEntity);
-                return item;
-            }
-            else
-            {
-                return null;
-            }
-        }
 
         public void GetHighestBidOnItem(Item item)
         {
@@ -74,6 +40,33 @@ namespace IEBEEJ.Business.Services
             }
         }
 
-        // TODO : itementity gelijkzetten aan itemmodel
+        public async Task ChangeItemActiveStatus(Item item)
+        {
+            item.IsActive = !item.IsActive;
+            ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
+
+            await _itemRepository.UpdateItemAsync(itemEntity);
+
+        }
+        public async Task ChangeItemSoldStatus(Item item)
+        {
+            item.IsSold = !item.IsSold;
+            ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
+
+            await _itemRepository.UpdateItemAsync(itemEntity);
+
+        }
+
+        public async Task CreateAnItem(Item item)
+        {
+            ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
+            await _itemRepository.CreateItemAsync(itemEntity);
+        }
+
+        public async Task<IEnumerable<Item>> GetAllItemsAsync()
+        {
+            IEnumerable<ItemEntity> itemEntitys = await _itemRepository.GetAllItemsAsync(0, 20);
+            return _mapper.Map<IEnumerable<Item>>(itemEntitys);
+        }
     }
 }

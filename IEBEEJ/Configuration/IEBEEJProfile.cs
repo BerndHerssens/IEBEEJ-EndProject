@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IEBEEJ.Business.Models;
 using IEBEEJ.Data.Entities;
+using IEBEEJ.DTO;
 
 
 namespace IEBEEJ.Configuration
@@ -11,6 +12,8 @@ namespace IEBEEJ.Configuration
         {
             CreateMap<BidEntity, Bid>().ReverseMap();
             CreateMap<ItemEntity, Item>().ReverseMap();
+
+            CreateMap<ItemDTO, Item>();
         }
     }
 }

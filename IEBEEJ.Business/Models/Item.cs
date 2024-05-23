@@ -11,37 +11,36 @@ namespace IEBEEJ.Business.Models
     public class Item
     {
         public Item() { }
-        public Item(User seller)
+        public Item(int sellerId)
         {
-            Seller = seller;
-            Created = DateTime.Now;
+            SellerId = sellerId;
         }
 
         public List<Bid> AllBids { get; set; }
-
+        //TODO: move from service to here
         public Bid? HighestBid { get; set; }
 
         public CategoryType Category { get; set; }
 
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
 
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
 
         public string ItemDescription { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; } = DateTime.Now.AddDays(7);
 
         public int Id { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
-        public bool IsSold { get; set; }
+        public bool IsSold { get; set; } = false;
 
         public string ItemName { get; set; }
 
         public User Seller { get; set; }
 
-        public int SellerID { get; set; }
+        public int SellerId { get; set; }
 
         public decimal StartingPrice { get; set; }
 

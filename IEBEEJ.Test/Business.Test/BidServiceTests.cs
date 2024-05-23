@@ -19,15 +19,19 @@ namespace IEBEEJ.Test.Business.Test
         public async Task CreateABidAsync_ShouldCreateBid()
         {
             // Arrange
+            var config = new MapperConfiguration(x => x.AddProfile(new IEBEEJProfile()));
+            var mapper = config.CreateMapper();
+
             decimal value = 100;
             int bidderID = 1;
             int itemID = 1;
+            Item item = new Item();
 
             var bidRepositoryMock = new Mock<IBidRepository>();
-            var bidService = new BidService(bidRepositoryMock.Object);
+            var bidService = new BidService(bidRepositoryMock.Object, mapper);
 
             // Act
-            await bidService.CreateABidAsync(value, bidderID, itemID);
+            await bidService.CreateABidAsync(value, bidderID, item);
 
             // Assert
             bidRepositoryMock.Verify(repo => repo.CreateBidAsync(It.Is<BidEntity>(bid =>

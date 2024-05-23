@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -57,8 +58,8 @@ namespace IEBEEJ.Data.Entities
         //[Required]
         /*public int Views { get; set; } = 0;*/ //Nice To Have
 
-         //Nice To Have
+        //Nice To Have
 
-         //Nice To Have //decimal voor value's bij currency
+        //Nice To Have //decimal voor value's bij currency
     }
 }

@@ -11,7 +11,12 @@ namespace IEBEEJ.Data.Entities
         public ItemEntity WonItem { get; set; }
 
         [Required]
+        public int WonItemId { get; set; }
+
+        [Required]
         public BidEntity WonBidding { get; set; }
+        [Required]
+        public int WonBidId { get; set; }
 
         public double TotalCost { get; set; }
         public bool IsActive { get; set; }
