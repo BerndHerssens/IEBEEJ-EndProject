@@ -9,7 +9,7 @@ namespace IEBEEJ.Data.Entities
         {
         }
 
-        public UserEntity(Enum role) 
+        public UserEntity(int role) 
         {
             Role = role;
         }
@@ -44,7 +44,7 @@ namespace IEBEEJ.Data.Entities
         public DateTime Birthday { get; set; }
         public bool IsActive { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
-        [Required]
-        private Enum Role { get; set; }
+        //[Required]
+        public int Role { get; set; }
     }
 }

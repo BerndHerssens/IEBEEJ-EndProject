@@ -26,6 +26,8 @@ namespace IEBEEJ.Business.Models
 
         public DateTime Created { get; set; } = DateTime.Now;
 
+        public DateTime LastUpdated { get; set; }
+
         public string ItemDescription { get; set; }
 
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(7);
