@@ -15,11 +15,53 @@ namespace IEBEEJ.Business.Services
     {
         private IBidRepository _bidRepository;
 
-        public BidService()
+        public BidService(IBidRepository bidRepository)
         {
-
+            _bidRepository = bidRepository;
         }
-        public async Task<BidEntity> CreateABidAsync(decimal value, int bidderID, int itemID)
+
+        public async Task<Bid> GetBidByIdAsync(int id)
+        {
+            Bid bid = new Bid();
+            BidEntity bidEntity = await _bidRepository.GetBidByIDAsync(id);
+
+            if (bidEntity != null)
+            {
+                bid.ID = bidEntity.Id;
+                bid.BidValue = bidEntity.BidValue;
+                bid.TimeCreated = bidEntity.Created;
+                bid.ItemID = bidEntity.ItemID;
+                bid.BidderID = bidEntity.BidderId;
+                bid.IsActive = bidEntity.IsActive;
+                return bid;
+            }
+            else
+            {
+                return null;
+            } 
+        }
+
+        public async Task<IEnumerable<Bid>> GetAllBidsAsync(int itemID)  // TODO : Automapper
+        {
+            List<Bid> bids = new List<Bid>();
+            IEnumerable<BidEntity> bidEntities = await _bidRepository.GetAllBidsOfItemIDAsync(itemID);
+
+            foreach (BidEntity bidEntity in bidEntities)
+            {
+                Bid bid = new Bid();
+                bid.ID = bidEntity.Id;
+                bid.BidValue = bidEntity.BidValue;
+                bid.TimeCreated = bidEntity.Created;
+                bid.ItemID = bidEntity.ItemID;
+                bid.BidderID = bidEntity.BidderId;
+                bid.IsActive = bidEntity.IsActive;
+                bids.Add(bid);
+            }
+
+            return bids;
+        }
+
+        public async Task CreateABidAsync(decimal value, int bidderID, int itemID)
         {
             BidEntity bidEntity = new BidEntity();
             bidEntity.BidValue = value;
@@ -28,8 +70,13 @@ namespace IEBEEJ.Business.Services
             bidEntity.ItemID = itemID;
             bidEntity.Created = DateTime.Now;
             await _bidRepository.CreateBidAsync(bidEntity);
-            return bidEntity;
         }
+
+        public async Task DeleteWalkByIdAsycn(int id)
+        {
+            await _bidRepository.DeleteBiddingByIdAsync(id);
+        }
+
 
     }
 }
