@@ -8,6 +8,13 @@ namespace IEBEEJ.Business.Models
 {
     public class Bid
     {
+        public Bid() { }
+        public Bid(int bidderId, decimal bidValue, int itemID)
+        {
+            BidderID = bidderId;
+            BidValue = bidValue;
+            ItemID = itemID;
+        }
         public int ID { get; set; }
 
        public decimal BidValue { get; set; }
@@ -18,8 +25,11 @@ namespace IEBEEJ.Business.Models
 
         public int BidderID { get; set; }
 
-        public virtual Item Item { get; set; }
+        public bool IsActive { get; set; }
 
-        public virtual User User { get; set; }
+        public Item Item { get; set; }
+
+        public User Bidder { get; set; }
+
     }
 }

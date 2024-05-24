@@ -9,7 +9,7 @@ namespace IEBEEJ.Data.Entities
         {
         }
 
-        public UserEntity(Enum role) 
+        public UserEntity(int role) 
         {
             Role = role;
         }
@@ -22,7 +22,7 @@ namespace IEBEEJ.Data.Entities
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        
         public string Password { get; set; }
 
         [Required]
@@ -32,7 +32,7 @@ namespace IEBEEJ.Data.Entities
 
         public List<ItemEntity> ItemsForSale { get; set; } //TODO: tezamen?
 
-        public List<OrderEntity> BoughtItems {  get; set; }
+        //public List<OrderEntity> BoughtItems {  get; set; }
 
         public List<UserEntity> LikedUsers { get; set; }
 
@@ -44,7 +44,7 @@ namespace IEBEEJ.Data.Entities
         public DateTime Birthday { get; set; }
         public bool IsActive { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
-        [Required]
-        private Enum Role { get; set; }
+        //[Required]
+        public int Role { get; set; }
     }
 }

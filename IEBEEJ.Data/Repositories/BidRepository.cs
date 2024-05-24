@@ -25,7 +25,7 @@ namespace IEBEEJ.Data.Repositories
 
         public async Task DeleteBiddingByIdAsync(int bidID)
         {
-            BidEntity bidEntity = new BidEntity() { ID = bidID };
+            BidEntity bidEntity = new BidEntity() { Id = bidID };
             _dbContext.Bids.Remove(bidEntity);
             await _dbContext.SaveChangesAsync();
         }
@@ -41,7 +41,7 @@ namespace IEBEEJ.Data.Repositories
         public async Task<BidEntity> GetBidByIDAsync(int bidID)
         {
             return await _dbContext.Bids
-               .SingleOrDefaultAsync(x => x.ID == bidID);
+               .SingleOrDefaultAsync(x => x.Id == bidID);
         }
     }
 }
