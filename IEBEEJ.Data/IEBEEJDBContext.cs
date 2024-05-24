@@ -9,7 +9,7 @@ namespace IEBEEJ.Data
         //public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<BidEntity> Bids { get; set; }
-        public DbSet<StatusEntity> Status { get; set; }
+       // public DbSet<StatusEntity> Status { get; set; }
         public DbSet<CategoryEntity> Category { get; set; }
 
         public IEBEEJDBContext(DbContextOptions<IEBEEJDBContext> dbContextOptions) : base(dbContextOptions)

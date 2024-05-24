@@ -82,7 +82,7 @@ namespace IEBEEJ.Business.Services
             return result;
         }
 
-        public async Task UpdateItem(int id, Item item)
+        public async Task UpdateItemAsync(int id, Item item)
         {
             ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(id);
             ItemEntity updatedEntity = _mapper.Map<ItemEntity>(item);
@@ -94,10 +94,13 @@ namespace IEBEEJ.Business.Services
             itemEntity.EstimatedValueMax = updatedEntity.EstimatedValueMax;
             itemEntity.EstimatedValueMin = updatedEntity.EstimatedValueMin;
             itemEntity.ItemName = updatedEntity.ItemName;
-            itemEntity.Id = id;
             itemEntity.LastModified = DateTime.Now;
 
             await _itemRepository.UpdateItemAsync(itemEntity);
+        }
+        public async Task DeleteItemAsync(int id)
+        {
+            await _itemRepository.GetItemByIdAsync(id);
         }
     }
 }

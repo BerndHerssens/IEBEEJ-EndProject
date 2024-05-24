@@ -10,9 +10,12 @@ namespace IEBEEJ.DTOs.ItemDTOs
         public int Category { get; set; }
         public int Id { get; set; }
         public int SellerID { get; set; }
+        public DateTime LastModified { get; set; }
         public string ItemDescription { get; set; }
         public string ItemName { get; set; }
         public string SendingAdress { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime EndDate { get; set; }
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IEBEEJ.Business.Models;
 using IEBEEJ.Business.Services;
+using IEBEEJ.DTOs.ItemDTOs;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -32,9 +33,10 @@ namespace IEBEEJ.Controllers
 
         // GET api/<ItemController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Item>> Get(int id)
         {
-            return "value";
+            Item item = await _itemService.GetItemByIdAsync(id);
+            return Ok(item);
         }
 
         // POST api/<ItemController>
@@ -43,16 +45,49 @@ namespace IEBEEJ.Controllers
         {
         }
 
-        // PUT api/<ItemController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+
+
 
         // DELETE api/<ItemController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async void Delete(int id)
         {
+            await _itemService.DeleteItemAsync(id);
+        }
+
+        [HttpPut]
+        [Route("UpdateItem")]
+        public async Task<ActionResult> UpdateItemAsync(int id, UpdateItemDTO updateItem)
+        {
+            if (ModelState.IsValid)
+            {
+                Item item = _mapper.Map<Item>(updateItem);
+                await _itemService.UpdateItemAsync(id, item);
+                return Created();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPut]
+        [Route("ActivityChangeItem")]
+        public async Task<ActionResult> ChangeItemActivityAsync(int id)
+        {
+            Item item = await _itemService.GetItemByIdAsync(id);
+            await _itemService.ChangeItemActiveStatus(item);
+            await _itemService.UpdateItemAsync(id, item);
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("SoldStatusChange")]
+        public async Task<ActionResult> ChangeItemSold(int id)
+        {
+            Item item = await _itemService.GetItemByIdAsync(id);
+            await _itemService.ChangeItemSoldStatus(item);
+            await _itemService.UpdateItemAsync(id, item);
+            return Ok();
         }
     }
 }

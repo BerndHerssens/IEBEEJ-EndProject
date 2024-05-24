@@ -11,6 +11,7 @@ namespace IEBEEJ.Business.Services
         Task<IEnumerable<Item>> GetAllItemsAsync();
         void GetHighestBidOnItem(Item item);
         Task<Item> GetItemByIdAsync(int id);
-        Task UpdateItem(int id, Item item);
+        Task UpdateItemAsync(int id, Item item);
+        Task DeleteItemAsync(int id);
     }
 }
