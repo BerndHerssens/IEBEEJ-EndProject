@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace IEBEEJ.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,6 +51,7 @@ namespace IEBEEJ.Data.Migrations
                     Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
                     UserEntityId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -129,6 +130,21 @@ namespace IEBEEJ.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Test" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Adress", "Birthday", "Created", "Email", "IsActive", "Name", "Password", "PhoneNumber", "Role", "UserEntityId" },
+                values: new object[] { 1, "u moeder", new DateTime(2024, 5, 24, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6683), new DateTime(2024, 5, 24, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6638), "Buddy@hotmail.com", false, "Buddy", "1230", "1234567890", 0, null });
+
+            migrationBuilder.InsertData(
+                table: "Items",
+                columns: new[] { "Id", "CategoryId", "Created", "EndDate", "EstimatedValueMax", "EstimatedValueMin", "IsActive", "IsSold", "ItemDescription", "ItemName", "LastModified", "SellerID", "SendingAdress", "StartingPrice", "UserEntityId" },
+                values: new object[] { 1, 1, new DateTime(2024, 5, 24, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6772), new DateTime(2024, 5, 31, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6774), 50000m, 10m, false, false, "Doodoo", "Dada item", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "dok", 1m, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bids_ItemID",

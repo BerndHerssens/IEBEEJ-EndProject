@@ -14,10 +14,9 @@ namespace IEBEEJ.Data.Entities
 
         public List<BidEntity> AllBids { get; set; }
 
-        public CategoryEntity Category { get; set; }
-
         [Required]
         public int CategoryId { get; set; }
+        public CategoryEntity Category { get; set; }
 
         [Required]
         public DateTime Created { get; set; }

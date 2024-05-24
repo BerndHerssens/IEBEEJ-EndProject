@@ -19,9 +19,11 @@ namespace IEBEEJ.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder) //seeding: dummy data 
         {
             base.OnModelCreating(modelBuilder);
-
             List<UserEntity> users = GenerateDummyUsers();
             modelBuilder.Entity<UserEntity>().HasData(users);
+            
+            List<CategoryEntity> categories = GenerateDummyCategories();
+            modelBuilder.Entity<CategoryEntity>().HasData(categories);
 
             List<ItemEntity> items = GenerateDummyItems();
             modelBuilder.Entity<ItemEntity>().HasData(items);
@@ -30,17 +32,17 @@ namespace IEBEEJ.Data
 
         private List<UserEntity> GenerateDummyUsers()
         {
-            return new List<UserEntity> 
-            { 
+            return new List<UserEntity>
+            {
                 new UserEntity
                 {
                     Id = 1,
                     Name = "Buddy",
                     Email = "Buddy@hotmail.com",
                     Password = "1230",
-                    Adress = "Buddy straat",
+                    Adress = "u moeder",
                     PhoneNumber = "1234567890",
-                    Birthday = DateTime.Now, 
+                    Birthday = DateTime.Now,
                 },
 
             };
@@ -65,6 +67,20 @@ namespace IEBEEJ.Data
                    StartingPrice = 1,
                },
            };
+        }
+
+        private List<CategoryEntity> GenerateDummyCategories()
+        {
+            return new List<CategoryEntity>
+           {
+               new CategoryEntity
+               {
+                   Id=1,
+                   Name = "Test"
+
+               },
+           };
+
         }
     }
 }

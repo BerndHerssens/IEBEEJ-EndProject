@@ -16,7 +16,6 @@ namespace IEBEEJ.Configuration
 
             CreateMap<ItemDTO, Item>();
 
-            CreateMap<CategoryEntity, CategoryType>().ReverseMap();
         }
     }
 }

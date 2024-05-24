@@ -20,13 +20,11 @@ namespace IEBEEJ.Business.Models
         //TODO: move from service to here
         public Bid? HighestBid { get; set; }
 
-        public CategoryType Category { get; set; }
+        public Category Category { get; set; }
 
         public int CategoryId { get; set; }
 
         public DateTime Created { get; set; } = DateTime.Now;
-
-        public DateTime LastUpdated { get; set; }
 
         public string ItemDescription { get; set; }
 

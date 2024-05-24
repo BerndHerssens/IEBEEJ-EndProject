@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IEBEEJ.Data.Migrations
 {
     [DbContext(typeof(IEBEEJDBContext))]
-    [Migration("20240523143900_Initial")]
-    partial class Initial
+    [Migration("20240524090253_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,13 @@ namespace IEBEEJ.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Test"
+                        });
                 });
 
             modelBuilder.Entity("IEBEEJ.Data.Entities.ItemEntity", b =>
@@ -139,6 +146,25 @@ namespace IEBEEJ.Data.Migrations
                     b.HasIndex("UserEntityId");
 
                     b.ToTable("Items");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Created = new DateTime(2024, 5, 24, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6772),
+                            EndDate = new DateTime(2024, 5, 31, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6774),
+                            EstimatedValueMax = 50000m,
+                            EstimatedValueMin = 10m,
+                            IsActive = false,
+                            IsSold = false,
+                            ItemDescription = "Doodoo",
+                            ItemName = "Dada item",
+                            LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SellerID = 1,
+                            SendingAdress = "dok",
+                            StartingPrice = 1m
+                        });
                 });
 
             modelBuilder.Entity("IEBEEJ.Data.Entities.StatusEntity", b =>
@@ -195,6 +221,9 @@ namespace IEBEEJ.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("int");
 
@@ -203,6 +232,21 @@ namespace IEBEEJ.Data.Migrations
                     b.HasIndex("UserEntityId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Adress = "u moeder",
+                            Birthday = new DateTime(2024, 5, 24, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6683),
+                            Created = new DateTime(2024, 5, 24, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6638),
+                            Email = "Buddy@hotmail.com",
+                            IsActive = false,
+                            Name = "Buddy",
+                            Password = "1230",
+                            PhoneNumber = "1234567890",
+                            Role = 0
+                        });
                 });
 
             modelBuilder.Entity("IEBEEJ.Data.Entities.BidEntity", b =>

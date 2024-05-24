@@ -72,6 +72,13 @@ namespace IEBEEJ.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Test"
+                        });
                 });
 
             modelBuilder.Entity("IEBEEJ.Data.Entities.ItemEntity", b =>
@@ -142,8 +149,8 @@ namespace IEBEEJ.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            Created = new DateTime(2024, 5, 23, 17, 14, 37, 162, DateTimeKind.Local).AddTicks(7164),
-                            EndDate = new DateTime(2024, 5, 30, 17, 14, 37, 162, DateTimeKind.Local).AddTicks(7166),
+                            Created = new DateTime(2024, 5, 24, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6772),
+                            EndDate = new DateTime(2024, 5, 31, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6774),
                             EstimatedValueMax = 50000m,
                             EstimatedValueMin = 10m,
                             IsActive = false,
@@ -227,9 +234,9 @@ namespace IEBEEJ.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Adress = "Buddy straat",
-                            Birthday = new DateTime(2024, 5, 23, 17, 14, 37, 162, DateTimeKind.Local).AddTicks(6970),
-                            Created = new DateTime(2024, 5, 23, 17, 14, 37, 162, DateTimeKind.Local).AddTicks(6879),
+                            Adress = "u moeder",
+                            Birthday = new DateTime(2024, 5, 24, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6683),
+                            Created = new DateTime(2024, 5, 24, 11, 2, 53, 296, DateTimeKind.Local).AddTicks(6638),
                             Email = "Buddy@hotmail.com",
                             IsActive = false,
                             Name = "Buddy",
