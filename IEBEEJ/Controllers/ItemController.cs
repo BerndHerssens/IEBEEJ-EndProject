@@ -12,9 +12,9 @@ namespace IEBEEJ.Controllers
     public class ItemController : ControllerBase
     {
         private IMapper _mapper;
-        private ItemService _itemService;
+        private IItemService _itemService;
 
-        public ItemController(IMapper mapper, ItemService itemService)
+        public ItemController(IMapper mapper, IItemService itemService)
         {
             _mapper = mapper;
             _itemService = itemService;
@@ -22,6 +22,7 @@ namespace IEBEEJ.Controllers
 
         // GET: api/<ItemController>
         [HttpGet]
+        [Route("GetAllItems")]
         public async Task<ActionResult<IEnumerable<Item>>> Get()
         {
             IEnumerable<Item> models = await _itemService.GetAllItemsAsync(); //TODO: map to DTO

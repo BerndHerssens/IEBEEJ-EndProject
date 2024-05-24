@@ -12,7 +12,7 @@ namespace IEBEEJ.Data.Entities
         public int ItemID { get; set; }
         public ItemEntity Item {  get; set; }
         public int BidderId { get; set; }
-        public UserEntity User { get; set; }
+        public UserEntity Bidder { get; set; }
         public bool IsActive { get; set; }
     }
 }

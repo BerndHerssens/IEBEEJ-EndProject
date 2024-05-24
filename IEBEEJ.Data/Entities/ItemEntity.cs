@@ -16,7 +16,7 @@ namespace IEBEEJ.Data.Entities
 
         [Required]
         public int CategoryId { get; set; }
-        public CategoryEntity Category { get; set; }
+        //public CategoryEntity Category { get; set; }
 
         [Required]
         public DateTime Created { get; set; }

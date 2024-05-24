@@ -2,7 +2,7 @@
 using IEBEEJ.Business;
 using IEBEEJ.Business.Models;
 using IEBEEJ.Data.Entities;
-using IEBEEJ.DTO;
+using IEBEEJ.DTOs.ItemDTOs;
 
 
 namespace IEBEEJ.Configuration
@@ -14,8 +14,9 @@ namespace IEBEEJ.Configuration
             CreateMap<BidEntity, Bid>().ReverseMap();
             CreateMap<ItemEntity, Item>().ReverseMap();
 
-            CreateMap<ItemDTO, Item>();
-
+            CreateMap<Item, ItemDTO>();
+            CreateMap<AddItemDTO, Item>();
+            CreateMap<UpdateItemDTO, Item>();
         }
     }
 }

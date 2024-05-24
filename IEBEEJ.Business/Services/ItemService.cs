@@ -68,5 +68,36 @@ namespace IEBEEJ.Business.Services
             IEnumerable<ItemEntity> itemEntitys = await _itemRepository.GetAllItemsAsync(0, 20);
             return _mapper.Map<IEnumerable<Item>>(itemEntitys);
         }
+
+        public List<Item> FilterItem(List<Item> itemList, int categoryInt)
+        {
+            List<Item> result = new List<Item>();
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                if (itemList[i].CategoryId == categoryInt)
+                {
+                    result.Add(itemList[i]);
+                }
+            }
+            return result;
+        }
+
+        public async Task UpdateItem(int id, Item item)
+        {
+            ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(id);
+            ItemEntity updatedEntity = _mapper.Map<ItemEntity>(item);
+
+            itemEntity.ItemDescription = updatedEntity.ItemDescription;
+            itemEntity.CategoryId = updatedEntity.CategoryId;
+            itemEntity.SendingAdress = updatedEntity.SendingAdress;
+            itemEntity.StartingPrice = updatedEntity.StartingPrice;
+            itemEntity.EstimatedValueMax = updatedEntity.EstimatedValueMax;
+            itemEntity.EstimatedValueMin = updatedEntity.EstimatedValueMin;
+            itemEntity.ItemName = updatedEntity.ItemName;
+            itemEntity.Id = id;
+            itemEntity.LastModified = DateTime.Now;
+
+            await _itemRepository.UpdateItemAsync(itemEntity);
+        }
     }
 }
