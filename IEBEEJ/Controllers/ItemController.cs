@@ -41,11 +41,32 @@ namespace IEBEEJ.Controllers
 
         // POST api/<ItemController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post(ItemDTO itemDTO)
         {
+            Item item = _mapper.Map<Item>(itemDTO);
+            await _itemService.CreateAnItem(item);
+            return Created();
         }
 
+        [HttpGet]
+        [Route("SearchOnCategory")]
 
+        public async Task<ActionResult<IEnumerable<Item>>> SearchOnCategory(int categoryInt)
+        {
+            IEnumerable<Item> models = await _itemService.GetAllItemsAsync();
+            List<Item> filteredList = _itemService.FilterItem(models.ToList(), categoryInt);
+            return Ok(filteredList);
+        }
+
+        [HttpGet]
+        [Route("SearchOnName")]
+
+        public async Task<ActionResult<IEnumerable<Item>>> SearchOnName(string name)
+        {
+            IEnumerable<Item> models = await _itemService.GetAllItemsAsync();
+            Item searchedItem = models.Contains(models.FirstOrDefault(x => x.ItemName.Contains(name))) ? models.FirstOrDefault(x => x.ItemName == name) : null;
+            return Ok(searchedItem);
+        }
 
 
         // DELETE api/<ItemController>/5
