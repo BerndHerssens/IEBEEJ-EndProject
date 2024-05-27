@@ -44,7 +44,7 @@ namespace IEBEEJ.Data.Entities
 
         public DateTime LastModified { get; set; }
 
-        public UserEntity Seller { get; } //UserEntity is een aparte tabel
+        public UserEntity Seller { get; set; } //UserEntity is een aparte tabel
 
         [Required]
         public int SellerId { get; set; }
