@@ -1,6 +1,6 @@
 ﻿namespace IEBEEJ.DTOs.UserDTOs
 {
-    public class SmallSellerDTO
+    public class SmallUserDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

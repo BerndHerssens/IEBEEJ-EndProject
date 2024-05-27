@@ -27,7 +27,7 @@ namespace IEBEEJ.Business.Services
             }
             else
             {
-                return null;
+                return null; //TODO: throw exception
             }
         }
 
@@ -82,9 +82,9 @@ namespace IEBEEJ.Business.Services
             return result;
         }
 
-        public async Task UpdateItemAsync(int id, Item item)
+        public async Task UpdateItemAsync(Item item)
         {
-            ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(id);
+            ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(item.Id);
             ItemEntity updatedEntity = _mapper.Map<ItemEntity>(item);
 
             itemEntity.ItemDescription = updatedEntity.ItemDescription;

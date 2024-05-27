@@ -27,7 +27,8 @@ namespace IEBEEJ.Configuration
             //CreateMap<Item, ItemDTO>()
             //    .ForMember(x => x.Seller, y => y.MapFrom(z => z.Seller.Name));
 
-
+            CreateMap<User, UserDTO>();
+            CreateMap<User, SmallUserDTO>();
 
             CreateMap<AddItemDTO, Item>();
             CreateMap<UpdateItemDTO, Item>();

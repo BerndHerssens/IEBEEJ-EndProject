@@ -27,6 +27,7 @@ namespace IEBEEJ.Data.Repositories
         {
             return await _dbContext.Items
                 .Include(x => x.AllBids)
+                .Include(x => x.Seller)
                 .Skip(skip)
                 .Take(take)
                 //.OrderByDescending(x => x.Id)

@@ -84,7 +84,7 @@ namespace IEBEEJ.Controllers
             if (ModelState.IsValid)
             {
                 Item item = _mapper.Map<Item>(updateItem);
-                await _itemService.UpdateItemAsync(id, item);
+                await _itemService.UpdateItemAsync(item);
                 return Created();
             }
             else
@@ -98,7 +98,7 @@ namespace IEBEEJ.Controllers
         {
             Item item = await _itemService.GetItemByIdAsync(id);
             await _itemService.ChangeItemActiveStatus(item);
-            await _itemService.UpdateItemAsync(id, item);
+            await _itemService.UpdateItemAsync(item);
             return Ok();
         }
 
@@ -108,7 +108,7 @@ namespace IEBEEJ.Controllers
         {
             Item item = await _itemService.GetItemByIdAsync(id);
             await _itemService.ChangeItemSoldStatus(item);
-            await _itemService.UpdateItemAsync(id, item);
+            await _itemService.UpdateItemAsync(item);
             return Ok();
         }
     }

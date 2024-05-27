@@ -20,7 +20,7 @@ namespace IEBEEJ.DTOs.ItemDTOs
         public DateTime Created { get; set; }
         public DateTime EndDate { get; set; }
         public int AllBidsCount { get; set; }
-        public List<SmallBidDTO> AllBids { get; set; } = new List<SmallBidDTO>();
+        public SmallBidDTO[] AllBids { get; set; }
         //public SmallSellerDTO Seller { get; set; }
     }
 }
