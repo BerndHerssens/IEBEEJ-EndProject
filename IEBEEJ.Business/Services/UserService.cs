@@ -28,9 +28,10 @@ namespace IEBEEJ.Business.Services
             await _userRepository.CreateUserAsync(userEntity);
         }
 
-        public async Task ChangeUserRole(User user, Enum role)
+        public async Task ChangeUserRoleAsync(User user, int role)
         {
-            throw new NotImplementedException(); //Todo: implementeer deze functie
+            UserEntity userEntity = _mapper.Map<UserEntity>(user);
+            await _userRepository.ChangeUserRoleAsync(userEntity, role);
         }
 
         public async Task ChangeAccountActiveStatus(User user)

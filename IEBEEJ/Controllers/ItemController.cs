@@ -21,7 +21,6 @@ namespace IEBEEJ.Controllers
             _itemService = itemService;
         }
 
-        // GET: api/<ItemController>
         [HttpGet]
         [Route("GetAllItems")]
         public async Task<ActionResult<IEnumerable<Item>>> Get()
@@ -31,7 +30,6 @@ namespace IEBEEJ.Controllers
             return Ok(itemDTOs);
         }
 
-        // GET api/<ItemController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ItemDTO>> Get(int id)
         {
@@ -40,7 +38,6 @@ namespace IEBEEJ.Controllers
             return Ok(itemDTO);
         }
 
-        // POST api/<ItemController>
         [HttpPost]
         public async Task<ActionResult> Post(AddItemDTO itemDTO)
         {
@@ -79,7 +76,7 @@ namespace IEBEEJ.Controllers
 
         [HttpPut]
         [Route("UpdateItem")]
-        public async Task<ActionResult> UpdateItemAsync(int id, UpdateItemDTO updateItem)
+        public async Task<ActionResult> UpdateItemAsync( UpdateItemDTO updateItem)
         {
             if (ModelState.IsValid)
             {

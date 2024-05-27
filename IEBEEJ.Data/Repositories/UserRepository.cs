@@ -16,6 +16,14 @@ namespace IEBEEJ.Data.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task ChangeUserRoleAsync(UserEntity userEntity, int role)
+        {
+            UserEntity tempUser = await _dbContext.Users
+                .SingleOrDefaultAsync(x => x.Id == userEntity.Id);
+            tempUser.Role = role;
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task CreateUserAsync(UserEntity user)
         {
             await _dbContext.Users.AddAsync(user);
@@ -33,6 +41,9 @@ namespace IEBEEJ.Data.Repositories
         public async Task<IEnumerable<UserEntity>> GetAllUsersAsync(int skip, int take)
         {
             return await _dbContext.Users
+                .Include(x => x.Bids)
+                .Include(x =>x.ItemsForSale)
+                .Include(x =>x.LikedUsers)
                 .Skip(skip)
                 .Take(take)
                 .OrderBy(x => x.Id)

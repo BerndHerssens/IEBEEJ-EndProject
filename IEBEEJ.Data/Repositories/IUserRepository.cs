@@ -15,5 +15,6 @@ namespace IEBEEJ.Data.Repositories
         Task<UserEntity> GetUserByIdAsync(int id);
         Task UpdateUserAsync(UserEntity user);
         Task<UserEntity> GetUserByLoginAsync(string name, string password);
+        Task ChangeUserRoleAsync(UserEntity userEntity, int role);
     }
 }

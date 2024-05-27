@@ -17,11 +17,11 @@ namespace IEBEEJ.Business.Services
 
         Task ChangeAccountActiveStatus(User user);
 
-        Task ChangeUserRole(User user, Enum role);
-
         Task<User> GetUserByLogin(string name, string password);
 
         Task<IEnumerable<User>> GetAllUsersAsync();
+
+        Task ChangeUserRoleAsync(User user, int role);
 
         // todo : Eens kijken naar de lists
     }
