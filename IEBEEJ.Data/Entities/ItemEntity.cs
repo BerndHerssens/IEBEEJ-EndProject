@@ -47,7 +47,7 @@ namespace IEBEEJ.Data.Entities
         public UserEntity Seller { get; } //UserEntity is een aparte tabel
 
         [Required]
-        public int SellerID { get; set; }
+        public int SellerId { get; set; }
 
         public string SendingAdress { get; set; }
 

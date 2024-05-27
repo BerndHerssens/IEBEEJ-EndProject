@@ -27,16 +27,17 @@ namespace IEBEEJ.Controllers
         public async Task<ActionResult<IEnumerable<Item>>> Get()
         {
             IEnumerable<Item> models = await _itemService.GetAllItemsAsync(); //TODO: map to DTO
-
-            return Ok(models);
+            IEnumerable<ItemDTO> itemDTOs = _mapper.Map<IEnumerable<ItemDTO>>(models);
+            return Ok(itemDTOs);
         }
 
         // GET api/<ItemController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Item>> Get(int id)
+        public async Task<ActionResult<ItemDTO>> Get(int id)
         {
             Item item = await _itemService.GetItemByIdAsync(id);
-            return Ok(item);
+            ItemDTO itemDTO = _mapper.Map<ItemDTO>(item);
+            return Ok(itemDTO);
         }
 
         // POST api/<ItemController>

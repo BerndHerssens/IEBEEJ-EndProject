@@ -26,10 +26,10 @@ namespace IEBEEJ.Data.Repositories
         public async Task<IEnumerable<ItemEntity>> GetAllItemsAsync(int skip, int take)
         {
             return await _dbContext.Items
-                
+                .Include(x => x.AllBids)
                 .Skip(skip)
                 .Take(take)
-                .OrderByDescending(x => x.Id)
+                //.OrderByDescending(x => x.Id)
                 .ToListAsync();
         }
 
@@ -42,7 +42,7 @@ namespace IEBEEJ.Data.Repositories
 
         public async Task<List<ItemEntity>> GetItemsBySellerIDAsync(int userId)
         {
-            return await _dbContext.Items.Where(x => x.SellerID == userId).ToListAsync();
+            return await _dbContext.Items.Where(x => x.SellerId == userId).ToListAsync();
         }
 
         public async Task RemoveItemByIDAsync(int id)
