@@ -42,7 +42,7 @@ namespace IEBEEJ.Controllers
 
         // POST api/<ItemController>
         [HttpPost]
-        public async Task<ActionResult> Post(ItemDTO itemDTO)
+        public async Task<ActionResult> Post(AddItemDTO itemDTO)
         {
             Item item = _mapper.Map<Item>(itemDTO);
             await _itemService.CreateAnItem(item);

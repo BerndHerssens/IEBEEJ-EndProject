@@ -9,9 +9,13 @@ namespace IEBEEJ.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-       private IMapper _mapper;
+        private IMapper _mapper;
         private IUserService _userService;
 
-
+        public UserController(IMapper mapper, IUserService userService)
+        {
+            _mapper = mapper;
+            _userService = userService;
+        }
     }
 }
