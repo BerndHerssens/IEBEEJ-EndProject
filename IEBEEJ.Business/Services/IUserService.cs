@@ -9,7 +9,7 @@ namespace IEBEEJ.Business.Services
 
         Task<User> GetUserByIdAsync(int id);
 
-        Task UpdateUserAsync(User user);
+        Task UpdateUserAsync(int id, User user);
 
         Task DeleteUserAsync(int id);
 
@@ -21,7 +21,7 @@ namespace IEBEEJ.Business.Services
 
         Task<IEnumerable<User>> GetAllUsersAsync();
 
-        Task ChangeUserRoleAsync(User user, int role);
+        Task ChangeUserRoleAsync(int id, User user, int role);
 
         // todo : Eens kijken naar de lists
     }
