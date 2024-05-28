@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IEBEEJ.Data.Repositories
 {
-    public class OrderRepository
+    public class OrderRepository : IOrderRepository
     {
         private IEBEEJDBContext _dbContext;
 
-        public OrderRepository(IEBEEJDBContext dbcontext)
+        public OrderRepository(IEBEEJDBContext dbcontext) 
         {
             _dbContext = dbcontext;
         }

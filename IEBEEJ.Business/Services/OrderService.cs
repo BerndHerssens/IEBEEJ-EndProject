@@ -2,15 +2,10 @@
 using IEBEEJ.Business.Models;
 using IEBEEJ.Data.Entities;
 using IEBEEJ.Data.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IEBEEJ.Business.Services
 {
-    internal class OrderService : IOrderService
+    public class OrderService : IOrderService
     {
         private IOrderRepository _orderRepository;
         private IMapper _mapper;
@@ -49,8 +44,8 @@ namespace IEBEEJ.Business.Services
             return orders;
 
         }
-        
-            
+
+
 
         public async Task UpdateOrderAsync(Order order)
         {
@@ -58,7 +53,7 @@ namespace IEBEEJ.Business.Services
             await _orderRepository.UpdateOrderAsync(orderEntity);
         }
 
-        
+
 
         public async Task<List<Order>> GetOrdersByUserIdAsync(int userId)
         {
@@ -74,8 +69,10 @@ namespace IEBEEJ.Business.Services
             await _orderRepository.UpdateOrderAsync(orderEntity);
         }
 
+        public async Task RemoveOrderByIdAsync(int id)
+        {
+            await _orderRepository.RemoveOrderByIdAsync(id);
+        }
 
     }
-
-
 }

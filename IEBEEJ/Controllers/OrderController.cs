@@ -30,11 +30,11 @@ namespace IEBEEJ.Controllers
 
         [HttpPut]
         [Route("UpdateOrderStatus")]
-        public async Task<ActionResult> UpdateOrderStatus(Order updatedOrder)
+        public async Task<ActionResult> UpdateOrderStatus(UpdateOrderStatusDTO updatedOrderstatusDTO)
         {
             if (ModelState.IsValid)
             {
-                Order order = _mapper.Map<Order>(updatedOrder);
+                Order order = _mapper.Map<Order>(updatedOrderstatusDTO);
                 await _orderService.UpdateOrderAsync(order);
                 return Ok();
             }
@@ -58,7 +58,7 @@ namespace IEBEEJ.Controllers
         [Route("GetAllOrders")]
         public async Task<ActionResult> GetAllOrders(int skip, int take)
         {
-            List<Order> orders = await _orderService.GetAllOrdersAsync(skip, take);
+            IEnumerable<Order> orders = await _orderService.GetAllOrdersAsync(skip, take);
             if (orders != null)
             {
                 return Ok(orders);

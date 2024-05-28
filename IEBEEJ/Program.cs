@@ -26,6 +26,8 @@ namespace IEBEEJ
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IBidRepository, BidRepository>();
             builder.Services.AddScoped<IBidService, BidService>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
 
 
             //TODO: Inject services here
