@@ -69,7 +69,7 @@ namespace IEBEEJ.Business.Services
 
         public async Task UpdateUserAsync(User user)
         {
-            UserEntity userEntity = await _userRepository.GetUserByIdAsync(user.ID);
+            UserEntity userEntity = await _userRepository.GetUserByIdAsync(user.Id);
             UserEntity updatedEntity = _mapper.Map<UserEntity>(user);
 
             userEntity.Adress = updatedEntity.Adress;
