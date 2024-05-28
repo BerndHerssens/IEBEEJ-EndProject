@@ -31,18 +31,13 @@ namespace IEBEEJ.Business.Services
             }
         }
 
-        public async Task CreateABidAsync(decimal value, int bidderID, Item item)
+        public async Task CreateABidAsync(Bid bid)
         {
-            if (item.HighestBid == null || value > item.HighestBid.BidValue)
+            if (bid.Item.HighestBid == null || bid.BidValue > bid.Item.HighestBid.BidValue)
             {
                 BidEntity bidEntity = new BidEntity();
-                ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
-                bidEntity.BidValue = value;
-                bidEntity.IsActive = true;
-                bidEntity.BidderId = bidderID;
-                bidEntity.Item = itemEntity;
-                bidEntity.ItemID = itemEntity.Id;
-                bidEntity.Created = DateTime.Now; 
+                
+               
                 await _bidRepository.CreateBidAsync(bidEntity);
             }
             else
@@ -64,6 +59,13 @@ namespace IEBEEJ.Business.Services
             List<Bid> bids = _mapper.Map<List<Bid>>(bidEntities);
 
             return bids;
+        }
+
+        public async Task UpdateBidAsync(Bid bid)
+        {
+            BidEntity bidEntity = _mapper.Map<BidEntity>(bid);
+            await _bidRepository.UpdateBidAsync(bidEntity);
+
         }
     }
 }
