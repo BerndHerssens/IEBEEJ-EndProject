@@ -9,7 +9,7 @@ namespace IEBEEJ.Business.Models
 {
     public class Order
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public int ItemID { get; set; }
 

@@ -15,7 +15,7 @@ namespace IEBEEJ.Business.Models
             BidValue = bidValue;
             ItemID = itemID;
         }
-        public int ID { get; set; }
+        public int Id { get; set; }
 
        public decimal BidValue { get; set; }
 

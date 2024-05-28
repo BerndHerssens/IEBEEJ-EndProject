@@ -4,6 +4,7 @@ using IEBEEJ.Business.Models;
 using IEBEEJ.Data.Entities;
 using IEBEEJ.DTOs.BidDTOs;
 using IEBEEJ.DTOs.ItemDTOs;
+using IEBEEJ.DTOs.OrderDTOs;
 using IEBEEJ.DTOs.UserDTOs;
 
 
@@ -28,6 +29,7 @@ namespace IEBEEJ.Configuration
             //    .ForMember(x => x.Seller, y => y.MapFrom(z => z.Seller.Name));
             CreateMap<AddItemDTO, Item>();
             CreateMap<UpdateItemDTO, Item>();
+            CreateMap<Item, SmallItemDTO>();
 
             CreateMap<User, UserDTO>();
             CreateMap<User, SmallUserDTO>();
@@ -36,6 +38,8 @@ namespace IEBEEJ.Configuration
 
 
             CreateMap<Bid, SmallBidDTO>();
+
+            CreateMap<Order, SmallOrderDTO>();
             
         }
     }
