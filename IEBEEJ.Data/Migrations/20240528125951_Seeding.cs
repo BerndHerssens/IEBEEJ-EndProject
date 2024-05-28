@@ -82,19 +82,19 @@ namespace IEBEEJ.Data.Migrations
                     ItemDescription = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     ItemName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SellerID = table.Column<int>(type: "int", nullable: false),
+                    SellerId = table.Column<int>(type: "int", nullable: false),
                     SendingAdress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    UserEntityId = table.Column<int>(type: "int", nullable: true)
+                    StartingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Items_Users_UserEntityId",
-                        column: x => x.UserEntityId,
+                        name: "FK_Items_Users_SellerId",
+                        column: x => x.SellerId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,13 +117,44 @@ namespace IEBEEJ.Data.Migrations
                         column: x => x.ItemID,
                         principalTable: "Items",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Bids_Users_BidderId",
                         column: x => x.BidderId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WonItemId = table.Column<int>(type: "int", nullable: false),
+                    WonBiddingId = table.Column<int>(type: "int", nullable: false),
+                    TotalCost = table.Column<double>(type: "float", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Bids_WonBiddingId",
+                        column: x => x.WonBiddingId,
+                        principalTable: "Bids",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_Items_WonItemId",
+                        column: x => x.WonItemId,
+                        principalTable: "Items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -140,16 +171,14 @@ namespace IEBEEJ.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Items",
-                columns: new[] { "Id", "CategoryId", "Created", "EndDate", "EstimatedValueMax", "EstimatedValueMin", "IsActive", "IsSold", "ItemDescription", "ItemName", "LastModified", "SellerID", "SendingAdress", "StartingPrice", "UserEntityId" },
+                table: "Status",
+                columns: new[] { "ID", "Status" },
                 values: new object[,]
                 {
-                    { 1, 0, new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6471), new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6474), 50000m, 10m, false, false, "Doodoo", "Dada item", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "dok", 1m, null },
-                    { 2, 1, new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6481), new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6483), 200m, 50m, false, false, "Tight Shorts that make you pretty", "A TS", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "dok", 50m, null },
-                    { 3, 2, new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6486), new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6487), 99m, 15m, false, false, "A book about the wonders of Belgium", "Tiny Treasure Box", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Ghent", 15m, null },
-                    { 4, 3, new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6490), new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6492), 400m, 99m, false, false, "An used old couch", "Hang Bank", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "My home", 80m, null },
-                    { 5, 4, new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6495), new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6496), 400m, 299m, false, false, "A grownups toy", "The Big Sheep Anatomy S-Doll", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "My home", 250m, null },
-                    { 6, 5, new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6500), new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6501), 20000m, 959m, false, false, "A painting from the Holy Roman Empire Time Period, for reals", "Holy Pope punching the heretic", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Centrum Brussel", 850m, null }
+                    { 1, "Open" },
+                    { 2, "Closed" },
+                    { 3, "Sold" },
+                    { 4, "Cancelled" }
                 });
 
             migrationBuilder.InsertData(
@@ -157,8 +186,21 @@ namespace IEBEEJ.Data.Migrations
                 columns: new[] { "Id", "Adress", "Birthday", "Created", "Email", "IsActive", "Name", "Password", "PhoneNumber", "Role", "UserEntityId" },
                 values: new object[,]
                 {
-                    { 1, "Thuis-Straat", new DateTime(1980, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6235), "Buddy@hotmail.com", false, "Buddy", "1230", "1234567890", 0, null },
-                    { 2, "Parque De Triumph", new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6307), "JaJa2015@hotmail.com", false, "Jacky Jackouis", "EnglishFrench", "9876543210", 0, null }
+                    { 1, "Thuis-Straat", new DateTime(1980, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3718), "Buddy@hotmail.com", false, "Buddy", "1230", "1234567890", 0, null },
+                    { 2, "Parque De Triumph", new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3780), "JaJa2015@hotmail.com", false, "Jacky Jackouis", "EnglishFrench", "9876543210", 0, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Items",
+                columns: new[] { "Id", "CategoryId", "Created", "EndDate", "EstimatedValueMax", "EstimatedValueMin", "IsActive", "IsSold", "ItemDescription", "ItemName", "LastModified", "SellerId", "SendingAdress", "StartingPrice" },
+                values: new object[,]
+                {
+                    { 1, 0, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3965), new DateTime(2024, 6, 4, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3967), 50000m, 10m, false, false, "Doodoo", "Dada item", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "dok", 1m },
+                    { 2, 1, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3978), new DateTime(2024, 6, 4, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3979), 200m, 50m, false, false, "Tight Shorts that make you pretty", "A TS", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "dok", 50m },
+                    { 3, 2, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3983), new DateTime(2024, 6, 4, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3984), 99m, 15m, false, false, "A book about the wonders of Belgium", "Tiny Treasure Box", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Ghent", 15m },
+                    { 4, 3, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3987), new DateTime(2024, 6, 4, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3988), 400m, 99m, false, false, "An used old couch", "Hang Bank", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "My home", 80m },
+                    { 5, 4, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3991), new DateTime(2024, 6, 4, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3992), 400m, 299m, false, false, "A grownups toy", "The Big Sheep Anatomy S-Doll", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "My home", 250m },
+                    { 6, 5, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3996), new DateTime(2024, 6, 4, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(3997), 20000m, 959m, false, false, "A painting from the Holy Roman Empire Time Period, for reals", "Holy Pope punching the heretic", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Centrum Brussel", 850m }
                 });
 
             migrationBuilder.InsertData(
@@ -166,9 +208,19 @@ namespace IEBEEJ.Data.Migrations
                 columns: new[] { "Id", "BidValue", "BidderId", "Created", "IsActive", "ItemID" },
                 values: new object[,]
                 {
-                    { 1, 500m, 2, new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6537), false, 1 },
-                    { 2, 600m, 1, new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6541), false, 1 },
-                    { 3, 700m, 2, new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6543), false, 1 }
+                    { 1, 500m, 2, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(4032), false, 1 },
+                    { 2, 600m, 1, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(4041), false, 1 },
+                    { 3, 700m, 2, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(4043), false, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "Created", "IsActive", "PaymentMethod", "StatusId", "TotalCost", "WonBiddingId", "WonItemId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(4099), false, "Paypal", 1, 700.0, 3, 1 },
+                    { 2, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(4106), false, "Credit Card", 2, 600.0, 2, 2 },
+                    { 3, new DateTime(2024, 5, 28, 14, 59, 50, 930, DateTimeKind.Local).AddTicks(4108), false, "Paypal", 3, 700.0, 1, 3 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -182,9 +234,19 @@ namespace IEBEEJ.Data.Migrations
                 column: "ItemID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Items_UserEntityId",
+                name: "IX_Items_SellerId",
                 table: "Items",
-                column: "UserEntityId");
+                column: "SellerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_WonBiddingId",
+                table: "Orders",
+                column: "WonBiddingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_WonItemId",
+                table: "Orders",
+                column: "WonItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_UserEntityId",
@@ -196,13 +258,16 @@ namespace IEBEEJ.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Bids");
-
-            migrationBuilder.DropTable(
                 name: "Category");
 
             migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
                 name: "Status");
+
+            migrationBuilder.DropTable(
+                name: "Bids");
 
             migrationBuilder.DropTable(
                 name: "Items");

@@ -5,7 +5,7 @@ using IEBEEJ.Data.Repositories;
 
 namespace IEBEEJ.Business.Services
 {
-    internal class OrderService : IOrderService
+    public class OrderService : IOrderService
     {
         private IOrderRepository _orderRepository;
         private IMapper _mapper;

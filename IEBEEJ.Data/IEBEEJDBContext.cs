@@ -39,64 +39,7 @@ namespace IEBEEJ.Data
 
         }
 
-        private List<OrderEntity> GenerateDummyOrders()
-        {
-            return new List<OrderEntity>()
-            { 
-                new OrderEntity
-            {
-                    Id = 1,
-                    WonBidId = 1,
-                    WonItemId = 1,
-                    TotalCost = 700,
-                    StatusId = 1
 
-                },
-                new OrderEntity
-                {
-                    Id = 2,
-                    WonBidId = 2,
-                    WonItemId = 2,
-                    TotalCost = 600,
-                    StatusId = 2
-                },
-                new OrderEntity
-                {
-                    Id = 3,
-                    WonBidId = 3,
-                    WonItemId = 3,
-                    TotalCost = 700,
-                    StatusId = 3
-                }
-            };
-        }
-
-        private List<StatusEntity> GenerateDummyStatuses()
-        {
-            return new List<StatusEntity>()
-            {
-                new StatusEntity
-                {
-                    ID = 1,
-                    Status = "Open"
-                },
-                new StatusEntity
-                {
-                    ID = 2,
-                    Status = "Closed"
-                },
-                new StatusEntity
-                {
-                    ID = 3,
-                    Status = "Sold"
-                },
-                new StatusEntity
-                {
-                    ID = 4,
-                    Status = "Cancelled"
-                },
-            };
-        }
 
         private List<BidEntity> GenerateDummyBids()
         {
@@ -288,6 +231,66 @@ namespace IEBEEJ.Data
                },
            };
 
+        }
+        private List<StatusEntity> GenerateDummyStatuses()
+        {
+            return new List<StatusEntity>()
+            {
+                new StatusEntity
+                {
+                    ID = 1,
+                    Status = "Open"
+                },
+                new StatusEntity
+                {
+                    ID = 2,
+                    Status = "Closed"
+                },
+                new StatusEntity
+                {
+                    ID = 3,
+                    Status = "Sold"
+                },
+                new StatusEntity
+                {
+                    ID = 4,
+                    Status = "Cancelled"
+                },
+            };
+        }
+        private List<OrderEntity> GenerateDummyOrders()
+        {
+            return new List<OrderEntity>()
+            {
+                new OrderEntity
+            {
+                    Id = 1,
+                    WonItemId = 1,
+                    TotalCost = 700,
+                    StatusId = 1,
+                    PaymentMethod = "Paypal",
+                    WonBiddingId = 3
+                    
+                },
+                new OrderEntity
+                {
+                    Id = 2,
+                    WonItemId = 2,
+                    TotalCost = 600,
+                    StatusId = 2,
+                    PaymentMethod = "Credit Card" ,
+                    WonBiddingId = 2
+                },
+                new OrderEntity
+                {
+                    Id = 3,
+                    WonItemId = 3,
+                    TotalCost = 700,
+                    StatusId = 3,
+                    PaymentMethod = "Paypal",
+                    WonBiddingId = 1
+                }
+            };
         }
     }
 }
