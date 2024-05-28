@@ -13,5 +13,6 @@ namespace IEBEEJ.Data.Repositories
         Task<IEnumerable<BidEntity>> GetAllBidsOfItemIDAsync(int itemID);
         Task CreateBidAsync(BidEntity bidEntity);
         Task DeleteBiddingByIdAsync(int bidID);
+        Task UpdateBidAsync(BidEntity bidEntity);
     }
 }

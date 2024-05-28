@@ -43,5 +43,11 @@ namespace IEBEEJ.Data.Repositories
             return await _dbContext.Bids
                .SingleOrDefaultAsync(x => x.Id == bidID);
         }
+
+        public async Task UpdateBidAsync(BidEntity bidEntity)
+        {
+            _dbContext.Bids.Update(bidEntity);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

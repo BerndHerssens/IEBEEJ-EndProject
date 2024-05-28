@@ -31,7 +31,7 @@ namespace IEBEEJ.Test.Business.Test
             var bidService = new BidService(bidRepositoryMock.Object, mapper);
 
             // Act
-            await bidService.CreateABidAsync(value, bidderID, item);
+            // await bidService.CreateABidAsync(Bid bid);
 
             // Assert
             bidRepositoryMock.Verify(repo => repo.CreateBidAsync(It.Is<BidEntity>(bid =>

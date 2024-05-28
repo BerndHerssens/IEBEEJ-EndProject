@@ -39,9 +39,14 @@ namespace IEBEEJ.Configuration
 
             CreateMap<Bid, SmallBidDTO>();
 
+            CreateMap<Item, ItemForBidDTO>();
+            CreateMap<UpdateBidDTO, Bid>();
+
+
             CreateMap<Order, SmallOrderDTO>();
             CreateMap<Order, OrderDTO>();
             CreateMap<AddOrderDTO, Order>();
+
             
         }
     }
