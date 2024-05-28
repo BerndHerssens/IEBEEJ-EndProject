@@ -24,5 +24,6 @@ namespace IEBEEJ.Business.Models
         public bool IsActive { get; set; }
 
         public StatusType Status { get; set; }
+        public int StatusId { get; internal set; }
     }
 }

@@ -21,5 +21,8 @@ namespace IEBEEJ.Data.Entities
         public double TotalCost { get; set; }
         public bool IsActive { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
+
+        [Required]
+        public int StatusId { get; set; } 
     }
 }

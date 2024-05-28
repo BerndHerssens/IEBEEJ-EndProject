@@ -6,10 +6,10 @@ namespace IEBEEJ.Data
     public class IEBEEJDBContext : DbContext
     {
         public DbSet<ItemEntity> Items { get; set; }
-        //public DbSet<OrderEntity> Orders { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<BidEntity> Bids { get; set; }
-       // public DbSet<StatusEntity> Status { get; set; }
+        public DbSet<StatusEntity> Status { get; set; }
         public DbSet<CategoryEntity> Category { get; set; }
 
         public IEBEEJDBContext(DbContextOptions<IEBEEJDBContext> dbContextOptions) : base(dbContextOptions)
@@ -31,6 +31,71 @@ namespace IEBEEJ.Data
             List<BidEntity> bids = GenerateDummyBids();
             modelBuilder.Entity<BidEntity>().HasData(bids);
 
+            List<StatusEntity> statuses = GenerateDummyStatuses();
+            modelBuilder.Entity<StatusEntity>().HasData(statuses);
+
+            List<OrderEntity> orders = GenerateDummyOrders();
+            modelBuilder.Entity<OrderEntity>().HasData(orders);
+
+        }
+
+        private List<OrderEntity> GenerateDummyOrders()
+        {
+            return new List<OrderEntity>()
+            { 
+                new OrderEntity
+            {
+                    Id = 1,
+                    WonBidId = 1,
+                    WonItemId = 1,
+                    TotalCost = 700,
+                    StatusId = 1
+
+                },
+                new OrderEntity
+                {
+                    Id = 2,
+                    WonBidId = 2,
+                    WonItemId = 2,
+                    TotalCost = 600,
+                    StatusId = 2
+                },
+                new OrderEntity
+                {
+                    Id = 3,
+                    WonBidId = 3,
+                    WonItemId = 3,
+                    TotalCost = 700,
+                    StatusId = 3
+                }
+            };
+        }
+
+        private List<StatusEntity> GenerateDummyStatuses()
+        {
+            return new List<StatusEntity>()
+            {
+                new StatusEntity
+                {
+                    ID = 1,
+                    Status = "Open"
+                },
+                new StatusEntity
+                {
+                    ID = 2,
+                    Status = "Closed"
+                },
+                new StatusEntity
+                {
+                    ID = 3,
+                    Status = "Sold"
+                },
+                new StatusEntity
+                {
+                    ID = 4,
+                    Status = "Cancelled"
+                },
+            };
         }
 
         private List<BidEntity> GenerateDummyBids()
