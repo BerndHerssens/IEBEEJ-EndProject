@@ -14,32 +14,29 @@ namespace IEBEEJ.Data
 
         public IEBEEJDBContext(DbContextOptions<IEBEEJDBContext> dbContextOptions) : base(dbContextOptions)
         {
-
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder) //seeding: dummy data 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) //seeding: dummy data
         {
-            base.OnModelCreating(modelBuilder);
-            List<UserEntity> users = GenerateDummyUsers();
-            modelBuilder.Entity<UserEntity>().HasData(users);
-            
-            List<CategoryEntity> categories = GenerateDummyCategories();
-            modelBuilder.Entity<CategoryEntity>().HasData(categories);
+            //base.OnModelCreating(modelBuilder);
+            //List<UserEntity> users = GenerateDummyUsers();
+            //modelBuilder.Entity<UserEntity>().HasData(users);
 
-            List<ItemEntity> items = GenerateDummyItems();
-            modelBuilder.Entity<ItemEntity>().HasData(items);
+            //List<CategoryEntity> categories = GenerateDummyCategories();
+            //modelBuilder.Entity<CategoryEntity>().HasData(categories);
 
-            List<BidEntity> bids = GenerateDummyBids();
-            modelBuilder.Entity<BidEntity>().HasData(bids);
+            //List<ItemEntity> items = GenerateDummyItems();
+            //modelBuilder.Entity<ItemEntity>().HasData(items);
 
-            List<StatusEntity> statuses = GenerateDummyStatuses();
-            modelBuilder.Entity<StatusEntity>().HasData(statuses);
+            //List<BidEntity> bids = GenerateDummyBids();
+            //modelBuilder.Entity<BidEntity>().HasData(bids);
 
-            List<OrderEntity> orders = GenerateDummyOrders();
-            modelBuilder.Entity<OrderEntity>().HasData(orders);
+            //List<StatusEntity> statuses = GenerateDummyStatuses();
+            //modelBuilder.Entity<StatusEntity>().HasData(statuses);
 
+            //List<OrderEntity> orders = GenerateDummyOrders();
+            //modelBuilder.Entity<OrderEntity>().HasData(orders);
         }
-
-
 
         private List<BidEntity> GenerateDummyBids()
         {
@@ -93,7 +90,6 @@ namespace IEBEEJ.Data
                     PhoneNumber = "9876543210",
                     Birthday = new DateTime(1995, 1,10)
                 },
-
             };
         }
 
@@ -185,7 +181,6 @@ namespace IEBEEJ.Data
                    SendingAdress = "Centrum Brussel",
                    StartingPrice = 850,
                },
-              
            };
         }
 
@@ -197,41 +192,35 @@ namespace IEBEEJ.Data
                {
                    Id=1,
                    Name = "Other"
-
                },
                 new CategoryEntity
                {
                    Id=2,
                    Name = "Fashion"
-
                },
                  new CategoryEntity
                {
                    Id=3,
                    Name = "Readables"
-
                },
                   new CategoryEntity
                {
                    Id=4,
                    Name = "Furniture"
-
                },
                    new CategoryEntity
                {
                    Id=5,
                    Name = "Toys"
-
                },
                     new CategoryEntity
                {
                    Id=6,
                    Name = "Decoration"
-
                },
            };
-
         }
+
         private List<StatusEntity> GenerateDummyStatuses()
         {
             return new List<StatusEntity>()
@@ -258,6 +247,7 @@ namespace IEBEEJ.Data
                 },
             };
         }
+
         private List<OrderEntity> GenerateDummyOrders()
         {
             return new List<OrderEntity>()
@@ -270,7 +260,6 @@ namespace IEBEEJ.Data
                     StatusId = 1,
                     PaymentMethod = "Paypal",
                     WonBiddingId = 3
-                    
                 },
                 new OrderEntity
                 {

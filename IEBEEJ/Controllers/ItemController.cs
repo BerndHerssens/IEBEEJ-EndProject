@@ -35,7 +35,15 @@ namespace IEBEEJ.Controllers
         {
             Item item = await _itemService.GetItemByIdAsync(id);
             ItemDTO itemDTO = _mapper.Map<ItemDTO>(item);
-            return Ok(itemDTO);
+
+            if (itemDTO != null)
+            {
+                return Ok(itemDTO);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost]
@@ -69,14 +77,15 @@ namespace IEBEEJ.Controllers
 
         // DELETE api/<ItemController>/5
         [HttpDelete("{id}")]
-        public async void Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             await _itemService.DeleteItemAsync(id);
+            return Created();
         }
 
         [HttpPut]
         [Route("UpdateItem")]
-        public async Task<ActionResult> UpdateItemAsync( UpdateItemDTO updateItem)
+        public async Task<ActionResult> UpdateItemAsync(UpdateItemDTO updateItem)
         {
             if (ModelState.IsValid)
             {

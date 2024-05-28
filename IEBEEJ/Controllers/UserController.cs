@@ -69,7 +69,7 @@ namespace IEBEEJ.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             await _userService.DeleteUserAsync(id);
         }
@@ -78,7 +78,14 @@ namespace IEBEEJ.Controllers
         public async Task<ActionResult<UserDTO>> Get(int id)
         {
             User user = await _userService.GetUserByIdAsync(id);
-            return Ok(user);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet]
