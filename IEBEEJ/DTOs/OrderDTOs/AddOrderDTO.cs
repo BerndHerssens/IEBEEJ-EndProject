@@ -8,5 +8,7 @@
         public string PaymentMethod { get; set; }
 
         public string ReceivingAdress { get; set; } 
+
+        public string BillingAdress { get; set; }
     }
 }

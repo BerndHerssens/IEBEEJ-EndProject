@@ -58,7 +58,7 @@ namespace IEBEEJ.Controllers
         [Route("GetAllOrders")]
         public async Task<ActionResult> GetAllOrders(int skip, int take)
         {
-            List<Order> orders = await _orderService.GetAllOrdersAsync(skip, take);
+            IEnumerable<Order> orders = await _orderService.GetAllOrdersAsync(skip, take);
             if (orders != null)
             {
                 return Ok(orders);
