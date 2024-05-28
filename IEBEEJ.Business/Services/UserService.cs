@@ -2,12 +2,6 @@
 using IEBEEJ.Business.Models;
 using IEBEEJ.Data.Entities;
 using IEBEEJ.Data.Repositories;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IEBEEJ.Business.Services
 {
@@ -28,7 +22,7 @@ namespace IEBEEJ.Business.Services
             await _userRepository.CreateUserAsync(userEntity);
         }
 
-        public async Task ChangeUserRoleAsync(User user, int role)
+        public async Task ChangeUserRoleAsync(int id, User user, int role)
         {
             UserEntity userEntity = _mapper.Map<UserEntity>(user);
             await _userRepository.ChangeUserRoleAsync(userEntity, role);
@@ -57,19 +51,27 @@ namespace IEBEEJ.Business.Services
             }
             else
             {
-                return null; //TODO: throw exception
+                throw new NullReferenceException("No user found by this id.");
             }
-            
+
         }
 
         public async Task<User> GetUserByNameAsync(string name)
         {
-            throw new NotImplementedException(); //todo : eens uitzoeken hoe het zit met substringzoekfuncties
+            IEnumerable<UserEntity> userEntities = await _userRepository.GetAllUsersAsync(0, 1000);
+            UserEntity userEntity = userEntities.SingleOrDefault(x => x.Name == name);
+
+            if (userEntity.Name == name)
+            {
+                User user = _mapper.Map<User>(userEntity);
+                return user;
+            }
+            throw new NullReferenceException("No user found by this name.");
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async Task UpdateUserAsync(int id, User user)
         {
-            UserEntity userEntity = await _userRepository.GetUserByIdAsync(user.Id);
+            UserEntity userEntity = await _userRepository.GetUserByIdAsync(id);
             UserEntity updatedEntity = _mapper.Map<UserEntity>(user);
 
             userEntity.Adress = updatedEntity.Adress;
@@ -78,10 +80,18 @@ namespace IEBEEJ.Business.Services
             userEntity.Name = updatedEntity.Name;
             userEntity.Birthday = updatedEntity.Birthday;
             userEntity.Password = updatedEntity.Password;
-            userEntity.Bids = updatedEntity.Bids;
-            userEntity.ItemsForSale = updatedEntity.ItemsForSale;
-            userEntity.LikedUsers = updatedEntity.LikedUsers;
-
+            if (updatedEntity.Bids != null)
+            {
+                userEntity.Bids = updatedEntity.Bids;
+            }
+            if (updatedEntity.ItemsForSale != null)
+            {
+                userEntity.ItemsForSale = updatedEntity.ItemsForSale;
+            }
+            if (updatedEntity.LikedUsers != null)
+            {
+                userEntity.LikedUsers = updatedEntity.LikedUsers;
+            }
             await _userRepository.UpdateUserAsync(userEntity);
         }
 
@@ -104,7 +114,7 @@ namespace IEBEEJ.Business.Services
             }
             else
             {
-                return null; //TODO: throw exception
+                throw new Exception("User name or password were not correct.");
             }
         }
     }

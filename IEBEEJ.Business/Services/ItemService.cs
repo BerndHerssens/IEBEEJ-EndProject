@@ -100,7 +100,7 @@ namespace IEBEEJ.Business.Services
         }
         public async Task DeleteItemAsync(int id)
         {
-            await _itemRepository.GetItemByIdAsync(id);
+            await _itemRepository.RemoveItemByIDAsync(id);
         }
     }
 }
