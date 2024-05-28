@@ -30,11 +30,11 @@ namespace IEBEEJ.Controllers
 
         [HttpPut]
         [Route("UpdateOrderStatus")]
-        public async Task<ActionResult> UpdateOrderStatus(Order updatedOrder)
+        public async Task<ActionResult> UpdateOrderStatus(UpdateOrderStatusDTO updatedOrderstatusDTO)
         {
             if (ModelState.IsValid)
             {
-                Order order = _mapper.Map<Order>(updatedOrder);
+                Order order = _mapper.Map<Order>(updatedOrderstatusDTO);
                 await _orderService.UpdateOrderAsync(order);
                 return Ok();
             }

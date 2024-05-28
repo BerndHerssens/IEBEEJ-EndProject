@@ -42,7 +42,7 @@ namespace IEBEEJ.Configuration
             CreateMap<Order, SmallOrderDTO>();
             CreateMap<Order, OrderDTO>();
             CreateMap<AddOrderDTO, Order>();
-            
+            CreateMap<UpdateOrderStatusDTO, Order>();            
         }
     }
 }
