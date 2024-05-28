@@ -86,8 +86,8 @@ namespace IEBEEJ.Controllers
         public async Task<ActionResult<IEnumerable<User>>> Get()
         {
             IEnumerable<User> users = await _userService.GetAllUsersAsync();
-            IEnumerable<UserDTO> smallUserDTOs = _mapper.Map<IEnumerable<UserDTO>>(users);
-            return Ok(smallUserDTOs);
+            IEnumerable<UserDTO> userDTOs = _mapper.Map<IEnumerable<UserDTO>>(users);
+            return Ok(userDTOs);
         }
 
         [HttpGet]

@@ -9,7 +9,7 @@ namespace IEBEEJ.Business.Models
     public class User
     {
         public User() { }
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
