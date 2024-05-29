@@ -3,6 +3,7 @@
     public class AddOrderDTO
     {
         public int WinningBidId { get; set; }
+
         public decimal TotalPrice { get; set; }
         public string PaymentMethod { get; set; }
 

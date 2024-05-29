@@ -35,7 +35,7 @@ namespace IEBEEJ.Controllers
             if (ModelState.IsValid)
             {
                 Order order = _mapper.Map<Order>(updatedOrderstatusDTO);
-                await _orderService.UpdateOrderAsync(order);
+                await _orderService.UpdateOrderStatusAsync(order);
                 return Ok();
             }
 
@@ -76,6 +76,20 @@ namespace IEBEEJ.Controllers
                 return Ok(orders);
             }
             return NotFound();
+        }
+
+        [HttpPut]
+        [Route("UpdateOrder")]
+        public async Task<ActionResult> UpdateOrder(UpdateOrderDTO updatedOrderDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                Order order = _mapper.Map<Order>(updatedOrderDTO);
+                await _orderService.UpdateOrderAsync(order);
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 

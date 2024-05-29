@@ -2,7 +2,7 @@
 
 namespace IEBEEJ.DTOs.OrderDTOs
 {
-    public class OrderDTO
+    public class UpdateOrderDTO
     {
         public int Id { get; set; }
         public int ItemId { get; set; }
@@ -19,8 +19,8 @@ namespace IEBEEJ.DTOs.OrderDTOs
 
         public DateTime Created { get; set; }
 
+        public StatusType Status { get; set; }
+
         public int StatusId { get; set; }
-
-
     }
 }

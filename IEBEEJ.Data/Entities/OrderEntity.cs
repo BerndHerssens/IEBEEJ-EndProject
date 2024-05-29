@@ -7,7 +7,7 @@ namespace IEBEEJ.Data.Entities
         public DateTime Created { get; set; } = DateTime.Now;
         public int Id { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = false;
         public string PaymentMethod { get; set; }
 
         [Required]

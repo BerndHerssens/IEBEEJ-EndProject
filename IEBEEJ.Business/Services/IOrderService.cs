@@ -11,6 +11,7 @@ namespace IEBEEJ.Business.Services
         Task<List<Order>> GetOrdersByUserIdAsync(int userId);
         Task UpdateOrderAsync(Order order);
 
+        Task UpdateOrderStatusAsync(Order order);
 
     }
 }

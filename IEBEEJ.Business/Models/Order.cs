@@ -13,7 +13,7 @@ namespace IEBEEJ.Business.Models
         public int BuyerID { get; set; }
         public int Id { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = false;
         public Item Item { get; set; }
         public int ItemID { get; set; }
         public int WonBiddingID { get; set; }
