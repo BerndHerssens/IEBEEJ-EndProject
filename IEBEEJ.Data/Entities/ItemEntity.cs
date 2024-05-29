@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -44,10 +45,11 @@ namespace IEBEEJ.Data.Entities
 
         public DateTime LastModified { get; set; }
 
+        [ForeignKey("User")]
+        public int SellerId { get; set; }
+
         public UserEntity Seller { get; set; } //UserEntity is een aparte tabel
 
-        [Required]
-        public int SellerId { get; set; }
 
         public string SendingAdress { get; set; }
 

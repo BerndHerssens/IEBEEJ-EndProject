@@ -51,7 +51,7 @@ namespace IEBEEJ.Business.Services
             }
             else
             {
-                throw new NullReferenceException("No user found by this id.");
+                return null;
             }
 
         }
@@ -66,7 +66,7 @@ namespace IEBEEJ.Business.Services
                 User user = _mapper.Map<User>(userEntity);
                 return user;
             }
-            throw new NullReferenceException("No user found by this name.");
+            throw null;
         }
 
         public async Task UpdateUserAsync(int id, User user)
@@ -114,7 +114,7 @@ namespace IEBEEJ.Business.Services
             }
             else
             {
-                throw new Exception("User name or password were not correct.");
+                return null;
             }
         }
     }

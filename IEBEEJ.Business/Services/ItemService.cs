@@ -58,6 +58,8 @@ namespace IEBEEJ.Business.Services
         public async Task CreateAnItem(Item item)
         {
             ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
+            itemEntity.Created = DateTime.Now;
+            itemEntity.EndDate = DateTime.Now.AddDays(7);
             await _itemRepository.CreateItemAsync(itemEntity);
         }
 

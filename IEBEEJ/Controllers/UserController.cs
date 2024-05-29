@@ -106,7 +106,14 @@ namespace IEBEEJ.Controllers
         {
             IEnumerable<User> users = await _userService.GetAllUsersAsync();
             IEnumerable<UserDTO> userDTOs = _mapper.Map<IEnumerable<UserDTO>>(users);
-            return Ok(userDTOs);
+            if (userDTOs != null)
+            {
+                return Ok(userDTOs);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet]
@@ -115,7 +122,15 @@ namespace IEBEEJ.Controllers
         {
             User user = await _userService.GetUserByNameAsync(name);
             UserDTO userDTO = _mapper.Map<UserDTO>(user);
-            return Ok(userDTO);
+            if (userDTO != null)
+            {
+                return Ok(userDTO);
+            }
+            else
+            {
+                return NotFound();
+            }
+           
         }
 
         
@@ -125,12 +140,19 @@ namespace IEBEEJ.Controllers
         public async Task<ActionResult> UserLogin(string username, string password)
         {
             User userLoggingIn = await _userService.GetUserByLogin(username, password);
-            if (userLoggingIn.Password == password)
+            if (userLoggingIn == null)
+            {
+                return NotFound();
+            }
+            else if (userLoggingIn.Password == password)
             {
                 UserDTO userDTO = _mapper.Map<UserDTO>(userLoggingIn);
                 return Ok(userDTO);
             }
-            return BadRequest();
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
