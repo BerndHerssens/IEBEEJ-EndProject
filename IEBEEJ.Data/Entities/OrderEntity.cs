@@ -13,6 +13,7 @@ namespace IEBEEJ.Data.Entities
         [Required]
         public int StatusId { get; set; }
 
+        public StatusEntity Status { get; set; }
 
         public decimal TotalCost { get; set; }
 

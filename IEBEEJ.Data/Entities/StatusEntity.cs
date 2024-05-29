@@ -8,7 +8,7 @@ namespace IEBEEJ.Data.Entities
 {
     public class StatusEntity
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string Status { get; set; }
     }

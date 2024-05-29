@@ -18,24 +18,24 @@ namespace IEBEEJ.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) //seeding: dummy data
         {
-            //base.OnModelCreating(modelBuilder);
-            //List<UserEntity> users = GenerateDummyUsers();
-            //modelBuilder.Entity<UserEntity>().HasData(users);
+            base.OnModelCreating(modelBuilder);
+            List<UserEntity> users = GenerateDummyUsers();
+            modelBuilder.Entity<UserEntity>().HasData(users);
 
-            //List<CategoryEntity> categories = GenerateDummyCategories();
-            //modelBuilder.Entity<CategoryEntity>().HasData(categories);
+            List<CategoryEntity> categories = GenerateDummyCategories();
+            modelBuilder.Entity<CategoryEntity>().HasData(categories);
 
-            //List<ItemEntity> items = GenerateDummyItems();
-            //modelBuilder.Entity<ItemEntity>().HasData(items);
+            List<ItemEntity> items = GenerateDummyItems();
+            modelBuilder.Entity<ItemEntity>().HasData(items);
 
-            //List<BidEntity> bids = GenerateDummyBids();
-            //modelBuilder.Entity<BidEntity>().HasData(bids);
+            List<BidEntity> bids = GenerateDummyBids();
+            modelBuilder.Entity<BidEntity>().HasData(bids);
 
-            //List<StatusEntity> statuses = GenerateDummyStatuses();
-            //modelBuilder.Entity<StatusEntity>().HasData(statuses);
+            List<StatusEntity> statuses = GenerateDummyStatuses();
+            modelBuilder.Entity<StatusEntity>().HasData(statuses);
 
-            //List<OrderEntity> orders = GenerateDummyOrders();
-            //modelBuilder.Entity<OrderEntity>().HasData(orders);
+            List<OrderEntity> orders = GenerateDummyOrders();
+            modelBuilder.Entity<OrderEntity>().HasData(orders);
         }
 
         private List<BidEntity> GenerateDummyBids()
@@ -190,32 +190,32 @@ namespace IEBEEJ.Data
            {
                new CategoryEntity
                {
-                   Id=1,
+                  Id = 1,
                    Name = "Other"
                },
                 new CategoryEntity
                {
-                   Id=2,
+                   Id = 2,
                    Name = "Fashion"
                },
                  new CategoryEntity
                {
-                   Id=3,
+                   Id = 3,
                    Name = "Readables"
                },
                   new CategoryEntity
                {
-                   Id=4,
+                   Id = 4,
                    Name = "Furniture"
                },
                    new CategoryEntity
                {
-                   Id=5,
+                   Id = 5,
                    Name = "Toys"
                },
                     new CategoryEntity
                {
-                   Id=6,
+                   Id = 6,
                    Name = "Decoration"
                },
            };
@@ -227,22 +227,22 @@ namespace IEBEEJ.Data
             {
                 new StatusEntity
                 {
-                    ID = 1,
+                    Id = 1,
                     Status = "Open"
                 },
                 new StatusEntity
                 {
-                    ID = 2,
+                    Id = 2,
                     Status = "Closed"
                 },
                 new StatusEntity
                 {
-                    ID = 3,
+                    Id = 3,
                     Status = "Sold"
                 },
                 new StatusEntity
                 {
-                    ID = 4,
+                    Id = 4,
                     Status = "Cancelled"
                 },
             };

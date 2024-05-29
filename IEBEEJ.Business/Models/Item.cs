@@ -18,13 +18,13 @@ namespace IEBEEJ.Business.Models
         public Bid? HighestBid { get; set; } //TODO: move from service to here
         public bool IsActive { get; set; } = true;
         public bool IsSold { get; set; } = false;
-        // public Category Category { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(7);
         public decimal EstimatedValueMax { get; set; }
         public decimal EstimatedValueMin { get; set; }
         public decimal StartingPrice { get; set; }
-        public int CategoryId { get; set; }
         public int Id { get; set; }
         public int SellerId { get; set; }
         public List<Bid> AllBids { get; set; }
