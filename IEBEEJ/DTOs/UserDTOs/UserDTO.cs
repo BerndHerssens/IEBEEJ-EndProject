@@ -14,7 +14,7 @@ namespace IEBEEJ.DTOs.UserDTOs
         public SmallBidDTO[] Bids { get; set; }
 
         public SmallItemDTO[] ItemsForSale { get; set; } 
-        public SmallOrderDTO[] BoughtItems { get; set; } 
+        public SmallOrderDTO[] BoughtItems { get; set; }
         public SmallUserDTO[] LikedUsers { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime Birthday { get; set; }

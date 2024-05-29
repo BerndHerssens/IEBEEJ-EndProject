@@ -30,7 +30,7 @@ namespace IEBEEJ
             builder.Services.AddScoped<IOrderService, OrderService>();
 
 
-            //TODO: Inject services here
+            //Inject services here
 
             string connectionString = builder.Configuration.GetConnectionString("myConnectionString");
             builder.Services.AddDbContext<IEBEEJDBContext>(

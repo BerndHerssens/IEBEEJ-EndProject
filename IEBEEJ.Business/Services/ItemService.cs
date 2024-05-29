@@ -18,17 +18,20 @@ namespace IEBEEJ.Business.Services
 
         public async Task<Item> GetItemByIdAsync(int id)
         {
-            ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(id);
+            {
+                ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(id);
 
-            if (itemEntity != null)
-            {
-                Item item = _mapper.Map<Item>(itemEntity);
-                return item;
+                if (itemEntity != null)
+                {
+                    Item item = _mapper.Map<Item>(itemEntity);
+                    return item;
+                }
+                else
+                {
+                    return null; 
+                }
             }
-            else
-            {
-                return null; //TODO: throw exception
-            }
+ 
         }
 
         public void GetHighestBidOnItem(Item item)

@@ -36,8 +36,9 @@ namespace IEBEEJ.Data.Repositories
 
         public async Task<ItemEntity> GetItemByIdAsync(int id)
         {
-            return await _dbContext.Items  //TODO: Include want meerdere tables aanspreken, MAAR: oppassen met foreign keys en circular references
+            return await _dbContext.Items  //TODO: Categorieen! Statustypes!
                 .Include(x => x.AllBids)
+                .Include(x => x.Seller)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 

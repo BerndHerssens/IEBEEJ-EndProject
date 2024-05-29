@@ -25,7 +25,7 @@ namespace IEBEEJ.Controllers
         [Route("GetAllItems")]
         public async Task<ActionResult<IEnumerable<Item>>> Get()
         {
-            IEnumerable<Item> models = await _itemService.GetAllItemsAsync(); //TODO: map to DTO
+            IEnumerable<Item> models = await _itemService.GetAllItemsAsync();
             IEnumerable<ItemDTO> itemDTOs = _mapper.Map<IEnumerable<ItemDTO>>(models);
             return Ok(itemDTOs);
         }

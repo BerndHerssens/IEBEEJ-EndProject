@@ -15,7 +15,7 @@ namespace IEBEEJ.Business.Models
         {
             SellerId = sellerId;
         }
-        public Bid? HighestBid { get; set; } //TODO: move from service to here
+        public Bid? HighestBid { get; set; } 
         public bool IsActive { get; set; } = true;
         public bool IsSold { get; set; } = false;
         // public Category Category { get; set; }

@@ -33,7 +33,7 @@ namespace IEBEEJ.Business.Services
             }
             else
             {
-                return null; //TODO: throw exception
+                return null; 
             }
         }
 
@@ -68,7 +68,7 @@ namespace IEBEEJ.Business.Services
             return orders;
         }
 
-        public async Task UpdateOrderStatusAsync(Order order)  //todo: aparte gemaakt om tijdelijk status updates automatisch te kunnen updaten
+        public async Task UpdateOrderStatusAsync(Order order)   //aparte gemaakt om tijdelijk status updates automatisch te kunnen updaten
         {
             OrderEntity orderEntity = await _orderRepository.GetOrderByIdAsync(order.Id);
             orderEntity.StatusId = order.StatusId;
@@ -83,7 +83,7 @@ namespace IEBEEJ.Business.Services
         public async Task CalculateTotalCostAsync(Order order)
         {
             OrderEntity orderEntity = _mapper.Map<OrderEntity>(order);
-            orderEntity.TotalCost = order.WonBidding.BidValue * 1.21m;  //TODO: Add sending costs based on location
+            orderEntity.TotalCost = order.WonBidding.BidValue * 1.21m;  //TODOAFTERDEADLINE: Add sending costs based on location
             await _orderRepository.UpdateOrderAsync(orderEntity);
         }
     }

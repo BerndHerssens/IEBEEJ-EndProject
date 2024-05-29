@@ -23,6 +23,5 @@ namespace IEBEEJ.Business.Services
 
         Task ChangeUserRoleAsync(int id, User user, int role);
 
-        // todo : Eens kijken naar de lists
     }
 }

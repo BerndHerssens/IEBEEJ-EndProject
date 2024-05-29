@@ -30,9 +30,9 @@ namespace IEBEEJ.Data.Entities
 
         public List<BidEntity> Bids { get; set; }
 
-        public List<ItemEntity> ItemsForSale { get; set; } //TODO: tezamen?
+        public List<ItemEntity> ItemsForSale { get; set; }
 
-        //public List<OrderEntity> BoughtItems {  get; set; }
+        public List<OrderEntity> BoughtItems { get; set; }
 
         public List<UserEntity> LikedUsers { get; set; }
 
