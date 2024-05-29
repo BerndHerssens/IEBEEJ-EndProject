@@ -4,25 +4,23 @@ namespace IEBEEJ.Data.Entities
 {
     public class OrderEntity : IEntity
     {
+        public DateTime Created { get; set; } = DateTime.Now;
         public int Id { get; set; }
+        public bool IsActive { get; set; }
         public string PaymentMethod { get; set; }
 
-        
-        public ItemEntity WonItem { get; set; }
 
         [Required]
-        public int WonItemId { get; set; }
+        public int StatusId { get; set; }
 
-        
+        public decimal TotalCost { get; set; }
         public BidEntity WonBidding { get; set; }
         [Required]
         public int WonBiddingId { get; set; }
 
-        public double TotalCost { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime Created { get; set; } = DateTime.Now;
+        public ItemEntity WonItem { get; set; }
 
         [Required]
-        public int StatusId { get; set; } 
+        public int WonItemId { get; set; }
     }
 }
