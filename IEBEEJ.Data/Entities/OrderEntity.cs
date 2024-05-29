@@ -6,15 +6,18 @@ namespace IEBEEJ.Data.Entities
     {
         public DateTime Created { get; set; } = DateTime.Now;
         public int Id { get; set; }
+
         public bool IsActive { get; set; }
         public string PaymentMethod { get; set; }
-
 
         [Required]
         public int StatusId { get; set; }
 
+
         public decimal TotalCost { get; set; }
+
         public BidEntity WonBidding { get; set; }
+
         [Required]
         public int WonBiddingId { get; set; }
 

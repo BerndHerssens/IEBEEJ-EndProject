@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IEBEEJ.Data.Entities;
+﻿using IEBEEJ.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace IEBEEJ.Data.Repositories
@@ -12,7 +7,7 @@ namespace IEBEEJ.Data.Repositories
     {
         private IEBEEJDBContext _dbContext;
 
-        public OrderRepository(IEBEEJDBContext dbcontext) 
+        public OrderRepository(IEBEEJDBContext dbcontext)
         {
             _dbContext = dbcontext;
         }
@@ -55,7 +50,5 @@ namespace IEBEEJ.Data.Repositories
             _dbContext.Orders.Update(orderEntity);
             await _dbContext.SaveChangesAsync();
         }
-
-
     }
 }
