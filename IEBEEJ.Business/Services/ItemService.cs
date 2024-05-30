@@ -27,7 +27,7 @@ namespace IEBEEJ.Business.Services
             }
             else
             {
-                return null; //TODO: throw exception
+                return null;
             }
         }
 
@@ -70,19 +70,6 @@ namespace IEBEEJ.Business.Services
             return _mapper.Map<IEnumerable<Item>>(itemEntitys);
         }
 
-        public List<Item> FilterItem(List<Item> itemList, int categoryInt)
-        {
-            List<Item> result = new List<Item>();
-            for (int i = 0; i < itemList.Count; i++)
-            {
-                if (itemList[i].CategoryId == categoryInt)
-                {
-                    result.Add(itemList[i]);
-                }
-            }
-            return result;
-        }
-
         public async Task UpdateItemAsync(Item item)
         {
             ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(item.Id);
@@ -105,6 +92,20 @@ namespace IEBEEJ.Business.Services
             ItemEntity entitytoDelete = new ItemEntity { Id = id };
 
             await _itemRepository.RemoveItemByIDAsync(entitytoDelete);
+        }
+
+        public async Task<IEnumerable<Item>> GetItemsByCategoryId(int id)
+        {
+            IEnumerable<ItemEntity> itemEntitiess = await _itemRepository.GetItemsByCategoryId(id);
+            if (itemEntitiess != null)
+            {
+               IEnumerable<Item> items = _mapper.Map<IEnumerable<Item>>(itemEntitiess);
+                return items;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

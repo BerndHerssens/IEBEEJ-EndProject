@@ -58,9 +58,16 @@ namespace IEBEEJ.Controllers
         [Route("SearchOnCategory")]
         public async Task<ActionResult<IEnumerable<Item>>> SearchOnCategory(int categoryInt)
         {
-            IEnumerable<Item> models = await _itemService.GetAllItemsAsync();
-            List<Item> filteredList = _itemService.FilterItem(models.ToList(), categoryInt);
-            return Ok(filteredList);
+            IEnumerable<Item> filteredList =await _itemService.GetItemsByCategoryId(categoryInt);
+            if (filteredList != null)
+            {
+                IEnumerable<ItemDTO> itemDTO = _mapper.Map<IEnumerable<ItemDTO>>(filteredList);
+                return Ok(itemDTO);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet]
