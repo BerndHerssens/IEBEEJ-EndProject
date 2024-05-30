@@ -13,6 +13,7 @@ namespace IEBEEJ.DTOs.OrderDTOs
         public string ItemName { get; set; }
         public string SendingAdress { get; set; }
         public string ReceivingAdress { get; set; }
+        public string BillingAdress { get; set; }
 
         public string BuyerName { get; set; }
 

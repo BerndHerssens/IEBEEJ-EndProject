@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -14,9 +15,10 @@ namespace IEBEEJ.Data.Entities
 
         public List<BidEntity> AllBids { get; set; }
 
-        [Required]
+        [ForeignKey("Category")]
         public int CategoryId { get; set; }
-        //public CategoryEntity Category { get; set; }
+
+        //public CategoryEntity Category { get; set; } //TODO: nog kijken om de categoryFK te linken aan een item.
 
         [Required]
         public DateTime Created { get; set; }
@@ -44,10 +46,11 @@ namespace IEBEEJ.Data.Entities
 
         public DateTime LastModified { get; set; }
 
+        [ForeignKey("User")]
+        public int SellerId { get; set; }
+
         public UserEntity Seller { get; set; } //UserEntity is een aparte tabel
 
-        [Required]
-        public int SellerId { get; set; }
 
         public string SendingAdress { get; set; }
 
@@ -55,10 +58,6 @@ namespace IEBEEJ.Data.Entities
         public decimal StartingPrice { get; set; }
 
         //[Required]
-        /*public int Views { get; set; } = 0;*/ //Nice To Have
-
-        //Nice To Have
-
-        //Nice To Have //decimal voor value's bij currency
+        //public int Views { get; set; } = 0;*/ //Nice To Have
     }
 }

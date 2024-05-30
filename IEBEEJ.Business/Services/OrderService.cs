@@ -2,15 +2,10 @@
 using IEBEEJ.Business.Models;
 using IEBEEJ.Data.Entities;
 using IEBEEJ.Data.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IEBEEJ.Business.Services
 {
-    internal class OrderService : IOrderService
+    public class OrderService : IOrderService
     {
         private IOrderRepository _orderRepository;
         private IMapper _mapper;
@@ -49,16 +44,22 @@ namespace IEBEEJ.Business.Services
             return orders;
 
         }
-        
-            
+
+
 
         public async Task UpdateOrderAsync(Order order)
         {
-            OrderEntity orderEntity = _mapper.Map<OrderEntity>(order);
+            OrderEntity orderEntity = await _orderRepository.GetOrderByIdAsync(order.Id);
+            OrderEntity updatedEntity = _mapper.Map<OrderEntity>(order);
+
+            orderEntity.IsActive = updatedEntity.IsActive;
+            orderEntity.TotalCost = updatedEntity.TotalCost;
+            orderEntity.StatusId = updatedEntity.StatusId;
+            orderEntity.PaymentMethod = updatedEntity.PaymentMethod;
             await _orderRepository.UpdateOrderAsync(orderEntity);
         }
 
-        
+
 
         public async Task<List<Order>> GetOrdersByUserIdAsync(int userId)
         {
@@ -67,13 +68,25 @@ namespace IEBEEJ.Business.Services
             return orders;
         }
 
-        public async Task UpdateOrderStatusAsync(Order order)
+        public async Task UpdateOrderStatusAsync(Order order)  //todo: aparte gemaakt om tijdelijk status updates automatisch te kunnen updaten
         {
             OrderEntity orderEntity = await _orderRepository.GetOrderByIdAsync(order.Id);
             orderEntity.StatusId = order.StatusId;
             await _orderRepository.UpdateOrderAsync(orderEntity);
         }
+
+
+        public async Task RemoveOrderByIdAsync(int id)
+        {
+            await _orderRepository.RemoveOrderByIdAsync(id);
+        }
+
+        public async Task CalculateTotalCostAsync(Order order)
+        {
+            OrderEntity orderEntity = _mapper.Map<OrderEntity>(order);
+            orderEntity.TotalCost = order.WonBidding.BidValue * 1.21m;  //TODO: Add sending costs based on location
+            await _orderRepository.UpdateOrderAsync(orderEntity);
+        }
+
     }
-
-
 }

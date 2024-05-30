@@ -25,9 +25,17 @@ namespace IEBEEJ.Controllers
         [Route("GetAllItems")]
         public async Task<ActionResult<IEnumerable<Item>>> Get()
         {
-            IEnumerable<Item> models = await _itemService.GetAllItemsAsync(); //TODO: map to DTO
+            IEnumerable<Item> models = await _itemService.GetAllItemsAsync(); 
             IEnumerable<ItemDTO> itemDTOs = _mapper.Map<IEnumerable<ItemDTO>>(models);
-            return Ok(itemDTOs);
+            if (itemDTOs != null)
+            {
+                return Ok(itemDTOs);
+            }
+            else
+            {
+                return NotFound();
+            }
+            
         }
 
         [HttpGet("{id}")]
@@ -35,20 +43,19 @@ namespace IEBEEJ.Controllers
         {
             Item item = await _itemService.GetItemByIdAsync(id);
             ItemDTO itemDTO = _mapper.Map<ItemDTO>(item);
-            return Ok(itemDTO);
-        }
 
-        [HttpPost]
-        public async Task<ActionResult> Post(AddItemDTO itemDTO)
-        {
-            Item item = _mapper.Map<Item>(itemDTO);
-            await _itemService.CreateAnItem(item);
-            return Created();
+            if (itemDTO != null)
+            {
+                return Ok(itemDTO);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet]
         [Route("SearchOnCategory")]
-
         public async Task<ActionResult<IEnumerable<Item>>> SearchOnCategory(int categoryInt)
         {
             IEnumerable<Item> models = await _itemService.GetAllItemsAsync();
@@ -75,16 +82,34 @@ namespace IEBEEJ.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<ActionResult> Post(AddItemDTO itemDTO)
+        {
+            try
+            {
+                Item item = _mapper.Map<Item>(itemDTO);
+                await _itemService.CreateAnItem(item);
+                return Created();
+            }
+            catch (Exception cannotCreate)
+            {
+                return BadRequest(cannotCreate.Message);
+            }
+           
+        }
+
+
         // DELETE api/<ItemController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             await _itemService.DeleteItemAsync(id);
+            return Created();
         }
 
         [HttpPut]
         [Route("UpdateItem")]
-        public async Task<ActionResult> UpdateItemAsync( UpdateItemDTO updateItem)
+        public async Task<ActionResult> UpdateItemAsync(UpdateItemDTO updateItem)
         {
             if (ModelState.IsValid)
             {

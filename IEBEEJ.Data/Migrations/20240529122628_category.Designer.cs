@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IEBEEJ.Data.Migrations
 {
     [DbContext(typeof(IEBEEJDBContext))]
-    [Migration("20240524120536_Seeding")]
-    partial class Seeding
+    [Migration("20240529122628_category")]
+    partial class category
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,7 +62,7 @@ namespace IEBEEJ.Data.Migrations
                             Id = 1,
                             BidValue = 500m,
                             BidderId = 2,
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6537),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6395),
                             IsActive = false,
                             ItemID = 1
                         },
@@ -71,7 +71,7 @@ namespace IEBEEJ.Data.Migrations
                             Id = 2,
                             BidValue = 600m,
                             BidderId = 1,
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6541),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6399),
                             IsActive = false,
                             ItemID = 1
                         },
@@ -80,7 +80,7 @@ namespace IEBEEJ.Data.Migrations
                             Id = 3,
                             BidValue = 700m,
                             BidderId = 2,
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6543),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6401),
                             IsActive = false,
                             ItemID = 1
                         });
@@ -177,7 +177,7 @@ namespace IEBEEJ.Data.Migrations
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SellerID")
+                    b.Property<int>("SellerId")
                         .HasColumnType("int");
 
                     b.Property<string>("SendingAdress")
@@ -187,12 +187,9 @@ namespace IEBEEJ.Data.Migrations
                     b.Property<decimal>("StartingPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("UserEntityId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserEntityId");
+                    b.HasIndex("SellerId");
 
                     b.ToTable("Items");
 
@@ -201,8 +198,8 @@ namespace IEBEEJ.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 0,
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6471),
-                            EndDate = new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6474),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6332),
+                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6335),
                             EstimatedValueMax = 50000m,
                             EstimatedValueMin = 10m,
                             IsActive = false,
@@ -210,7 +207,7 @@ namespace IEBEEJ.Data.Migrations
                             ItemDescription = "Doodoo",
                             ItemName = "Dada item",
                             LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SellerID = 1,
+                            SellerId = 1,
                             SendingAdress = "dok",
                             StartingPrice = 1m
                         },
@@ -218,8 +215,8 @@ namespace IEBEEJ.Data.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6481),
-                            EndDate = new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6483),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6342),
+                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6344),
                             EstimatedValueMax = 200m,
                             EstimatedValueMin = 50m,
                             IsActive = false,
@@ -227,7 +224,7 @@ namespace IEBEEJ.Data.Migrations
                             ItemDescription = "Tight Shorts that make you pretty",
                             ItemName = "A TS",
                             LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SellerID = 1,
+                            SellerId = 1,
                             SendingAdress = "dok",
                             StartingPrice = 50m
                         },
@@ -235,8 +232,8 @@ namespace IEBEEJ.Data.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6486),
-                            EndDate = new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6487),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6347),
+                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6348),
                             EstimatedValueMax = 99m,
                             EstimatedValueMin = 15m,
                             IsActive = false,
@@ -244,7 +241,7 @@ namespace IEBEEJ.Data.Migrations
                             ItemDescription = "A book about the wonders of Belgium",
                             ItemName = "Tiny Treasure Box",
                             LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SellerID = 2,
+                            SellerId = 2,
                             SendingAdress = "Ghent",
                             StartingPrice = 15m
                         },
@@ -252,8 +249,8 @@ namespace IEBEEJ.Data.Migrations
                         {
                             Id = 4,
                             CategoryId = 3,
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6490),
-                            EndDate = new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6492),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6351),
+                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6353),
                             EstimatedValueMax = 400m,
                             EstimatedValueMin = 99m,
                             IsActive = false,
@@ -261,7 +258,7 @@ namespace IEBEEJ.Data.Migrations
                             ItemDescription = "An used old couch",
                             ItemName = "Hang Bank",
                             LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SellerID = 1,
+                            SellerId = 1,
                             SendingAdress = "My home",
                             StartingPrice = 80m
                         },
@@ -269,8 +266,8 @@ namespace IEBEEJ.Data.Migrations
                         {
                             Id = 5,
                             CategoryId = 4,
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6495),
-                            EndDate = new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6496),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6355),
+                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6357),
                             EstimatedValueMax = 400m,
                             EstimatedValueMin = 299m,
                             IsActive = false,
@@ -278,7 +275,7 @@ namespace IEBEEJ.Data.Migrations
                             ItemDescription = "A grownups toy",
                             ItemName = "The Big Sheep Anatomy S-Doll",
                             LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SellerID = 1,
+                            SellerId = 1,
                             SendingAdress = "My home",
                             StartingPrice = 250m
                         },
@@ -286,8 +283,8 @@ namespace IEBEEJ.Data.Migrations
                         {
                             Id = 6,
                             CategoryId = 5,
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6500),
-                            EndDate = new DateTime(2024, 5, 31, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6501),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6360),
+                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6362),
                             EstimatedValueMax = 20000m,
                             EstimatedValueMin = 959m,
                             IsActive = false,
@@ -295,27 +292,125 @@ namespace IEBEEJ.Data.Migrations
                             ItemDescription = "A painting from the Holy Roman Empire Time Period, for reals",
                             ItemName = "Holy Pope punching the heretic",
                             LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SellerID = 2,
+                            SellerId = 2,
                             SendingAdress = "Centrum Brussel",
                             StartingPrice = 850m
                         });
                 });
 
-            modelBuilder.Entity("IEBEEJ.Data.Entities.StatusEntity", b =>
+            modelBuilder.Entity("IEBEEJ.Data.Entities.OrderEntity", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("WonBiddingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WonItemId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StatusId");
+
+                    b.HasIndex("WonBiddingId");
+
+                    b.HasIndex("WonItemId");
+
+                    b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6453),
+                            IsActive = false,
+                            PaymentMethod = "Paypal",
+                            StatusId = 1,
+                            TotalCost = 700m,
+                            WonBiddingId = 3,
+                            WonItemId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6457),
+                            IsActive = false,
+                            PaymentMethod = "Credit Card",
+                            StatusId = 2,
+                            TotalCost = 600m,
+                            WonBiddingId = 2,
+                            WonItemId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6460),
+                            IsActive = false,
+                            PaymentMethod = "Paypal",
+                            StatusId = 3,
+                            TotalCost = 700m,
+                            WonBiddingId = 1,
+                            WonItemId = 3
+                        });
+                });
+
+            modelBuilder.Entity("IEBEEJ.Data.Entities.StatusEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Status");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Status = "Open"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Status = "Closed"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Status = "Sold"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Status = "Cancelled"
+                        });
                 });
 
             modelBuilder.Entity("IEBEEJ.Data.Entities.UserEntity", b =>
@@ -373,7 +468,7 @@ namespace IEBEEJ.Data.Migrations
                             Id = 1,
                             Adress = "Thuis-Straat",
                             Birthday = new DateTime(1980, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6235),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6100),
                             Email = "Buddy@hotmail.com",
                             IsActive = false,
                             Name = "Buddy",
@@ -386,7 +481,7 @@ namespace IEBEEJ.Data.Migrations
                             Id = 2,
                             Adress = "Parque De Triumph",
                             Birthday = new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2024, 5, 24, 14, 5, 36, 256, DateTimeKind.Local).AddTicks(6307),
+                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6189),
                             Email = "JaJa2015@hotmail.com",
                             IsActive = false,
                             Name = "Jacky Jackouis",
@@ -417,9 +512,40 @@ namespace IEBEEJ.Data.Migrations
 
             modelBuilder.Entity("IEBEEJ.Data.Entities.ItemEntity", b =>
                 {
-                    b.HasOne("IEBEEJ.Data.Entities.UserEntity", null)
+                    b.HasOne("IEBEEJ.Data.Entities.UserEntity", "Seller")
                         .WithMany("ItemsForSale")
-                        .HasForeignKey("UserEntityId");
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Seller");
+                });
+
+            modelBuilder.Entity("IEBEEJ.Data.Entities.OrderEntity", b =>
+                {
+                    b.HasOne("IEBEEJ.Data.Entities.StatusEntity", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IEBEEJ.Data.Entities.BidEntity", "WonBidding")
+                        .WithMany()
+                        .HasForeignKey("WonBiddingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IEBEEJ.Data.Entities.ItemEntity", "WonItem")
+                        .WithMany()
+                        .HasForeignKey("WonItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Status");
+
+                    b.Navigation("WonBidding");
+
+                    b.Navigation("WonItem");
                 });
 
             modelBuilder.Entity("IEBEEJ.Data.Entities.UserEntity", b =>

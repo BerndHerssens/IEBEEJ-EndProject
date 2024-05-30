@@ -46,20 +46,21 @@ namespace IEBEEJ.Business.Services
             ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
 
             await _itemRepository.UpdateItemAsync(itemEntity);
-
         }
+
         public async Task ChangeItemSoldStatus(Item item)
         {
             item.IsSold = !item.IsSold;
             ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
 
             await _itemRepository.UpdateItemAsync(itemEntity);
-
         }
 
         public async Task CreateAnItem(Item item)
         {
             ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
+            itemEntity.Created = DateTime.Now;
+            itemEntity.EndDate = DateTime.Now.AddDays(7);
             await _itemRepository.CreateItemAsync(itemEntity);
         }
 
@@ -98,9 +99,12 @@ namespace IEBEEJ.Business.Services
 
             await _itemRepository.UpdateItemAsync(itemEntity);
         }
+
         public async Task DeleteItemAsync(int id)
         {
-            await _itemRepository.GetItemByIdAsync(id);
+            ItemEntity entitytoDelete = new ItemEntity { Id = id };
+
+            await _itemRepository.RemoveItemByIDAsync(entitytoDelete);
         }
     }
 }

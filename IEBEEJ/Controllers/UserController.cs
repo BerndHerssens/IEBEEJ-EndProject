@@ -29,27 +29,39 @@ namespace IEBEEJ.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateUser")]
-        public async Task<ActionResult> UpdateUserAsync(User updatedUser)
+        [Route("UpdateUserFull")]
+        public async Task<ActionResult> UpdateUserAsync(int id, User updatedUser)
         {
             if (ModelState.IsValid)
             {
                 User user = _mapper.Map<User>(updatedUser);
-                await _userService.UpdateUserAsync(user);
+                await _userService.UpdateUserAsync(id, user);
                 return Created();
             }
-           
                 return BadRequest();
         }
 
         [HttpPut]
+        [Route("UpdateUserInfo")]
+        public async Task<ActionResult> UpdateUserInfoAsync(int id, UpdateUserDTO updatedUser) //moet een Id meegeven
+        {
+            if (ModelState.IsValid)
+            {
+                User user = _mapper.Map<User>(updatedUser);
+                await _userService.UpdateUserAsync(id, user);
+                return Ok(user);
+            }
+            return BadRequest();
+        }
+
+        [HttpPut]
         [Route("UpdateUserRole")]
-        public async Task<ActionResult> ChangeUserRole(User targetUser, int role)
+        public async Task<ActionResult> ChangeUserRole(int id, User targetUser, int role)
         {
             if (ModelState.IsValid)
             {
                 User user = _mapper.Map<User>(targetUser);
-                await _userService.ChangeUserRoleAsync(user, role);
+                await _userService.ChangeUserRoleAsync(id,user, role);
                 return Ok();
             }
             return BadRequest();
@@ -68,17 +80,24 @@ namespace IEBEEJ.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async void Delete(int id)
         {
             await _userService.DeleteUserAsync(id);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         public async Task<ActionResult<UserDTO>> Get(int id)
         {
             User user = await _userService.GetUserByIdAsync(id);
-            return Ok(user);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet]
@@ -87,7 +106,14 @@ namespace IEBEEJ.Controllers
         {
             IEnumerable<User> users = await _userService.GetAllUsersAsync();
             IEnumerable<UserDTO> userDTOs = _mapper.Map<IEnumerable<UserDTO>>(users);
-            return Ok(userDTOs);
+            if (userDTOs != null)
+            {
+                return Ok(userDTOs);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet]
@@ -95,32 +121,38 @@ namespace IEBEEJ.Controllers
         public async Task<ActionResult<UserDTO>> Get(string name)
         {
             User user = await _userService.GetUserByNameAsync(name);
-            return Ok(user);
+            UserDTO userDTO = _mapper.Map<UserDTO>(user);
+            if (userDTO != null)
+            {
+                return Ok(userDTO);
+            }
+            else
+            {
+                return NotFound();
+            }
+           
         }
 
-        [HttpPost]
-        [Route("UpdateUserInfo")]
-        public async Task<ActionResult> UpdateUserInfoAsync(User updatedUser)
-        {
-            if (ModelState.IsValid)
-            {
-                User user = _mapper.Map<User>(updatedUser);
-                await _userService.UpdateUserAsync(user);
-                return Ok(user);
-            }
-            return BadRequest();
-        }
+        
 
         [HttpGet]
         [Route("UserLogin")]
         public async Task<ActionResult> UserLogin(string username, string password)
         {
-            User userLoggingIn = await _userService.GetUserByNameAsync(username);
-            if (userLoggingIn.Password == password)
+            User userLoggingIn = await _userService.GetUserByLogin(username, password);
+            if (userLoggingIn == null)
             {
-                return Ok(userLoggingIn);
+                return NotFound();
             }
-            return BadRequest();
+            else if (userLoggingIn.Password == password)
+            {
+                UserDTO userDTO = _mapper.Map<UserDTO>(userLoggingIn);
+                return Ok(userDTO);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

@@ -46,10 +46,9 @@ namespace IEBEEJ.Data.Repositories
             return await _dbContext.Items.Where(x => x.SellerId == userId).ToListAsync();
         }
 
-        public async Task RemoveItemByIDAsync(int id)
+        public async Task RemoveItemByIDAsync(ItemEntity entity)
         {
-            ItemEntity walkEntity = new ItemEntity { Id = id };
-            _dbContext.Items.Remove(walkEntity);
+            _dbContext.Items.Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
 

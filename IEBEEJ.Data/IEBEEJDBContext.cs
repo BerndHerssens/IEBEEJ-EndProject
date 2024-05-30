@@ -14,14 +14,14 @@ namespace IEBEEJ.Data
 
         public IEBEEJDBContext(DbContextOptions<IEBEEJDBContext> dbContextOptions) : base(dbContextOptions)
         {
-
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder) //seeding: dummy data 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) //seeding: dummy data
         {
             base.OnModelCreating(modelBuilder);
             List<UserEntity> users = GenerateDummyUsers();
             modelBuilder.Entity<UserEntity>().HasData(users);
-            
+
             List<CategoryEntity> categories = GenerateDummyCategories();
             modelBuilder.Entity<CategoryEntity>().HasData(categories);
 
@@ -36,66 +36,6 @@ namespace IEBEEJ.Data
 
             List<OrderEntity> orders = GenerateDummyOrders();
             modelBuilder.Entity<OrderEntity>().HasData(orders);
-
-        }
-
-        private List<OrderEntity> GenerateDummyOrders()
-        {
-            return new List<OrderEntity>()
-            { 
-                new OrderEntity
-            {
-                    Id = 1,
-                    WonBidId = 1,
-                    WonItemId = 1,
-                    TotalCost = 700,
-                    StatusId = 1
-
-                },
-                new OrderEntity
-                {
-                    Id = 2,
-                    WonBidId = 2,
-                    WonItemId = 2,
-                    TotalCost = 600,
-                    StatusId = 2
-                },
-                new OrderEntity
-                {
-                    Id = 3,
-                    WonBidId = 3,
-                    WonItemId = 3,
-                    TotalCost = 700,
-                    StatusId = 3
-                }
-            };
-        }
-
-        private List<StatusEntity> GenerateDummyStatuses()
-        {
-            return new List<StatusEntity>()
-            {
-                new StatusEntity
-                {
-                    ID = 1,
-                    Status = "Open"
-                },
-                new StatusEntity
-                {
-                    ID = 2,
-                    Status = "Closed"
-                },
-                new StatusEntity
-                {
-                    ID = 3,
-                    Status = "Sold"
-                },
-                new StatusEntity
-                {
-                    ID = 4,
-                    Status = "Cancelled"
-                },
-            };
         }
 
         private List<BidEntity> GenerateDummyBids()
@@ -150,7 +90,6 @@ namespace IEBEEJ.Data
                     PhoneNumber = "9876543210",
                     Birthday = new DateTime(1995, 1,10)
                 },
-
             };
         }
 
@@ -242,7 +181,6 @@ namespace IEBEEJ.Data
                    SendingAdress = "Centrum Brussel",
                    StartingPrice = 850,
                },
-              
            };
         }
 
@@ -252,42 +190,96 @@ namespace IEBEEJ.Data
            {
                new CategoryEntity
                {
-                   Id=1,
+                  Id = 1,
                    Name = "Other"
-
                },
                 new CategoryEntity
                {
-                   Id=2,
+                   Id = 2,
                    Name = "Fashion"
-
                },
                  new CategoryEntity
                {
-                   Id=3,
+                   Id = 3,
                    Name = "Readables"
-
                },
                   new CategoryEntity
                {
-                   Id=4,
+                   Id = 4,
                    Name = "Furniture"
-
                },
                    new CategoryEntity
                {
-                   Id=5,
+                   Id = 5,
                    Name = "Toys"
-
                },
                     new CategoryEntity
                {
-                   Id=6,
+                   Id = 6,
                    Name = "Decoration"
-
                },
            };
+        }
 
+        private List<StatusEntity> GenerateDummyStatuses()
+        {
+            return new List<StatusEntity>()
+            {
+                new StatusEntity
+                {
+                    Id = 1,
+                    Status = "Open"
+                },
+                new StatusEntity
+                {
+                    Id = 2,
+                    Status = "Closed"
+                },
+                new StatusEntity
+                {
+                    Id = 3,
+                    Status = "Sold"
+                },
+                new StatusEntity
+                {
+                    Id = 4,
+                    Status = "Cancelled"
+                },
+            };
+        }
+
+        private List<OrderEntity> GenerateDummyOrders()
+        {
+            return new List<OrderEntity>()
+            {
+                new OrderEntity
+            {
+                    Id = 1,
+                    WonItemId = 1,
+                    TotalCost = 700,
+                    StatusId = 1,
+                    PaymentMethod = "Paypal",
+                    WonBiddingId = 3
+                },
+                new OrderEntity
+                {
+                    Id = 2,
+                    WonItemId = 2,
+                    TotalCost = 600,
+                    StatusId = 2,
+                    PaymentMethod = "Credit Card" ,
+                    WonBiddingId = 2
+                },
+                new OrderEntity
+                {
+                    Id = 3,
+                    WonItemId = 3,
+                    TotalCost = 700,
+                    StatusId = 3,
+                    PaymentMethod = "Paypal",
+                    WonBiddingId = 1
+                }
+            };
         }
     }
 }
