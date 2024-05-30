@@ -21,8 +21,6 @@ namespace IEBEEJ.Data.Entities
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-
-        
         public string Password { get; set; }
 
         [Required]
@@ -33,9 +31,6 @@ namespace IEBEEJ.Data.Entities
         public List<ItemEntity> ItemsForSale { get; set; }
 
         //public List<OrderEntity> BoughtItems {  get; set; }
-
-        public List<UserEntity> LikedUsers { get; set; }
-
         [Required]
         [Phone]
         public string PhoneNumber { get; set; }

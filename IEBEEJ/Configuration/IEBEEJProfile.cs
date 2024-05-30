@@ -14,40 +14,37 @@ namespace IEBEEJ.Configuration
     {
         public IEBEEJProfile()
         {
-            CreateMap<BidEntity, Bid>().ReverseMap();
-            CreateMap<ItemEntity, Item>().ReverseMap();
-            CreateMap<UserEntity, User>().ReverseMap();
-            CreateMap<CategoryEntity, Category>().ReverseMap();
-            CreateMap<OrderEntity, Order>().ReverseMap();
-            CreateMap<StatusEntity,StatusType>();
-
-            CreateMap<Item, ItemDTO>();
-            //CreateMap<User, SmallSellerDTO>()
+                
+                
             //    .ForMember(x => x.Id, y => y.MapFrom(z => z.ID))
             //    .ForMember(x => x.Name, y => y.MapFrom(z => z.Name));
-            //CreateMap<Item, ItemDTO>()
             //    .ForMember(x => x.Seller, y => y.MapFrom(z => z.Seller.Name));
+            //CreateMap<Item, ItemDTO>()
+            //CreateMap<User, SmallSellerDTO>()
             CreateMap<AddItemDTO, Item>();
-            CreateMap<UpdateItemDTO, Item>();
-            CreateMap<Item, SmallItemDTO>();
-
-            CreateMap<User, UserDTO>();
-            CreateMap<User, SmallUserDTO>();
-            CreateMap<AddUserDTO, User>();
-            CreateMap<UpdateUserDTO, User>();
-
-
-            CreateMap<Bid, SmallBidDTO>().ReverseMap();
-
-            CreateMap<Item, ItemForBidDTO>();
-            CreateMap<UpdateBidDTO, Bid>();
-
-
-            CreateMap<Order, SmallOrderDTO>();
-            CreateMap<Order, OrderDTO>();
             CreateMap<AddOrderDTO, Order>();
-
+            CreateMap<AddUserDTO, User>();
+            CreateMap<Bid, SmallBidDTO>();
+            CreateMap<BidEntity, Bid>().ReverseMap();
+            CreateMap<CategoryEntity, Category>().ReverseMap();
+            CreateMap<Item, ItemDTO>()
+                .ForMember(x => x.Id, y => y.MapFrom(z => z.SellerId))
+                .ForPath(x => x.SellerName, y => y.MapFrom(z => z.Seller.Name))
+                .ForPath(x => x.CategoryName, y => y.MapFrom(z => z.Category.Name)) ;
+            CreateMap<Item, ItemForBidDTO>();
+            CreateMap<Item, SmallUserDTO>();
+            CreateMap<ItemEntity, Item>().ReverseMap();
+            CreateMap<Order, OrderDTO>();
+            CreateMap<Order, SmallOrderDTO>();
+            CreateMap<OrderEntity, Order>().ReverseMap();
+            CreateMap<StatusEntity,StatusType>();
+            CreateMap<UpdateBidDTO, Bid>();
+            CreateMap<UpdateItemDTO, Item>();
             CreateMap<UpdateOrderStatusDTO, Order>();            
+            CreateMap<UpdateUserDTO, User>();
+            CreateMap<User, SmallUserDTO>();
+            CreateMap<User, UserDTO>();
+            CreateMap<UserEntity, User>().ReverseMap();
         }
     }
 }

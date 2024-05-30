@@ -59,7 +59,7 @@ namespace IEBEEJ.Data.Migrations
                             Id = 1,
                             BidValue = 500m,
                             BidderId = 2,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6395),
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3598),
                             IsActive = false,
                             ItemID = 1
                         },
@@ -68,7 +68,7 @@ namespace IEBEEJ.Data.Migrations
                             Id = 2,
                             BidValue = 600m,
                             BidderId = 1,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6399),
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3646),
                             IsActive = false,
                             ItemID = 1
                         },
@@ -77,7 +77,7 @@ namespace IEBEEJ.Data.Migrations
                             Id = 3,
                             BidValue = 700m,
                             BidderId = 2,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6401),
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3649),
                             IsActive = false,
                             ItemID = 1
                         });
@@ -186,6 +186,8 @@ namespace IEBEEJ.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("SellerId");
 
                     b.ToTable("Items");
@@ -194,9 +196,9 @@ namespace IEBEEJ.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CategoryId = 0,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6332),
-                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6335),
+                            CategoryId = 1,
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3453),
+                            EndDate = new DateTime(2024, 6, 6, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3455),
                             EstimatedValueMax = 50000m,
                             EstimatedValueMin = 10m,
                             IsActive = false,
@@ -211,9 +213,9 @@ namespace IEBEEJ.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CategoryId = 1,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6342),
-                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6344),
+                            CategoryId = 2,
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3466),
+                            EndDate = new DateTime(2024, 6, 6, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3467),
                             EstimatedValueMax = 200m,
                             EstimatedValueMin = 50m,
                             IsActive = false,
@@ -228,9 +230,9 @@ namespace IEBEEJ.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CategoryId = 2,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6347),
-                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6348),
+                            CategoryId = 3,
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3470),
+                            EndDate = new DateTime(2024, 6, 6, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3472),
                             EstimatedValueMax = 99m,
                             EstimatedValueMin = 15m,
                             IsActive = false,
@@ -245,9 +247,9 @@ namespace IEBEEJ.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CategoryId = 3,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6351),
-                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6353),
+                            CategoryId = 4,
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3475),
+                            EndDate = new DateTime(2024, 6, 6, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3476),
                             EstimatedValueMax = 400m,
                             EstimatedValueMin = 99m,
                             IsActive = false,
@@ -262,9 +264,9 @@ namespace IEBEEJ.Data.Migrations
                         new
                         {
                             Id = 5,
-                            CategoryId = 4,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6355),
-                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6357),
+                            CategoryId = 5,
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3479),
+                            EndDate = new DateTime(2024, 6, 6, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3480),
                             EstimatedValueMax = 400m,
                             EstimatedValueMin = 299m,
                             IsActive = false,
@@ -279,9 +281,9 @@ namespace IEBEEJ.Data.Migrations
                         new
                         {
                             Id = 6,
-                            CategoryId = 5,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6360),
-                            EndDate = new DateTime(2024, 6, 5, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6362),
+                            CategoryId = 6,
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3484),
+                            EndDate = new DateTime(2024, 6, 6, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3486),
                             EstimatedValueMax = 20000m,
                             EstimatedValueMin = 959m,
                             IsActive = false,
@@ -292,6 +294,23 @@ namespace IEBEEJ.Data.Migrations
                             SellerId = 2,
                             SendingAdress = "Centrum Brussel",
                             StartingPrice = 850m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 3,
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3489),
+                            EndDate = new DateTime(2024, 6, 6, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3490),
+                            EstimatedValueMax = 20000m,
+                            EstimatedValueMin = 959m,
+                            IsActive = false,
+                            IsSold = false,
+                            ItemDescription = "A book about how to read books",
+                            ItemName = "Reading Book for dummies",
+                            LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SellerId = 1,
+                            SendingAdress = "Centrum Brussel",
+                            StartingPrice = 200m
                         });
                 });
 
@@ -339,7 +358,7 @@ namespace IEBEEJ.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6453),
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3723),
                             IsActive = false,
                             PaymentMethod = "Paypal",
                             StatusId = 1,
@@ -350,7 +369,7 @@ namespace IEBEEJ.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6457),
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3729),
                             IsActive = false,
                             PaymentMethod = "Credit Card",
                             StatusId = 2,
@@ -361,7 +380,7 @@ namespace IEBEEJ.Data.Migrations
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6460),
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3731),
                             IsActive = false,
                             PaymentMethod = "Paypal",
                             StatusId = 3,
@@ -450,12 +469,7 @@ namespace IEBEEJ.Data.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserEntityId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserEntityId");
 
                     b.ToTable("Users");
 
@@ -465,7 +479,7 @@ namespace IEBEEJ.Data.Migrations
                             Id = 1,
                             Adress = "Thuis-Straat",
                             Birthday = new DateTime(1980, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6100),
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3158),
                             Email = "Buddy@hotmail.com",
                             IsActive = false,
                             Name = "Buddy",
@@ -478,7 +492,7 @@ namespace IEBEEJ.Data.Migrations
                             Id = 2,
                             Adress = "Parque De Triumph",
                             Birthday = new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2024, 5, 29, 14, 26, 28, 451, DateTimeKind.Local).AddTicks(6189),
+                            Created = new DateTime(2024, 5, 30, 11, 28, 21, 884, DateTimeKind.Local).AddTicks(3249),
                             Email = "JaJa2015@hotmail.com",
                             IsActive = false,
                             Name = "Jacky Jackouis",
@@ -509,11 +523,19 @@ namespace IEBEEJ.Data.Migrations
 
             modelBuilder.Entity("IEBEEJ.Data.Entities.ItemEntity", b =>
                 {
+                    b.HasOne("IEBEEJ.Data.Entities.CategoryEntity", "Category")
+                        .WithMany("Items")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("IEBEEJ.Data.Entities.UserEntity", "Seller")
                         .WithMany("ItemsForSale")
                         .HasForeignKey("SellerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Seller");
                 });
@@ -545,11 +567,9 @@ namespace IEBEEJ.Data.Migrations
                     b.Navigation("WonItem");
                 });
 
-            modelBuilder.Entity("IEBEEJ.Data.Entities.UserEntity", b =>
+            modelBuilder.Entity("IEBEEJ.Data.Entities.CategoryEntity", b =>
                 {
-                    b.HasOne("IEBEEJ.Data.Entities.UserEntity", null)
-                        .WithMany("LikedUsers")
-                        .HasForeignKey("UserEntityId");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("IEBEEJ.Data.Entities.ItemEntity", b =>
@@ -562,8 +582,6 @@ namespace IEBEEJ.Data.Migrations
                     b.Navigation("Bids");
 
                     b.Navigation("ItemsForSale");
-
-                    b.Navigation("LikedUsers");
                 });
 #pragma warning restore 612, 618
         }

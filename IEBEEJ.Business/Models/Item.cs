@@ -15,7 +15,8 @@ namespace IEBEEJ.Business.Models
         {
             SellerId = sellerId;
         }
-        public Bid? HighestBid { get; set; } //TODO: move from service to here
+        public List<Bid> AllBids { get; set; }
+        public Bid? HighestBid { get; set; } //= AllBids.OrderDescending().First(); //TODO: move from service to here
         public bool IsActive { get; set; } = true;
         public bool IsSold { get; set; } = false;
         public int CategoryId { get; set; }
@@ -27,11 +28,11 @@ namespace IEBEEJ.Business.Models
         public decimal StartingPrice { get; set; }
         public int Id { get; set; }
         public int SellerId { get; set; }
-        public List<Bid> AllBids { get; set; }
+        public User Seller { get; set; }
         public string ItemDescription { get; set; }
         public string ItemName { get; set; }
         public string SendingAdress { get; set; }
-        public User Seller { get; set; }
+
     }
 
 }

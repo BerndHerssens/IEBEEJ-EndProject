@@ -16,10 +16,8 @@ namespace IEBEEJ.Business.Models
         public DateTime Created { get; set; } = DateTime.Now;
         public string Email { get; set; }
         public int Id { get; set; }
-
         public bool IsActive { get; set; }
         public List<Item> ItemsForSale { get; set; }
-        public List<User> LikedUsers { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
         public string PhoneNumber { get; set; }

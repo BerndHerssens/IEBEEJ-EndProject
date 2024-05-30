@@ -69,6 +69,10 @@ namespace IEBEEJ.Controllers
         {
             IEnumerable<Item> models = await _itemService.GetAllItemsAsync();
             Item searchedItem = models.Contains(models.FirstOrDefault(x => x.ItemName.Contains(name))) ? models.FirstOrDefault(x => x.ItemName == name) : null;
+            if (searchedItem == null) 
+            {
+                return NotFound();
+            }
             return Ok(searchedItem);
         }
 

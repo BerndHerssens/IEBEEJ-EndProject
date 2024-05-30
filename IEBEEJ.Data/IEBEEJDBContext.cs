@@ -100,7 +100,7 @@ namespace IEBEEJ.Data
                new ItemEntity
                {
                    Id=1,
-                   CategoryId = 0,
+                   CategoryId = 1,
                    Created = DateTime.Now,
                    EndDate = DateTime.Now.AddDays(7),
                    EstimatedValueMax = 50000,
@@ -114,7 +114,7 @@ namespace IEBEEJ.Data
                new ItemEntity
                {
                    Id=2,
-                   CategoryId = 1,
+                   CategoryId = 2,
                    Created = DateTime.Now,
                    EndDate = DateTime.Now.AddDays(7),
                    EstimatedValueMax = 200,
@@ -128,7 +128,7 @@ namespace IEBEEJ.Data
                new ItemEntity
                {
                    Id=3,
-                   CategoryId = 2,
+                   CategoryId = 3,
                    Created = DateTime.Now,
                    EndDate = DateTime.Now.AddDays(7),
                    EstimatedValueMax = 99,
@@ -142,7 +142,7 @@ namespace IEBEEJ.Data
                new ItemEntity
                {
                    Id=4,
-                   CategoryId = 3,
+                   CategoryId = 4,
                    Created = DateTime.Now,
                    EndDate = DateTime.Now.AddDays(7),
                    EstimatedValueMax = 400,
@@ -156,7 +156,7 @@ namespace IEBEEJ.Data
                 new ItemEntity
                {
                    Id=5,
-                   CategoryId = 4,
+                   CategoryId = 5,
                    Created = DateTime.Now,
                    EndDate = DateTime.Now.AddDays(7),
                    EstimatedValueMax = 400,
@@ -170,7 +170,7 @@ namespace IEBEEJ.Data
                new ItemEntity
                {
                    Id=6,
-                   CategoryId = 5,
+                   CategoryId = 6,
                    Created = DateTime.Now,
                    EndDate = DateTime.Now.AddDays(7),
                    EstimatedValueMax = 20000,
@@ -180,6 +180,20 @@ namespace IEBEEJ.Data
                    SellerId=2,
                    SendingAdress = "Centrum Brussel",
                    StartingPrice = 850,
+               },
+               new ItemEntity
+               {
+                   Id=7,
+                   CategoryId = 3,
+                   Created = DateTime.Now,
+                   EndDate = DateTime.Now.AddDays(7),
+                   EstimatedValueMax = 20000,
+                   EstimatedValueMin = 959,
+                   ItemDescription="A book about how to read books",
+                   ItemName="Reading Book for dummies",
+                   SellerId=1,
+                   SendingAdress = "Centrum Brussel",
+                   StartingPrice = 200,
                },
            };
         }

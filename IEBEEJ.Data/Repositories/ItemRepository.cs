@@ -28,6 +28,7 @@ namespace IEBEEJ.Data.Repositories
             return await _dbContext.Items
                 .Include(x => x.AllBids)
                 .Include(x => x.Seller)
+                .Include(x => x.Category)
                 .Skip(skip)
                 .Take(take)
                 //.OrderByDescending(x => x.Id)
@@ -38,6 +39,8 @@ namespace IEBEEJ.Data.Repositories
         {
             return await _dbContext.Items  //TODO: Include want meerdere tables aanspreken, MAAR: oppassen met foreign keys en circular references
                 .Include(x => x.AllBids)
+                .Include(x => x.Seller)
+                .Include(x => x.Category)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 

@@ -88,10 +88,6 @@ namespace IEBEEJ.Business.Services
             {
                 userEntity.ItemsForSale = updatedEntity.ItemsForSale;
             }
-            if (updatedEntity.LikedUsers != null)
-            {
-                userEntity.LikedUsers = updatedEntity.LikedUsers;
-            }
             await _userRepository.UpdateUserAsync(userEntity);
         }
 

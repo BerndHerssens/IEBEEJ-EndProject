@@ -1,16 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-
-namespace IEBEEJ.Data.Entities
+﻿namespace IEBEEJ.Data.Entities
 {
     public class CategoryEntity 
     {
         public int Id { get; set; }
-        
         public string Name { get; set; }
+        public List<ItemEntity> Items { get; set; }
     }
 }

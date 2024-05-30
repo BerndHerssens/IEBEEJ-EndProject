@@ -15,10 +15,9 @@ namespace IEBEEJ.Data.Entities
 
         public List<BidEntity> AllBids { get; set; }
 
-        [ForeignKey("Category")]
         public int CategoryId { get; set; }
 
-        //public CategoryEntity Category { get; set; } //TODO: nog kijken om de categoryFK te linken aan een item.
+        public CategoryEntity Category { get; set; } //TODO: nog kijken om de categoryFK te linken aan een item.
 
         [Required]
         public DateTime Created { get; set; }

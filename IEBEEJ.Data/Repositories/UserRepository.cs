@@ -43,7 +43,6 @@ namespace IEBEEJ.Data.Repositories
             return await _dbContext.Users
                 .Include(x => x.Bids)
                 .Include(x =>x.ItemsForSale)
-                .Include(x =>x.LikedUsers)
                 .Skip(skip)
                 .Take(take)
                 .OrderBy(x => x.Id)
