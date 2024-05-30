@@ -77,7 +77,7 @@ namespace IEBEEJ.Controllers
 
         // DELETE api/<ItemController>/5
         [HttpDelete("{id}")]
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             await _itemService.DeleteItemAsync(id);
         }

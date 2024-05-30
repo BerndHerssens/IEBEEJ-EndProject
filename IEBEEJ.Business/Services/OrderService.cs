@@ -42,10 +42,10 @@ namespace IEBEEJ.Business.Services
             }
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrdersAsync(int skip, int take)
+        public async Task<List<Order>> GetAllOrdersAsync(int skip, int take)
         {
             IEnumerable<OrderEntity> orderEntities = await _orderRepository.GetAllOrdersAsync(skip, take);
-            IEnumerable<Order> orders = _mapper.Map<IEnumerable<Order>>(orderEntities);
+            List<Order> orders = _mapper.Map<List<Order>>(orderEntities);
             return orders;
 
         }
@@ -73,8 +73,6 @@ namespace IEBEEJ.Business.Services
             orderEntity.StatusId = order.StatusId;
             await _orderRepository.UpdateOrderAsync(orderEntity);
         }
-
-
     }
 
 
