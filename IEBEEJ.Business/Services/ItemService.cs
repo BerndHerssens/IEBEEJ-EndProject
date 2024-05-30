@@ -31,7 +31,8 @@ namespace IEBEEJ.Business.Services
             }
         }
 
-        public void GetHighestBidOnItem(Item item)
+
+        public async Task GetHighestBidOnItem(Item item)
         {
             if (item.AllBids != null || item.AllBids.Count > 0)
             {

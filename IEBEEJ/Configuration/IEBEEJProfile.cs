@@ -37,7 +37,7 @@ namespace IEBEEJ.Configuration
             CreateMap<UpdateUserDTO, User>();
 
 
-            CreateMap<Bid, SmallBidDTO>();
+            CreateMap<Bid, SmallBidDTO>().ReverseMap();
 
             CreateMap<Item, ItemForBidDTO>();
             CreateMap<UpdateBidDTO, Bid>();

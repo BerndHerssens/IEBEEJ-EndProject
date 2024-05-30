@@ -37,10 +37,10 @@ namespace IEBEEJ.Business.Services
             }
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrdersAsync(int skip, int take)
+        public async Task<List<Order>> GetAllOrdersAsync(int skip, int take)
         {
             IEnumerable<OrderEntity> orderEntities = await _orderRepository.GetAllOrdersAsync(skip, take);
-            IEnumerable<Order> orders = _mapper.Map<IEnumerable<Order>>(orderEntities);
+            List<Order> orders = _mapper.Map<List<Order>>(orderEntities);
             return orders;
 
         }
@@ -75,6 +75,7 @@ namespace IEBEEJ.Business.Services
             await _orderRepository.UpdateOrderAsync(orderEntity);
         }
 
+
         public async Task RemoveOrderByIdAsync(int id)
         {
             await _orderRepository.RemoveOrderByIdAsync(id);
@@ -86,5 +87,6 @@ namespace IEBEEJ.Business.Services
             orderEntity.TotalCost = order.WonBidding.BidValue * 1.21m;  //TODO: Add sending costs based on location
             await _orderRepository.UpdateOrderAsync(orderEntity);
         }
+
     }
 }

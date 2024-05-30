@@ -15,12 +15,13 @@ import { FooterComponent } from './footer/footer.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { RegisterComponent } from './register/register.component';
 import { Routes } from '@angular/router';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    NavbarComponent,
     HomePageComponent,
     WebShopComponent,
     ProductDetailsComponent,
@@ -29,11 +30,14 @@ import { Routes } from '@angular/router';
     ShoppingCartComponent,
     FooterComponent,
     LogInComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    NavbarComponent,
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

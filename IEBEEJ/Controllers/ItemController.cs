@@ -72,6 +72,15 @@ namespace IEBEEJ.Controllers
             return Ok(searchedItem);
         }
 
+        [HttpGet]
+        [Route("GetHighestBidOnItem")]
+        public async Task<ActionResult> GetHighestBid(int id)
+        {
+            Item item = await _itemService.GetItemByIdAsync(id);
+            await _itemService.GetHighestBidOnItem(item);
+            return Ok(item.HighestBid);
+        }
+
 
         [HttpPost]
         public async Task<ActionResult> Post(AddItemDTO itemDTO)
@@ -132,5 +141,7 @@ namespace IEBEEJ.Controllers
             await _itemService.UpdateItemAsync(item);
             return Ok();
         }
+
+        
     }
 }
