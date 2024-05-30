@@ -1,4 +1,5 @@
 ﻿using IEBEEJ.Data.Entities;
+using IEBEEJ.DTOs.BidDTOs;
 
 namespace IEBEEJ.DTOs.ItemDTOs
 {
@@ -7,6 +8,7 @@ namespace IEBEEJ.DTOs.ItemDTOs
         public decimal EstimatedValueMax { get; set; }
         public decimal EstimatedValueMin { get; set; }
         public decimal StartingPrice { get; set; }
+        public SmallBidDTO SmallBid { get; set; }
         public int Category { get; set; }
         public int Id { get; set; }
         public int SellerID { get; set; }

@@ -58,12 +58,20 @@ namespace IEBEEJ.Controllers
 
         [HttpGet]
         [Route("SearchOnName")]
-
         public async Task<ActionResult<IEnumerable<Item>>> SearchOnName(string name)
         {
             IEnumerable<Item> models = await _itemService.GetAllItemsAsync();
             Item searchedItem = models.Contains(models.FirstOrDefault(x => x.ItemName.Contains(name))) ? models.FirstOrDefault(x => x.ItemName == name) : null;
             return Ok(searchedItem);
+        }
+
+        [HttpGet]
+        [Route("GetHighestBidOnItem")]
+        public async Task<ActionResult> GetHighestBid(int id)
+        {
+            Item item = await _itemService.GetItemByIdAsync(id);
+            await _itemService.GetHighestBidOnItem(item);
+            return Ok(item.HighestBid);
         }
 
 
@@ -108,5 +116,7 @@ namespace IEBEEJ.Controllers
             await _itemService.UpdateItemAsync(item);
             return Ok();
         }
+
+        
     }
 }
