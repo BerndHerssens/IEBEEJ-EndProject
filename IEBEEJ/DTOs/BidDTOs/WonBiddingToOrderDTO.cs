@@ -2,6 +2,8 @@
 {
     public class WonBiddingToOrderDTO
     {
+        public int Id { get; set; }
 
+        
     }
 }

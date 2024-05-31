@@ -14,6 +14,10 @@ namespace IEBEEJ.DTOs.OrderDTOs
         public ItemForOrderDTO Item { get; set; }
 
         public UserForOrderDTO Buyer { get; set; }
+
+        public SmallUserDTO Bidder { get; set; }
+
+        public WonBiddingToOrderBuyerToOrderDTO WonBidding { get; set; }
         public string PaymentMethod { get; set; }
         public decimal PriceTotal { get; set;}
 
