@@ -47,9 +47,10 @@ namespace IEBEEJ.Controllers
         public async Task<ActionResult> GetOrderById(int id)
         {
             Order order = await _orderService.GetOrderByIdAsync(id);
+            OrderDTO orderDTO = _mapper.Map<OrderDTO>(order);
             if (order != null)
             {
-                return Ok(order);
+                return Ok(orderDTO);
             }
             return NotFound();
         }
