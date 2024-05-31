@@ -1,4 +1,7 @@
-﻿namespace IEBEEJ.DTOs.OrderDTOs
+﻿using IEBEEJ.DTOs.ItemDTOs;
+using IEBEEJ.DTOs.UserDTOs;
+
+namespace IEBEEJ.DTOs.OrderDTOs
 {
     public class AddOrderDTO
     {
@@ -6,11 +9,9 @@
         public decimal TotalPrice { get; set; }
         public string PaymentMethod { get; set; }
 
-        public string ReceivingAdress { get; set; } 
+        public ItemForOrderDTO Item { get; set; }
 
-        public string BillingAdress { get; set; }
-
-        public string SendingAdress { get; set; }
+        public UserForOrderDTO Buyer { get; set; }
 
         public int StatusId { get; set; }
     }

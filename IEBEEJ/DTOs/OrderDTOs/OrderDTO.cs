@@ -7,6 +7,7 @@ namespace IEBEEJ.DTOs.OrderDTOs
     public class OrderDTO
     {
         public int Id { get; set; }
+        public int WonBiddingId { get; set; }
         public int ItemId { get; set; }
         public int BuyerId { get; set; }
 
