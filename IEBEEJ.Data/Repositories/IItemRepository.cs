@@ -16,6 +16,9 @@ namespace IEBEEJ.Data.Repositories
 
         Task<List<ItemEntity>> GetItemsBySellerIDAsync(int userId);
         Task<IEnumerable<ItemEntity>> GetItemsByCategoryId(int id);
+        Task<IEnumerable<ItemEntity>> GetAllItemsOnNameAsync(string searchname);
+        Task ChangeItemActiveStatusAsync(ItemEntity itemEntity);
+        Task ChangeItemSoldStatusAsync(ItemEntity itemEntity);
 
         //Task<List<ItemEntity>> GetItemsBySellerNameAsync (int userId);
     }

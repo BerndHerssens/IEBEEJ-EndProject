@@ -33,7 +33,7 @@ namespace IEBEEJ.Controllers
             }
             else
             {
-                return NotFound();
+                return NotFound("Cannot find any Item lists");
             }
             
         }
@@ -50,7 +50,7 @@ namespace IEBEEJ.Controllers
             }
             else
             {
-                return NotFound();
+                return NotFound("Cannot find item with id "+id);
             }
         }
 
@@ -66,7 +66,7 @@ namespace IEBEEJ.Controllers
             }
             else
             {
-                return NotFound();
+                return NotFound("Cannot find the category with int "+categoryInt);
             }
         }
 
@@ -74,24 +74,31 @@ namespace IEBEEJ.Controllers
         [Route("SearchOnName")]
         public async Task<ActionResult<IEnumerable<Item>>> SearchOnName(string name)
         {
-            IEnumerable<Item> models = await _itemService.GetAllItemsAsync();
-            Item searchedItem = models.Contains(models.FirstOrDefault(x => x.ItemName.Contains(name))) ? models.FirstOrDefault(x => x.ItemName == name) : null;
-            if (searchedItem == null) 
+            IEnumerable<Item> item = await _itemService.SearchOnName(name);
+
+            if (item != null)
             {
-                return NotFound();
+                IEnumerable<ItemDTO> itemDTO = _mapper.Map<IEnumerable<ItemDTO>>(item);
+                return Ok(itemDTO);
             }
-            return Ok(searchedItem);
+            else
+            {
+                return NotFound("Cannot find item with name" +name);
+            }
         }
 
         [HttpGet]
         [Route("GetHighestBidOnItem")]
-        public async Task<ActionResult> GetHighestBid(int id)
+        public async Task<ActionResult> GetHighestBid(Item item)
         {
-            Item item = await _itemService.GetItemByIdAsync(id);
             await _itemService.GetHighestBidOnItem(item);
-            return Ok(item.HighestBid);
+            if ( item != null)
+            {
+                ItemDTO itemDTO = _mapper.Map< ItemDTO > (item);
+                return Ok(itemDTO);
+            }
+            return BadRequest(ModelState);
         }
-
 
         [HttpPost]
         public async Task<ActionResult> Post(AddItemDTO itemDTO)
@@ -106,9 +113,7 @@ namespace IEBEEJ.Controllers
             {
                 return BadRequest(cannotCreate.Message);
             }
-           
         }
-
 
         // DELETE api/<ItemController>/5
         [HttpDelete("{id}")]
@@ -130,29 +135,40 @@ namespace IEBEEJ.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
         }
+
         [HttpPut]
         [Route("ActivityChangeItem")]
-        public async Task<ActionResult> ChangeItemActivityAsync(int id)
+        public async Task<ActionResult> ChangeItemActivityAsync(Item item)
         {
-            Item item = await _itemService.GetItemByIdAsync(id);
-            await _itemService.ChangeItemActiveStatus(item);
-            await _itemService.UpdateItemAsync(item);
-            return Ok();
+            
+            if (ModelState.IsValid)
+            {
+                await _itemService.ChangeItemActiveStatusAsync(item);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         [HttpPut]
         [Route("SoldStatusChange")]
-        public async Task<ActionResult> ChangeItemSold(int id)
+        public async Task<ActionResult> ChangeItemSoldAsync(Item item)
         {
-            Item item = await _itemService.GetItemByIdAsync(id);
-            await _itemService.ChangeItemSoldStatus(item);
-            await _itemService.UpdateItemAsync(item);
-            return Ok();
+            
+            if (ModelState.IsValid)
+            {
+                await _itemService.ChangeItemSoldStatusAsync(item);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
-
-        
     }
 }

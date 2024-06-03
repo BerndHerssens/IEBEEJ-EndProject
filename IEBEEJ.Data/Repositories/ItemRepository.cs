@@ -17,6 +17,18 @@ namespace IEBEEJ.Data.Repositories
             _dbContext = dbcontext;
         }
 
+        public async Task ChangeItemActiveStatusAsync(ItemEntity itemEntity)
+        {
+            itemEntity.IsActive = !itemEntity.IsActive;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task ChangeItemSoldStatusAsync(ItemEntity itemEntity)
+        {
+            itemEntity.IsSold = !itemEntity.IsSold;
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task CreateItemAsync(ItemEntity itemEntity)
         {
             await _dbContext.Items.AddAsync(itemEntity);
@@ -34,6 +46,16 @@ namespace IEBEEJ.Data.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<ItemEntity>> GetAllItemsOnNameAsync(string searchname)
+        {
+            return await _dbContext.Items
+                .Where(x => x.ItemName.Contains(searchname))
+                .Include(x => x.AllBids)
+                .Include(x => x.Seller)
+                .Include(x => x.Category)
+                .ToListAsync();
+        }
+
         public async Task<ItemEntity> GetItemByIdAsync(int id)
         {
             return await _dbContext.Items  //TODO: Include want meerdere tables aanspreken, MAAR: oppassen met foreign keys en circular references
@@ -45,7 +67,8 @@ namespace IEBEEJ.Data.Repositories
 
         public async Task<IEnumerable<ItemEntity>> GetItemsByCategoryId(int id)
         {
-            return await _dbContext.Items.Where(x => x.CategoryId == id)
+            return await _dbContext.Items
+                .Where(x => x.CategoryId == id || id == null)
                 .Include(x => x.AllBids)
                 .Include(x => x.Seller)
                 .Include(x => x.Category)
