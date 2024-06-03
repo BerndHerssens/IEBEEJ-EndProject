@@ -25,5 +25,9 @@ export class UserService {
   getUserByLogin(username: string, password: string) : Observable<any> {
     return this.httpClient.get(`${this.APIUrl}/UserLogin?username=${username}&password=${password}`)
   }
+
+  registerAUser(user: any) : Observable<any> {
+    return this.httpClient.post(`${this.APIUrl}/CreatUser`, user)
+  }
   constructor(private httpClient: HttpClient) {}
 }
