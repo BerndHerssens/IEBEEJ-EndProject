@@ -2,6 +2,7 @@
 using IEBEEJ.Business.Models;
 using IEBEEJ.Data.Entities;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace IEBEEJ.Business.Services
 {
@@ -31,7 +32,6 @@ namespace IEBEEJ.Business.Services
             }
         }
 
-
         public async Task GetHighestBidOnItem(Item item)
         {
             if (item.AllBids != null || item.AllBids.Count > 0)
@@ -40,20 +40,22 @@ namespace IEBEEJ.Business.Services
             }
         }
 
-        public async Task ChangeItemActiveStatus(Item item)
+        public async Task ChangeItemActiveStatusAsync(Item item)
         {
-            item.IsActive = !item.IsActive;
-            ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
-
-            await _itemRepository.UpdateItemAsync(itemEntity);
+            if (item != null)
+            {
+                ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(item.Id);
+                await _itemRepository.ChangeItemActiveStatusAsync(itemEntity);
+            }
         }
 
-        public async Task ChangeItemSoldStatus(Item item)
+        public async Task ChangeItemSoldStatusAsync(Item item)
         {
-            item.IsSold = !item.IsSold;
-            ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
-
-            await _itemRepository.UpdateItemAsync(itemEntity);
+            if (item != null)
+            {
+                ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(item.Id);
+                await _itemRepository.ChangeItemSoldStatusAsync(itemEntity);
+            }
         }
 
         public async Task CreateAnItem(Item item)
@@ -106,6 +108,17 @@ namespace IEBEEJ.Business.Services
             {
                 return null;
             }
+        }
+
+        public async Task<IEnumerable<Item>> SearchOnName(string name)
+        {
+            IEnumerable<ItemEntity> itemEntity = await _itemRepository.GetAllItemsOnNameAsync(name);
+            if (itemEntity != null)
+            {
+                IEnumerable<Item> items = _mapper.Map<IEnumerable<Item>>(itemEntity);
+                return items;
+            }
+            return null;
         }
     }
 }
