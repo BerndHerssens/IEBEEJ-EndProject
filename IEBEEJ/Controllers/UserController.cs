@@ -144,14 +144,10 @@ namespace IEBEEJ.Controllers
             {
                 return NotFound();
             }
-            else if (userLoggingIn.Password == password)
-            {
-                UserDTO userDTO = _mapper.Map<UserDTO>(userLoggingIn);
-                return Ok(userDTO);
-            }
             else
             {
-                return BadRequest();
+                LoginDTO loginDTO = _mapper.Map<LoginDTO>(userLoggingIn);
+                return Ok(loginDTO);
             }
         }
     }

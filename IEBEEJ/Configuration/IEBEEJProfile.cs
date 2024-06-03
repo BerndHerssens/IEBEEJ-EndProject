@@ -33,6 +33,8 @@ namespace IEBEEJ.Configuration
                 .ForPath(x => x.CategoryName, y => y.MapFrom(z => z.Category.Name)) ;
             CreateMap<Item, ItemForBidDTO>();
             CreateMap<Item, SmallUserDTO>();
+            CreateMap<User, ItemForOrderDTO>();
+            CreateMap<User, LoginDTO>();
             CreateMap<ItemEntity, Item>().ReverseMap();
             CreateMap<Order, OrderDTO>();
             CreateMap<Order, SmallOrderDTO>();
@@ -44,7 +46,9 @@ namespace IEBEEJ.Configuration
             CreateMap<UpdateUserDTO, User>();
             CreateMap<User, SmallUserDTO>();
             CreateMap<User, UserDTO>();
+            CreateMap<User, UserForOrderDTO>();
             CreateMap<UserEntity, User>().ReverseMap();
+            CreateMap<WonBiddingToOrderBuyerToOrderDTO, OrderDTO>();
         }
     }
 }

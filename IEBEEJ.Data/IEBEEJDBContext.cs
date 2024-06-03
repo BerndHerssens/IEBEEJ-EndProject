@@ -18,24 +18,24 @@ namespace IEBEEJ.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) //seeding: dummy data
         {
-            base.OnModelCreating(modelBuilder);
-            List<UserEntity> users = GenerateDummyUsers();
-            modelBuilder.Entity<UserEntity>().HasData(users);
+            //base.OnModelCreating(modelBuilder);
+            //List<UserEntity> users = GenerateDummyUsers();
+            //modelBuilder.Entity<UserEntity>().HasData(users);
 
-            List<CategoryEntity> categories = GenerateDummyCategories();
-            modelBuilder.Entity<CategoryEntity>().HasData(categories);
+            //List<CategoryEntity> categories = GenerateDummyCategories();
+            //modelBuilder.Entity<CategoryEntity>().HasData(categories);
 
-            List<ItemEntity> items = GenerateDummyItems();
-            modelBuilder.Entity<ItemEntity>().HasData(items);
+            //List<ItemEntity> items = GenerateDummyItems();
+            //modelBuilder.Entity<ItemEntity>().HasData(items);
 
-            List<BidEntity> bids = GenerateDummyBids();
-            modelBuilder.Entity<BidEntity>().HasData(bids);
+            //List<BidEntity> bids = GenerateDummyBids();
+            //modelBuilder.Entity<BidEntity>().HasData(bids);
 
-            List<StatusEntity> statuses = GenerateDummyStatuses();
-            modelBuilder.Entity<StatusEntity>().HasData(statuses);
+            //List<StatusEntity> statuses = GenerateDummyStatuses();
+            //modelBuilder.Entity<StatusEntity>().HasData(statuses);
 
-            List<OrderEntity> orders = GenerateDummyOrders();
-            modelBuilder.Entity<OrderEntity>().HasData(orders);
+            //List<OrderEntity> orders = GenerateDummyOrders();
+            //modelBuilder.Entity<OrderEntity>().HasData(orders);
         }
 
         private List<BidEntity> GenerateDummyBids()
