@@ -17,6 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { Routes } from '@angular/router';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     NavbarComponent,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

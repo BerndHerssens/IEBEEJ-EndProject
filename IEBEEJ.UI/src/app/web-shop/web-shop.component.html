@@ -19,17 +19,13 @@
             <h5 class="fw-bolder">{{item.itemName}}</h5>
             <!-- Product price-->
             <h6>Current highest bid: </h6>
-<<<<<<< Updated upstream
-            <p class="font-italic">€{{item.smallBid.bidValue}} by {{item.smallBid.bidderId}}</p>
-=======
             <p class="font-italic">€400,00 by {{item.sellerName.at(0)?.toUpperCase()}}</p>
->>>>>>> Stashed changes
             <p>{{item.sellerName}}</p>
           </div>
         </div>
         <!-- Product actions-->
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-          <div class="text-center"><a class="btn btn-outline-dark mt-auto" routerLink="/items/ + {{item.id}}">View details</a></div>
+          <div class="text-center"><a class="btn btn-outline-dark mt-auto" routerLink="/items/{{item.id}}">View details</a></div>
         </div>
       </div>
     </div>
