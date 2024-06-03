@@ -146,8 +146,8 @@ namespace IEBEEJ.Controllers
             }
             else if (userLoggingIn.Password == password)
             {
-                UserDTO userDTO = _mapper.Map<UserDTO>(userLoggingIn);
-                return Ok(userDTO);
+                LoginDTO loginDTO = _mapper.Map<LoginDTO>(userLoggingIn);
+                return Ok(loginDTO);
             }
             else
             {
