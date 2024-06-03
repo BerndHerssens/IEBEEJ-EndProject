@@ -11,14 +11,14 @@
                     <span>$40.00</span>
                 </div>
                 <p class="lead">{{item.itemDescription}}</p>
-                <div class="d-flex">
+                <form (submit)="placeBid()" [formGroup]="addBid" class="d-flex">
                     <!-- @if () {} -->
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" [(ngModel)]="bidValue" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
+                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" formControlName="bidValue" />
+                    <button class="btn btn-outline-dark flex-shrink-0" type="submit" >
+                        Add Bid
                         
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     </div>

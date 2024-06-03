@@ -13,13 +13,13 @@ export class UserService {
   isLoggedIn: boolean = false;
 
   currentUser: any = {
-    Id: 1,
-    Name: "Buddy",
-    Email: "Buddy@hotmail.com",
-    Password: "1230",
-    Address: "Thuis-Straat",
-    PhoneNumber: "1234567890",
-    Birthday: new Date(1980, 9, 10)
+    id: 1,
+    name: "Buddy",
+    email: "Buddy@hotmail.com",
+    password: "1230",
+    address: "Thuis-Straat",
+    phoneNumber: "1234567890",
+    birthday: new Date(1980, 9, 10)
   }
 
   getUserByLogin(username: string, password: string) : Observable<any> {
@@ -27,7 +27,7 @@ export class UserService {
   }
 
   registerAUser(user: any) : Observable<any> {
-    return this.httpClient.post(`${this.APIUrl}/CreatUser`, user)
+    return this.httpClient.post(`${this.APIUrl}/CreateUser`, user)
   }
   constructor(private httpClient: HttpClient) {}
 }

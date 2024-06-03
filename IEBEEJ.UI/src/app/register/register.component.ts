@@ -30,12 +30,13 @@ export class RegisterComponent {
   constructor(private userService : UserService) {}
 
   register() : void{
-
-    this.userService.registerAUser(this.registerForm).subscribe(
+    console.log(this.registerForm.value)
+    this.userService.registerAUser(this.registerForm.value).subscribe(
       (data) => {
         this.userService.currentUser = data;
       }, 
         (error) => {
+          console.error(error)
           alert("Wrong username or password")
         }
       
