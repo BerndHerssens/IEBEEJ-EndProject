@@ -17,6 +17,16 @@ import { RegisterComponent } from './register/register.component';
 import { Routes } from '@angular/router';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -30,16 +40,22 @@ import { HttpClientModule } from '@angular/common/http';
     ShoppingCartComponent,
     FooterComponent,
     LogInComponent,
-    RegisterComponent,
     UserDetailsComponent
   ],
   imports: [
     BrowserModule,
     NavbarComponent,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    
+    
   ],
-  providers: [],
+  providers: [provideNativeDateAdapter(), provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

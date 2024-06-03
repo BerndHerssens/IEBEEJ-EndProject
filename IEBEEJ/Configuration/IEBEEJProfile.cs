@@ -24,6 +24,7 @@ namespace IEBEEJ.Configuration
             CreateMap<AddItemDTO, Item>();
             CreateMap<AddOrderDTO, Order>();
             CreateMap<AddUserDTO, User>();
+            CreateMap<AddBidDTO, Bid>();
             CreateMap<Bid, SmallBidDTO>();
             CreateMap<BidEntity, Bid>().ReverseMap();
             CreateMap<CategoryEntity, Category>().ReverseMap();

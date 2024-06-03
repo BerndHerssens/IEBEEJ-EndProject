@@ -1,18 +1,51 @@
 import { SmallBidDTO } from "./bids";
 
 export interface ItemDTO {
+    allBids: SmallBidDTO[];
+    categoryName: string;
+    created: Date;
+    endDate: Date;
+    estimatedValueMax: number;
+    estimatedValueMin: number;
+    id: number;
+    itemDescription: string;
+    itemName: string;
+    lastModified: Date;
+    sellerId: number;
+    sellerName: string;
+    sendingAdress: string;
+    startingPrice: number;
+    highestBidPrice: number;
+    highestBidder: string;
+}
+
+export interface AddItemDTO {
+    estimatedValueMax: number;
+    estimatedValueMin: number;
+    startingPrice: number;
+    category: number;
+    sellerId: number;
+    sellerName: string;
+    itemDescription: string;
+    itemName: string;
+    sendingAddress: string;
+    created: Date;
+    endDate: Date;
+}
+
+export interface SmallItemDTO {
+    id: number;
+    itemName: string;
+}
+
+export interface UpdateItemDTO {
     estimatedValueMax: number;
     estimatedValueMin: number;
     startingPrice: number;
     category: number;
     id: number;
-    sellerId: number;
-    sellerName: string;
-    lastModified: Date;
+    sellerID: number;
     itemDescription: string;
     itemName: string;
-    sendingAdress: string;
-    created: Date;
-    endDate: Date;
-    smallBid: SmallBidDTO
+    sendingAddress: string;
 }

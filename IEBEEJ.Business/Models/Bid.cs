@@ -11,9 +11,9 @@ namespace IEBEEJ.Business.Models
         public Bid() { }
         public Bid(int bidderId, decimal bidValue, int itemID)
         {
-            BidderID = bidderId;
+            BidderId = bidderId;
             BidValue = bidValue;
-            ItemID = itemID;
+            ItemId = itemID;
         }
         public int Id { get; set; }
 
@@ -21,9 +21,9 @@ namespace IEBEEJ.Business.Models
 
         public DateTime TimeCreated { get; set; }
 
-        public int ItemID { get; set; }
+        public int ItemId { get; set; }
 
-        public int BidderID { get; set; }
+        public int BidderId { get; set; }
 
         public bool IsActive { get; set; }
 

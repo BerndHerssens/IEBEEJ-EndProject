@@ -1,1 +1,65 @@
-<p>register works!</p>
+<section class="h-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card card-registration my-4">
+          <div class="row g-0">
+            <div class="col-xl-6 d-none d-xl-block">
+              <img src="https://s3.amazonaws.com/www-inside-design/uploads/2019/03/featureuserpersona-810x810.jpg"
+                alt="Sample photo" class="img-fluid"
+                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+            </div>
+            <form  (submit)="register()" [formGroup]="registerForm" class="col-xl-6">
+              <div class="card-body p-md-5 text-black">
+                <h3 class="mb-5 text-uppercase">Create an account</h3>
+
+                <div class="row">
+                  <div class="col-md-12 mb-4">
+                    <div data-mdb-input-init class="form-outline">
+                      <input formControlName="name" type="text" id="name" class="form-control form-control-lg" />
+                      <label class="form-label" for="name">Username</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <input formControlName="password" type="password" id="password" class="form-control form-control-lg" />
+                  <label class="form-label" for="password">Password</label>
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <input formControlName="adress" type="text" id="adress" class="form-control form-control-lg" />
+                  <label class="form-label" for="adress">Adress</label>
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <input formControlName="email" type="text" id="email" class="form-control form-control-lg" />
+                  <label class="form-label" for="email">Email</label>
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <input formControlName="phoneNumber" type="text" id="phoneNumber" class="form-control form-control-lg" />
+                  <label class="form-label" for="phoneNumber">Phonenumber</label>
+                </div>
+
+                <mat-form-field> 
+                  <mat-label>Choose a date</mat-label>
+                  <input formControlName="birthday" matInput [matDatepicker]="picker">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <div class="d-flex justify-content-end pt-3">  
+                  <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                    class="btn btn-warning btn-lg ms-2">Submit form</button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

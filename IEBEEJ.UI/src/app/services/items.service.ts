@@ -23,6 +23,11 @@ export class ItemsService {
 
   }
 
+  getItemById(id: number): Observable<any> {
+    return this.HttpClient.get(`${this.APIUrl}/${id}`)
+
+  }
+
   constructor(private HttpClient: HttpClient) { }
   
 }
