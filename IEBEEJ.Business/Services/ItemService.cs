@@ -56,14 +56,29 @@ namespace IEBEEJ.Business.Services
                 ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(item.Id);
                 await _itemRepository.ChangeItemSoldStatusAsync(itemEntity);
             }
+            else
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
         }
 
         public async Task CreateAnItem(Item item)
-        {
-            ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
-            itemEntity.Created = DateTime.Now;
-            itemEntity.EndDate = DateTime.Now.AddDays(7);
-            await _itemRepository.CreateItemAsync(itemEntity);
+        { 
+                if (item != null)
+                {
+                    ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
+                    if (itemEntity == null) 
+                    {
+                        throw new AutoMapperMappingException("Properties for ItemEntity and Item are not being mapped correctly.");
+                    }
+                    itemEntity.Created = DateTime.Now;
+                    itemEntity.EndDate = DateTime.Now.AddDays(7);
+                    await _itemRepository.CreateItemAsync(itemEntity);
+                }
+                else
+                {
+                    throw new ArgumentNullException(nameof(item));
+                }            
         }
 
         public async Task<IEnumerable<Item>> GetAllItemsAsync()

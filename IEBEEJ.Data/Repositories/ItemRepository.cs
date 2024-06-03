@@ -31,8 +31,17 @@ namespace IEBEEJ.Data.Repositories
 
         public async Task CreateItemAsync(ItemEntity itemEntity)
         {
+
             await _dbContext.Items.AddAsync(itemEntity);
-            await _dbContext.SaveChangesAsync();
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new DbUpdateException("Could not save and update DataBase.", ex);
+            }
+            
         }
 
         public async Task<IEnumerable<ItemEntity>> GetAllItemsAsync(int skip, int take)
