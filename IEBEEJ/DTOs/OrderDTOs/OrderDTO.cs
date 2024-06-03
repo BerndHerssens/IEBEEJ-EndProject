@@ -1,21 +1,25 @@
 ﻿using IEBEEJ.Business;
+using IEBEEJ.DTOs.ItemDTOs;
+using IEBEEJ.DTOs.UserDTOs;
 
 namespace IEBEEJ.DTOs.OrderDTOs
 {
     public class OrderDTO
     {
         public int Id { get; set; }
+        public int WonBiddingId { get; set; }
         public int ItemId { get; set; }
-
         public int BuyerId { get; set; }
+
+        public ItemForOrderDTO Item { get; set; }
+
+        public UserForOrderDTO Buyer { get; set; }
+
+        public SmallUserDTO Bidder { get; set; }
+
+        public WonBiddingToOrderBuyerToOrderDTO WonBidding { get; set; }
         public string PaymentMethod { get; set; }
         public decimal PriceTotal { get; set;}
-        public string ItemName { get; set; }
-        public string SendingAdress { get; set; }
-        public string ReceivingAdress { get; set; }
-        public string BillingAdress { get; set; }
-
-        public string BuyerName { get; set; }
 
         public DateTime Created { get; set; }
 

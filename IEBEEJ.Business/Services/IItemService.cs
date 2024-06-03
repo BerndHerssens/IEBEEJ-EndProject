@@ -7,11 +7,11 @@ namespace IEBEEJ.Business.Services
         Task ChangeItemActiveStatus(Item item);
         Task ChangeItemSoldStatus(Item item);
         Task CreateAnItem(Item item);
-        List<Item> FilterItem(List<Item> itemList, int categoryInt);
         Task<IEnumerable<Item>> GetAllItemsAsync();
         Task GetHighestBidOnItem(Item item);
         Task<Item> GetItemByIdAsync(int id);
         Task UpdateItemAsync(Item item);
         Task DeleteItemAsync(int id);
+        Task<IEnumerable<Item>> GetItemsByCategoryId(int id);
     }
 }

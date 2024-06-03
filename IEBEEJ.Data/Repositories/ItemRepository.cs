@@ -31,7 +31,6 @@ namespace IEBEEJ.Data.Repositories
                 .Include(x => x.Category)
                 .Skip(skip)
                 .Take(take)
-                //.OrderByDescending(x => x.Id)
                 .ToListAsync();
         }
 
@@ -42,6 +41,15 @@ namespace IEBEEJ.Data.Repositories
                 .Include(x => x.Seller)
                 .Include(x => x.Category)
                 .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<ItemEntity>> GetItemsByCategoryId(int id)
+        {
+            return await _dbContext.Items.Where(x => x.CategoryId == id)
+                .Include(x => x.AllBids)
+                .Include(x => x.Seller)
+                .Include(x => x.Category)
+                .ToListAsync();
         }
 
         public async Task<List<ItemEntity>> GetItemsBySellerIDAsync(int userId)

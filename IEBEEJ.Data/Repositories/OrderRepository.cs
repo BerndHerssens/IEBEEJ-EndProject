@@ -30,6 +30,8 @@ namespace IEBEEJ.Data.Repositories
         public async Task<OrderEntity> GetOrderByIdAsync(int id)
         {
             return await _dbContext.Orders
+                .Include(x => x.WonBidding)
+                .Include(x => x.WonItem)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
