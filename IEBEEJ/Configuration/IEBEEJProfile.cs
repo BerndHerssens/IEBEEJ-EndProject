@@ -34,6 +34,7 @@ namespace IEBEEJ.Configuration
             CreateMap<Item, ItemForBidDTO>();
             CreateMap<Item, SmallUserDTO>();
             CreateMap<User, ItemForOrderDTO>();
+            CreateMap<User, LoginDTO>();
             CreateMap<ItemEntity, Item>().ReverseMap();
             CreateMap<Order, OrderDTO>();
             CreateMap<Order, SmallOrderDTO>();
