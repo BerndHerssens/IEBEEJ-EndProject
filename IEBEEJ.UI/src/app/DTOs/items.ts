@@ -15,8 +15,7 @@ export interface ItemDTO {
     sellerName: string;
     sendingAdress: string;
     startingPrice: number;
-    highestBidPrice: number;
-    highestBidder: string;
+    highestBidPrice: number | undefined;
 }
 
 export interface AddItemDTO {

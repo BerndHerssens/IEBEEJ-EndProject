@@ -34,9 +34,9 @@ namespace IEBEEJ.Business.Services
             }
         }
 
-        public async Task<Bid> GetHighestBidOnItem(Item item)
+        public async Task<Bid> GetHighestBidOnItem(int id)
         {
-            BidEntity entity = await _bidRepository.GetHighestBidForItem(item.Id);
+            BidEntity entity = await _bidRepository.GetHighestBidForItem(id);
             Bid model = _mapper.Map<Bid>(entity);
             
             return model;

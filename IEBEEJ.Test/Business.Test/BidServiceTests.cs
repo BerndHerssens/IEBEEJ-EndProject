@@ -63,11 +63,12 @@ namespace IEBEEJ.Test.Business.Test
             decimal expectedvalue = 3500;
             
             var itemRepositoryMock = new Mock<IItemRepository>();
-            ItemService itemService = new ItemService(itemRepositoryMock.Object, mapper);
+            var bidRepositoryMock = new Mock<IBidRepository>();
+            ItemService itemService = new ItemService(itemRepositoryMock.Object, mapper, bidRepositoryMock.Object);
 
             //Act
 
-            itemService.GetHighestBidOnItem(item);
+            itemService.GetHighestBidOnItem(item.Id);
 
             //Assert
             Assert.AreEqual(item.HighestBid.BidValue, expectedvalue);
