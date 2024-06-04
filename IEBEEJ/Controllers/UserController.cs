@@ -69,12 +69,12 @@ namespace IEBEEJ.Controllers
 
         [HttpPut]
         [Route("UpdateUserActiveState")]
-        public async Task<ActionResult> ChangeUserActiveState(User targetUser)
+        public async Task<ActionResult> ChangeUserActiveState(int id)
         {
             if (ModelState.IsValid)
             {
-                User user = _mapper.Map<User>(targetUser);
-                await _userService.ChangeAccountActiveStatus(user);
+                User user = await _userService.GetUserByIdAsync(id);
+                await _userService.ChangeAccountActiveStatus(id, user);
                 return Ok();
             }
             return BadRequest();
