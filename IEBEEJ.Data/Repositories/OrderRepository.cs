@@ -1,4 +1,5 @@
-﻿using IEBEEJ.Data.Entities;
+﻿using AutoMapper;
+using IEBEEJ.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace IEBEEJ.Data.Repositories
@@ -6,16 +7,36 @@ namespace IEBEEJ.Data.Repositories
     public class OrderRepository : IOrderRepository
     {
         private IEBEEJDBContext _dbContext;
+        private IMapper _mapper;
 
-        public OrderRepository(IEBEEJDBContext dbcontext)
+        public OrderRepository(IEBEEJDBContext dbcontext, IMapper mapper)
         {
             _dbContext = dbcontext;
+            _mapper = mapper;
         }
 
-        public async Task CreateOrderAsync(OrderEntity orderEntity)
+        public async Task CreateOrderAsync(OrderEntity orderEntity, ItemEntity itemEntity)
         {
-            await _dbContext.Orders.AddAsync(orderEntity);
-            await _dbContext.SaveChangesAsync();
+            try
+            {
+                List<BidEntity> bids = itemEntity.AllBids;
+                orderEntity.TotalCost = bids.Max(x => x.BidValue) *1.21m; //move to bussiness
+            }
+            catch (Exception ex)
+            {
+                //logger.Log(ex.message("Something went wrong during creating at the reposity"))
+                throw;
+            }
+            try
+            {
+                await _dbContext.Orders.AddAsync(orderEntity);
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                //logger.Log(ex.message("Could not save and update DataBase.")
+                throw new DbUpdateException("Could not save and update DataBase.", ex);
+            }
         }
 
         public async Task<IEnumerable<OrderEntity>> GetAllOrdersAsync(int skip, int take)
@@ -30,19 +51,16 @@ namespace IEBEEJ.Data.Repositories
         public async Task<OrderEntity> GetOrderByIdAsync(int id)
         {
             return await _dbContext.Orders
-                .Include(x => x.WonBidding)
-                .Include(x => x.WonItem)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<List<OrderEntity>> GetOrdersByBuyerIDAsync(int userId)
         {
-            return await _dbContext.Orders.Where(x => x.WonBidding.BidderId == userId).ToListAsync();
+            return await _dbContext.Orders.Where(x => x.BuyerId == userId).ToListAsync();
         }
 
-        public async Task RemoveOrderByIdAsync(int id)
+        public async Task RemoveOrderAsync(OrderEntity orderEntity)
         {
-            OrderEntity orderEntity = new OrderEntity { Id = id };
             _dbContext.Orders.Remove(orderEntity);
             await _dbContext.SaveChangesAsync();
         }

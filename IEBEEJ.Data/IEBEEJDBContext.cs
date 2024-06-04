@@ -18,24 +18,24 @@ namespace IEBEEJ.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) //seeding: dummy data
         {
-            //base.OnModelCreating(modelBuilder);
-            //List<UserEntity> users = GenerateDummyUsers();
-            //modelBuilder.Entity<UserEntity>().HasData(users);
+            base.OnModelCreating(modelBuilder);
+            List<UserEntity> users = GenerateDummyUsers();
+            modelBuilder.Entity<UserEntity>().HasData(users);
 
-            //List<CategoryEntity> categories = GenerateDummyCategories();
-            //modelBuilder.Entity<CategoryEntity>().HasData(categories);
+            List<CategoryEntity> categories = GenerateDummyCategories();
+            modelBuilder.Entity<CategoryEntity>().HasData(categories);
 
-            //List<ItemEntity> items = GenerateDummyItems();
-            //modelBuilder.Entity<ItemEntity>().HasData(items);
+            List<ItemEntity> items = GenerateDummyItems();
+            modelBuilder.Entity<ItemEntity>().HasData(items);
 
-            //List<BidEntity> bids = GenerateDummyBids();
-            //modelBuilder.Entity<BidEntity>().HasData(bids);
+            List<BidEntity> bids = GenerateDummyBids();
+            modelBuilder.Entity<BidEntity>().HasData(bids);
 
-            //List<StatusEntity> statuses = GenerateDummyStatuses();
-            //modelBuilder.Entity<StatusEntity>().HasData(statuses);
+            List<StatusEntity> statuses = GenerateDummyStatuses();
+            modelBuilder.Entity<StatusEntity>().HasData(statuses);
 
-            //List<OrderEntity> orders = GenerateDummyOrders();
-            //modelBuilder.Entity<OrderEntity>().HasData(orders);
+            List<OrderEntity> orders = GenerateDummyOrders();
+            modelBuilder.Entity<OrderEntity>().HasData(orders);
         }
 
         private List<BidEntity> GenerateDummyBids()
@@ -269,29 +269,38 @@ namespace IEBEEJ.Data
                 new OrderEntity
             {
                     Id = 1,
-                    WonItemId = 1,
+                    BuyerId = 1,
+                    Created = DateTime.Now,
+                    SellerName = "Jeff",
+                    SendAdress = "test",
                     TotalCost = 700,
                     StatusId = 1,
                     PaymentMethod = "Paypal",
-                    WonBiddingId = 3
+                    ItemEntityId = 3,
                 },
                 new OrderEntity
                 {
                     Id = 2,
-                    WonItemId = 2,
+                    BuyerId = 2,
+                    Created = DateTime.Now,
+                    SellerName = "Joff",
+                    SendAdress = "test",
                     TotalCost = 600,
                     StatusId = 2,
                     PaymentMethod = "Credit Card" ,
-                    WonBiddingId = 2
+                    ItemEntityId = 2
                 },
                 new OrderEntity
                 {
                     Id = 3,
-                    WonItemId = 3,
+                    BuyerId = 1,
+                    Created = DateTime.Now,
+                    SellerName = "Dante",
+                    SendAdress = "test",
                     TotalCost = 700,
                     StatusId = 3,
                     PaymentMethod = "Paypal",
-                    WonBiddingId = 1
+                    ItemEntityId = 1
                 }
             };
         }

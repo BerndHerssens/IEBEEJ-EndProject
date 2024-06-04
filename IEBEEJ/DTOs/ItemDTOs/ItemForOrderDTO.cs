@@ -8,6 +8,6 @@
 
         public string SellerName { get; set; }
 
-        public int SendAdress { get; set; }
+        public string SendingAdress { get; set; }
     }
 }
