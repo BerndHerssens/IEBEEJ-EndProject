@@ -35,6 +35,8 @@ namespace IEBEEJ.Data.Repositories
             await _dbContext.Items.AddAsync(itemEntity);
             try
             {
+                itemEntity.Created = DateTime.Now;
+                itemEntity.EndDate = DateTime.Now.AddDays(7);
                 await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -89,7 +91,7 @@ namespace IEBEEJ.Data.Repositories
             return await _dbContext.Items.Where(x => x.SellerId == userId).ToListAsync();
         }
 
-        public async Task RemoveItemByIDAsync(ItemEntity entity)
+        public async Task RemoveItemAsync(ItemEntity entity)
         {
             _dbContext.Items.Remove(entity);
             await _dbContext.SaveChangesAsync();
@@ -100,15 +102,5 @@ namespace IEBEEJ.Data.Repositories
             _dbContext.Items.Update(itemEntity);
             await _dbContext.SaveChangesAsync();
         }
-
-        /*public async Task<List<ItemEntity>> GetFilteredDataAsync(string category, int skip, int take)
-        {
-            return await _dbContext.Items
-                .Where(x => x.CategoryId = category )
-                .Skip(skip)
-                .Take(take)
-                .OrderByDescending(x => x.Id)
-                .ToListAsync();
-        }*/
     }
 }

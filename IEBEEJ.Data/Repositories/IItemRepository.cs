@@ -8,7 +8,7 @@ namespace IEBEEJ.Data.Repositories
 
         Task CreateItemAsync(ItemEntity itemEntity);
 
-        Task RemoveItemByIDAsync(ItemEntity entity);
+        Task RemoveItemAsync(ItemEntity entity);
 
         Task UpdateItemAsync(ItemEntity itemEntity);
 

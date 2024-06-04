@@ -9,17 +9,27 @@ namespace IEBEEJ.Business.Services
     {
         private IOrderRepository _orderRepository;
         private IMapper _mapper;
+        private IItemRepository _itemRepository;
+        private IUserRepository _userRepository;
 
-        public OrderService(IOrderRepository orderRepository, IMapper mapper)
+        public OrderService(IOrderRepository orderRepository, IMapper mapper, IItemRepository itemRepository, IUserRepository userRepository)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
+            _itemRepository = itemRepository;
+            _userRepository = userRepository;
         }
 
         public async Task CreateOrderAsync(Order order)
         {
+            
             OrderEntity orderEntity = _mapper.Map<OrderEntity>(order);
-            await _orderRepository.CreateOrderAsync(orderEntity);
+            if (orderEntity == null)
+            {
+                throw new AutoMapperMappingException("Properties for OrderEntity and Order are not being mapped correctly.");
+            }
+            ItemEntity tempItemEntity = await _itemRepository.GetItemByIdAsync(order.ItemId);
+            await _orderRepository.CreateOrderAsync(orderEntity, tempItemEntity);
         }
 
         public async Task<Order> GetOrderByIdAsync(int id)
@@ -42,24 +52,24 @@ namespace IEBEEJ.Business.Services
             IEnumerable<OrderEntity> orderEntities = await _orderRepository.GetAllOrdersAsync(skip, take);
             List<Order> orders = _mapper.Map<List<Order>>(orderEntities);
             return orders;
-
         }
-
-
 
         public async Task UpdateOrderAsync(Order order)
         {
             OrderEntity orderEntity = await _orderRepository.GetOrderByIdAsync(order.Id);
             OrderEntity updatedEntity = _mapper.Map<OrderEntity>(order);
-
+            orderEntity.ItemEntityId = updatedEntity.ItemEntityId;
+            orderEntity.BuyerId = updatedEntity.BuyerId;
+            orderEntity.SellerName = updatedEntity.SellerName;
+            orderEntity.SendAdress = updatedEntity.SendAdress;
+            orderEntity.StatusId = updatedEntity.StatusId;
             orderEntity.IsActive = updatedEntity.IsActive;
             orderEntity.TotalCost = updatedEntity.TotalCost;
             orderEntity.StatusId = updatedEntity.StatusId;
             orderEntity.PaymentMethod = updatedEntity.PaymentMethod;
+
             await _orderRepository.UpdateOrderAsync(orderEntity);
         }
-
-
 
         public async Task<List<Order>> GetOrdersByUserIdAsync(int userId)
         {
@@ -75,18 +85,10 @@ namespace IEBEEJ.Business.Services
             await _orderRepository.UpdateOrderAsync(orderEntity);
         }
 
-
-        public async Task RemoveOrderByIdAsync(int id)
+        public async Task DeleteItemAsync(int id)
         {
-            await _orderRepository.RemoveOrderByIdAsync(id);
+           OrderEntity orderEntity = new OrderEntity { Id = id };
+            await _orderRepository.RemoveOrderAsync(orderEntity);
         }
-
-        public async Task CalculateTotalCostAsync(Order order)
-        {
-            OrderEntity orderEntity = _mapper.Map<OrderEntity>(order);
-            orderEntity.TotalCost = order.WonBidding.BidValue * 1.21m;  //TODO: Add sending costs based on location
-            await _orderRepository.UpdateOrderAsync(orderEntity);
-        }
-
     }
 }

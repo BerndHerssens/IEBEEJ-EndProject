@@ -9,22 +9,17 @@ namespace IEBEEJ.Business.Models
 {
     public class Order
     {
-        public User Buyer { get; set; }
-        public int BuyerID { get; set; }
         public int Id { get; set; }
-
-        public bool IsActive { get; set; }
-        public int ItemID { get; set; }
-        public Item WonItem { get; set; }
-        public int WonBiddingID { get; set; }
-        public Bid WonBidding { get; set; }
-        public int WonItemID { get; set; }
-        public string PaymentMethod { get; set; }
-        public int StatusId { get; set; }
-        public StatusType Status { get; set; }
-        
         public DateTime TimeCreated { get; set; }
-
+        public string SellerName { get; set; }
+        public string SendAdress { get; set; }
+        public int BuyerID { get; set; }
+        public string BuyerName { get; set; }
+        public string BuyerAdress { get; set; }
+        public bool IsActive { get; set; }
+        public string PaymentMethod { get; set; }
+        public int StatusId { get; set; }    
         public decimal TotalCost { get; set; }
+        public int ItemId { get; set; }
     }
 }

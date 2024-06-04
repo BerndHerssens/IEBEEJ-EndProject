@@ -71,8 +71,6 @@ namespace IEBEEJ.Business.Services
                     {
                         throw new AutoMapperMappingException("Properties for ItemEntity and Item are not being mapped correctly.");
                     }
-                    itemEntity.Created = DateTime.Now;
-                    itemEntity.EndDate = DateTime.Now.AddDays(7);
                     await _itemRepository.CreateItemAsync(itemEntity);
                 }
                 else
@@ -108,7 +106,7 @@ namespace IEBEEJ.Business.Services
         {
             ItemEntity entitytoDelete = new ItemEntity { Id = id };
 
-            await _itemRepository.RemoveItemByIDAsync(entitytoDelete);
+            await _itemRepository.RemoveItemAsync(entitytoDelete);
         }
 
         public async Task<IEnumerable<Item>> GetItemsByCategoryId(int id)
