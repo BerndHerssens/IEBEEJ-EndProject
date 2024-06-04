@@ -8,6 +8,8 @@ namespace IEBEEJ.Data.Entities
         public int Id { get; set; }
 
         public bool IsActive { get; set; }
+
+        [MaxLength(50)]
         public string PaymentMethod { get; set; }
 
         [Required]

@@ -36,11 +36,11 @@ namespace IEBEEJ.Data.Entities
         public bool IsSold { get; set; }
 
         [Required]
-        [StringLength(200)]
+        [MaxLength(200)]
         public string ItemDescription { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(50)]
         public string ItemName { get; set; }
 
         public DateTime LastModified { get; set; }
@@ -49,8 +49,7 @@ namespace IEBEEJ.Data.Entities
         public int SellerId { get; set; }
 
         public UserEntity Seller { get; set; } //UserEntity is een aparte tabel
-
-
+        [MaxLength(200)]
         public string SendingAdress { get; set; }
 
         [Required]
