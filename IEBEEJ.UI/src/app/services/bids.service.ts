@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SmallBidDTO } from '../DTOs/bids';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,24 @@ export class BidsService {
     return this.httpClient.post(`${this.APIUrl}`, bid)
     
   }
+
+  getHighestBid(bids : SmallBidDTO[]) : SmallBidDTO | null {
+    console.log(bids);
+    
+    if (bids.length == 0) {
+      return null
+    } else {
+    return bids.sort((a, b) => {
+      if (a.bidValue > b.bidValue) {
+          return -1;
+      }
+      if (a.bidValue < b.bidValue) {
+          return 1;
+      }
+      return 0;
+  })[0]}
+}
+
 
   constructor(private httpClient : HttpClient) { }
 }

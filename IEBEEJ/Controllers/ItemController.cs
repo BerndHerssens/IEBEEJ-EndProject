@@ -92,15 +92,18 @@ namespace IEBEEJ.Controllers
 
         [HttpGet]
         [Route("GetHighestBidOnItem")]
-        public async Task<ActionResult> GetHighestBid(Item item)
+        public async Task<ActionResult> GetHighestBid(int id)
         {
-            await _itemService.GetHighestBidOnItem(item);
-            if ( item != null)
+            Bid bid = await _itemService.GetHighestBidOnItem(id);
+            if (bid != null)
             {
-                ItemDTO itemDTO = _mapper.Map< ItemDTO > (item);
-                return Ok(itemDTO);
+                return Ok(bid);
+            } 
+            else
+            {
+                return NotFound();
             }
-            return BadRequest(ModelState);
+            
         }
 
         [HttpPost]

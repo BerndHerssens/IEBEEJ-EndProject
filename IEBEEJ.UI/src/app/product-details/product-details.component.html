@@ -7,12 +7,20 @@
                 <div class="small mb-1">Itemseller: {{item.sellerName}}</div>
                 
                 
-                <div class="fs-5 mb-5">
-                    <span>$40.00</span>
-                </div>
+                
                 <p class="lead">{{item.itemDescription}}</p>
+                @if( item.allBids != [] || item.allBids != null ) {
+                    <h3>Current Bids:</h3>
+                    <ul>
+                        <li *ngFor="let bid of item.allBids">
+                            <h5>
+                                <span>${{bid.bidValue}}</span>
+                            </h5>
+                        </li>
+                    </ul>
+                }
                 <form (submit)="placeBid()" [formGroup]="addBid" class="d-flex">
-                    <!-- @if () {} -->
+                    
                     <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" formControlName="bidValue" />
                     <button class="btn btn-outline-dark flex-shrink-0" type="submit" >
                         Add Bid
