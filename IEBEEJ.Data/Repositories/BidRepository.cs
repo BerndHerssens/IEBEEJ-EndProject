@@ -49,7 +49,7 @@ namespace IEBEEJ.Data.Repositories
            return await _dbContext.Bids
                 .Where(x => x.ItemID == itemId)
                 .OrderByDescending(x => x.BidValue)
-                .FirstOrDefaultAsync(); ;
+                .FirstOrDefaultAsync();
         }
 
         public async Task UpdateBidAsync(BidEntity bidEntity)

@@ -8,7 +8,7 @@ namespace IEBEEJ.Business.Services
         Task ChangeItemSoldStatusAsync(Item item);
         Task CreateAnItem(Item item);
         Task<IEnumerable<Item>> GetAllItemsAsync();
-        Task GetHighestBidOnItem(Item item);
+        Task<Bid> GetHighestBidOnItem(int id);
         Task<Item> GetItemByIdAsync(int id);
         Task UpdateItemAsync(Item item);
         Task DeleteItemAsync(int id);

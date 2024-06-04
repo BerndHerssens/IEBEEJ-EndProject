@@ -9,12 +9,14 @@ namespace IEBEEJ.Business.Services
     public class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepository;
+        private readonly IBidRepository _bidRepository;
         private IMapper _mapper;
 
-        public ItemService(IItemRepository itemRepository, IMapper mapper)
+        public ItemService(IItemRepository itemRepository, IMapper mapper, IBidRepository bidRepository)
         {
             _itemRepository = itemRepository;
             _mapper = mapper;
+            _bidRepository = bidRepository;
         }
 
         public async Task<Item> GetItemByIdAsync(int id)
@@ -32,12 +34,12 @@ namespace IEBEEJ.Business.Services
             }
         }
 
-        public async Task GetHighestBidOnItem(Item item)
+        public async Task<Bid> GetHighestBidOnItem(Item item)
         {
-            if (item.AllBids != null || item.AllBids.Count > 0)
-            {
-                item.HighestBid = item.AllBids.OrderByDescending(x => x.BidValue).ToList()[0];
-            }
+            BidEntity entity = await _bidRepository.GetHighestBidForItem(item.Id);
+            Bid model = _mapper.Map<Bid>(entity);
+            
+            return model;
         }
 
         public async Task ChangeItemActiveStatusAsync(Item item)
@@ -63,20 +65,20 @@ namespace IEBEEJ.Business.Services
         }
 
         public async Task CreateAnItem(Item item)
-        { 
-                if (item != null)
+        {
+            if (item != null) // Tip: Extra checks: Positieve prijs. Adres ingevuld. Email geldig.
+            {
+                ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
+                if (itemEntity == null)
                 {
-                    ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
-                    if (itemEntity == null) 
-                    {
-                        throw new AutoMapperMappingException("Properties for ItemEntity and Item are not being mapped correctly.");
-                    }
-                    await _itemRepository.CreateItemAsync(itemEntity);
+                    throw new AutoMapperMappingException("Properties for ItemEntity and Item are not being mapped correctly.");
                 }
-                else
-                {
-                    throw new ArgumentNullException(nameof(item));
-                }            
+                await _itemRepository.CreateItemAsync(itemEntity);
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
         }
 
         public async Task<IEnumerable<Item>> GetAllItemsAsync()
@@ -90,6 +92,7 @@ namespace IEBEEJ.Business.Services
             ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(item.Id);
             ItemEntity updatedEntity = _mapper.Map<ItemEntity>(item);
 
+            // Dit kan (lees moet) via AutoMapper
             itemEntity.ItemDescription = updatedEntity.ItemDescription;
             itemEntity.CategoryId = updatedEntity.CategoryId;
             itemEntity.SendingAdress = updatedEntity.SendingAdress;
@@ -114,7 +117,7 @@ namespace IEBEEJ.Business.Services
             IEnumerable<ItemEntity> itemEntitiess = await _itemRepository.GetItemsByCategoryId(id);
             if (itemEntitiess != null)
             {
-               IEnumerable<Item> items = _mapper.Map<IEnumerable<Item>>(itemEntitiess);
+                IEnumerable<Item> items = _mapper.Map<IEnumerable<Item>>(itemEntitiess);
                 return items;
             }
             else
