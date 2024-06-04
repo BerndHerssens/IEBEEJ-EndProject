@@ -3,6 +3,9 @@ using IEBEEJ.Business.Models;
 using IEBEEJ.Business.Services;
 using IEBEEJ.DTOs.ItemDTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Eventing.Reader;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -103,16 +106,35 @@ namespace IEBEEJ.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(AddItemDTO itemDTO)
         {
-            try
+            if (ModelState.IsValid)
             {
-                Item item = _mapper.Map<Item>(itemDTO);
-                await _itemService.CreateAnItem(item);
-                return Created();
+                try
+                {
+                    Item item = _mapper.Map<Item>(itemDTO);
+                    await _itemService.CreateAnItem(item);
+                    return Created();
+                }
+                catch(AutoMapperMappingException ex)
+                {
+                    //LogException(ex);
+                    return StatusCode(500, ex.Message);
+                }
+                catch (DbUpdateException ex)
+                {
+                    //LogException(ex)
+                    return StatusCode(409, ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    //LogException(ex); 
+                    return StatusCode(500, ex.Message);
+                }
             }
-            catch (Exception cannotCreate)
+            else
             {
-                return BadRequest(cannotCreate.Message);
+                return BadRequest(ModelState);
             }
+            
         }
 
         // DELETE api/<ItemController>/5
@@ -147,7 +169,7 @@ namespace IEBEEJ.Controllers
             if (ModelState.IsValid)
             {
                 await _itemService.ChangeItemActiveStatusAsync(item);
-                return Ok();
+                return StatusCode(200);
             }
             else
             {
@@ -162,8 +184,21 @@ namespace IEBEEJ.Controllers
             
             if (ModelState.IsValid)
             {
-                await _itemService.ChangeItemSoldStatusAsync(item);
-                return Ok();
+                try
+                {
+                    await _itemService.ChangeItemSoldStatusAsync(item);
+                    return StatusCode(200);
+                }
+                catch (ArgumentNullException ex)
+                {
+                    //LogException(ex);
+                    return StatusCode(500);
+                }
+                catch (Exception ex)
+                {
+                    //LogException(ex); Here we send everything what happened to our internal logger which is not yet implemented.
+                    return StatusCode(406);
+                }
             }
             else
             {

@@ -8,25 +8,13 @@ namespace IEBEEJ.DTOs.OrderDTOs
     {
         public int Id { get; set; }
         public int WonBiddingId { get; set; }
-        public int ItemId { get; set; }
+        public SmallItemDTO Item { get; set; }
+        public string SellerName { get; set; }
+        public string SendAdress { get; set; }
         public int BuyerId { get; set; }
-
-        public ItemForOrderDTO Item { get; set; }
-
-        public UserForOrderDTO Buyer { get; set; }
-
-        public SmallUserDTO Bidder { get; set; }
-
-        public WonBiddingToOrderBuyerToOrderDTO WonBidding { get; set; }
         public string PaymentMethod { get; set; }
-        public decimal PriceTotal { get; set;}
-
+        public decimal TotalCost { get; set;}
         public DateTime Created { get; set; }
-
-        public StatusType Status { get; set; }
-
         public int StatusId { get; set; }
-
-
     }
 }

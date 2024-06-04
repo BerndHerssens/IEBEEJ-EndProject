@@ -35,22 +35,17 @@ namespace IEBEEJ.Business.Services
 
         public async Task CreateABidAsync(Bid bid)
         {
-            Item item = await _itemService.GetItemByIdAsync(bid.ItemId);
-            await _itemService.GetHighestBidOnItem(item);
+            Bid highestBid = await _itemService.GetHighestBidOnItem(bid.ItemId);
 
-            if (item.HighestBid == null || bid.BidValue > item.HighestBid.BidValue)
+            if (highestBid == null || bid.BidValue > highestBid.BidValue)
             {
                 BidEntity bidEntity = _mapper.Map<BidEntity>(bid);
-                
-               
                 await _bidRepository.CreateBidAsync(bidEntity);
             }
             else
             {
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException($"A higher bid exists: {highestBid.BidValue}");
             }
-
-
         }
 
         public async Task DeleteBidByIDAsync(int id)

@@ -8,7 +8,7 @@ namespace IEBEEJ.Data.Repositories
 
         Task CreateItemAsync(ItemEntity itemEntity);
 
-        Task RemoveItemByIDAsync(ItemEntity entity);
+        Task RemoveItemAsync(ItemEntity entity);
 
         Task UpdateItemAsync(ItemEntity itemEntity);
 
@@ -19,6 +19,7 @@ namespace IEBEEJ.Data.Repositories
         Task<IEnumerable<ItemEntity>> GetAllItemsOnNameAsync(string searchname);
         Task ChangeItemActiveStatusAsync(ItemEntity itemEntity);
         Task ChangeItemSoldStatusAsync(ItemEntity itemEntity);
+        Task<ItemEntity> GetOnlyItemAsync(int itemId);
 
         //Task<List<ItemEntity>> GetItemsBySellerNameAsync (int userId);
     }

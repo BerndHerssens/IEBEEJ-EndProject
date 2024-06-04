@@ -14,5 +14,6 @@ namespace IEBEEJ.Data.Repositories
         Task CreateBidAsync(BidEntity bidEntity);
         Task DeleteBiddingByIdAsync(int bidID);
         Task UpdateBidAsync(BidEntity bidEntity);
+        Task<BidEntity> GetHighestBidForItem(int id);
     }
 }
