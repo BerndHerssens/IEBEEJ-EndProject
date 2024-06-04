@@ -8,11 +8,13 @@ namespace IEBEEJ.Business.Services
     public class BidService : IBidService
     {
         private IBidRepository _bidRepository;
+        private IItemService _itemService;
         private IMapper _mapper;
 
-        public BidService(IBidRepository bidRepository, IMapper mapper)
+        public BidService(IBidRepository bidRepository, IMapper mapper, IItemService itemService)
         {
             _bidRepository = bidRepository;
+            _itemService = itemService;
             _mapper = mapper;
         }
 
@@ -33,9 +35,12 @@ namespace IEBEEJ.Business.Services
 
         public async Task CreateABidAsync(Bid bid)
         {
-            if (bid.Item.HighestBid == null || bid.BidValue > bid.Item.HighestBid.BidValue)
+            Item item = await _itemService.GetItemByIdAsync(bid.ItemId);
+            await _itemService.GetHighestBidOnItem(item);
+
+            if (item.HighestBid == null || bid.BidValue > item.HighestBid.BidValue)
             {
-                BidEntity bidEntity = new BidEntity();
+                BidEntity bidEntity = _mapper.Map<BidEntity>(bid);
                 
                
                 await _bidRepository.CreateBidAsync(bidEntity);

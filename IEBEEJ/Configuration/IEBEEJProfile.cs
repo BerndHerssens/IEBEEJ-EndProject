@@ -22,8 +22,7 @@ namespace IEBEEJ.Configuration
                 .ForMember(x => x.SellerName, y => y.MapFrom(z => z.SellerName))
                 .ForMember(x => x.SendAdress, y => y.MapFrom(z => z.SendingAdress));
             CreateMap<AddUserDTO, User>();
-
-
+            CreateMap<AddBidDTO, Bid>();
             CreateMap<Bid, SmallBidDTO>();
             CreateMap<BidEntity, Bid>().ReverseMap();
 

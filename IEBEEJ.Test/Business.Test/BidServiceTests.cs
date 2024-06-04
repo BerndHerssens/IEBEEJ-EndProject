@@ -28,7 +28,7 @@ namespace IEBEEJ.Test.Business.Test
             Item item = new Item();
 
             var bidRepositoryMock = new Mock<IBidRepository>();
-            var bidService = new BidService(bidRepositoryMock.Object, mapper);
+            // var bidService = new BidService(bidRepositoryMock.Object, mapper);
 
             // Act
             // await bidService.CreateABidAsync(Bid bid);
