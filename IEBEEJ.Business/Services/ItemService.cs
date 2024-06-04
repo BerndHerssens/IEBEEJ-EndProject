@@ -107,5 +107,11 @@ namespace IEBEEJ.Business.Services
                 return null;
             }
         }
+
+        public async Task<IEnumerable<Item>> GetItemsBySellerIDAsync(int id)
+        {
+            List<ItemEntity> itemEntities = await _itemRepository.GetItemsBySellerIDAsync(id);
+            return _mapper.Map<List<Item>>(itemEntities);
+        }
     }
 }

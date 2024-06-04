@@ -69,6 +69,11 @@ namespace IEBEEJ.Data.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<List<ItemEntity>> GetItemsBySellerIdAsync(string id)
+        {
+            return await _dbContext.Items.Where(x => x.Seller.Name == id).ToListAsync();
+        }
+
         /*public async Task<List<ItemEntity>> GetFilteredDataAsync(string category, int skip, int take)
         {
             return await _dbContext.Items
