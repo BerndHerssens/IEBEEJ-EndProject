@@ -15,28 +15,11 @@ namespace IEBEEJ.Data.Repositories
             _mapper = mapper;
         }
 
-        public async Task CreateOrderAsync(OrderEntity orderEntity, ItemEntity itemEntity)
+        public async Task CreateOrderAsync(OrderEntity orderEntity)
         {
-            try
-            {
-                List<BidEntity> bids = itemEntity.AllBids;
-                orderEntity.TotalCost = bids.Max(x => x.BidValue) *1.21m; //move to bussiness
-            }
-            catch (Exception ex)
-            {
-                //logger.Log(ex.message("Something went wrong during creating at the reposity"))
-                throw;
-            }
-            try
-            {
-                await _dbContext.Orders.AddAsync(orderEntity);
-                await _dbContext.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                //logger.Log(ex.message("Could not save and update DataBase.")
-                throw new DbUpdateException("Could not save and update DataBase.", ex);
-            }
+            orderEntity.Buyer = null;
+            await _dbContext.AddAsync(orderEntity);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<OrderEntity>> GetAllOrdersAsync(int skip, int take)

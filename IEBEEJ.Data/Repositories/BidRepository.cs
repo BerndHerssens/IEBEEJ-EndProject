@@ -44,6 +44,14 @@ namespace IEBEEJ.Data.Repositories
                .SingleOrDefaultAsync(x => x.Id == bidID);
         }
 
+        public async Task<BidEntity> GetHighestBidForItem(int itemId)
+        {
+           return await _dbContext.Bids
+                .Where(x => x.ItemID == itemId)
+                .OrderByDescending(x => x.BidValue)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task UpdateBidAsync(BidEntity bidEntity)
         {
             _dbContext.Bids.Update(bidEntity);

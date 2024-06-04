@@ -4,7 +4,7 @@ namespace IEBEEJ.Data.Repositories
 {
     public interface IOrderRepository
     {
-        Task CreateOrderAsync(OrderEntity orderEntity, ItemEntity itemEntity);
+        Task CreateOrderAsync(OrderEntity orderEntity);
 
         Task<IEnumerable<OrderEntity>> GetAllOrdersAsync(int skip, int take);
 

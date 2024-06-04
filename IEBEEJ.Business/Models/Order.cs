@@ -10,9 +10,8 @@ namespace IEBEEJ.Business.Models
     public class Order
     {
         public int Id { get; set; }
-        public DateTime TimeCreated { get; set; }
         public string SellerName { get; set; }
-        public string SendAdress { get; set; }
+        public string SourceAdress { get; set; }
         public int BuyerID { get; set; }
         public string BuyerName { get; set; }
         public string BuyerAdress { get; set; }

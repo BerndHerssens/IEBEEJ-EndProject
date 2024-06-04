@@ -15,12 +15,7 @@ namespace IEBEEJ.Configuration
         public IEBEEJProfile()
         {
             CreateMap<AddItemDTO, Item>();
-            CreateMap<AddOrderDTO, Order>()
-                .ForMember(x => x.BuyerID, y => y.MapFrom(z => z.BuyerId))
-                .ForMember(x => x.BuyerName, y => y.MapFrom(z => z.BuyerName))
-                .ForMember(x => x.BuyerAdress, y => y.MapFrom(z => z.BuyerAdress))
-                .ForMember(x => x.SellerName, y => y.MapFrom(z => z.SellerName))
-                .ForMember(x => x.SendAdress, y => y.MapFrom(z => z.SendingAdress));
+            CreateMap<AddOrderDTO, Order>();
             CreateMap<AddUserDTO, User>();
             CreateMap<AddBidDTO, Bid>();
             CreateMap<Bid, SmallBidDTO>();
@@ -49,8 +44,9 @@ namespace IEBEEJ.Configuration
 
             CreateMap<Order, OrderDTO>();
             CreateMap<Order, SmallOrderDTO>();
-            CreateMap<OrderEntity, Order>().ReverseMap();
-                //.ForMember(x => x.ItemEntity, y => y.MapFrom(z => z.Item));
+            CreateMap<OrderEntity, Order>()
+                .ForMember(x => x.SourceAdress, y => y.MapFrom(z => z.SendAdress))
+                .ReverseMap();
 
 
             CreateMap<StatusEntity,StatusType>();

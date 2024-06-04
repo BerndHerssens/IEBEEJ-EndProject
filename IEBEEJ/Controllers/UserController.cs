@@ -81,7 +81,7 @@ namespace IEBEEJ.Controllers
         }
 
         [HttpDelete]
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             await _userService.DeleteUserAsync(id);
         }

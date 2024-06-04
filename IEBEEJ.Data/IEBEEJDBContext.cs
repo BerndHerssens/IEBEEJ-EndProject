@@ -25,6 +25,9 @@ namespace IEBEEJ.Data
             List<CategoryEntity> categories = GenerateDummyCategories();
             modelBuilder.Entity<CategoryEntity>().HasData(categories);
 
+            List<OrderEntity> orders = GenerateDummyOrders();
+            modelBuilder.Entity<OrderEntity>().HasData(orders);
+
             List<ItemEntity> items = GenerateDummyItems();
             modelBuilder.Entity<ItemEntity>().HasData(items);
 
@@ -34,8 +37,7 @@ namespace IEBEEJ.Data
             List<StatusEntity> statuses = GenerateDummyStatuses();
             modelBuilder.Entity<StatusEntity>().HasData(statuses);
 
-            List<OrderEntity> orders = GenerateDummyOrders();
-            modelBuilder.Entity<OrderEntity>().HasData(orders);
+            
         }
 
         private List<BidEntity> GenerateDummyBids()
@@ -110,6 +112,7 @@ namespace IEBEEJ.Data
                    SellerId=1,
                    SendingAdress = "dok",
                    StartingPrice = 1,
+                   OrderID=1,
                },
                new ItemEntity
                {
@@ -276,7 +279,7 @@ namespace IEBEEJ.Data
                     TotalCost = 700,
                     StatusId = 1,
                     PaymentMethod = "Paypal",
-                    ItemEntityId = 3,
+                    ItemId = 3,
                 },
                 new OrderEntity
                 {
@@ -288,7 +291,7 @@ namespace IEBEEJ.Data
                     TotalCost = 600,
                     StatusId = 2,
                     PaymentMethod = "Credit Card" ,
-                    ItemEntityId = 2
+                    ItemId = 2
                 },
                 new OrderEntity
                 {
@@ -300,7 +303,7 @@ namespace IEBEEJ.Data
                     TotalCost = 700,
                     StatusId = 3,
                     PaymentMethod = "Paypal",
-                    ItemEntityId = 1
+                    ItemId = 1
                 }
             };
         }

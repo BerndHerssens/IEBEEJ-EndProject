@@ -33,10 +33,15 @@ namespace IEBEEJ.Controllers
                     return Created();
 
                 }
+                catch (KeyNotFoundException ex)
+                {
+                    //LogException(ex); Here we will save it in an internal logger, not yet implemented
+                    return BadRequest(ex.Message);
+                }
                 catch (Exception ex)
                 {
                     //LogException(ex); Here we will save it in an internal logger, not yet implemented
-                    return StatusCode(500, ex.Message);
+                    return StatusCode(500, ex);
                 }
             }
             else
