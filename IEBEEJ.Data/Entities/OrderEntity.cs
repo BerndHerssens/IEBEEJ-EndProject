@@ -11,6 +11,8 @@ namespace IEBEEJ.Data.Entities
         public int BuyerId { get; set; }
         public UserEntity Buyer { get; set; }
         public bool IsActive { get; set; }
+
+        [MaxLength(50)]
         public string PaymentMethod { get; set; }
         [Required]
         public int StatusId { get; set; }

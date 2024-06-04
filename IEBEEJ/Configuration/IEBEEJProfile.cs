@@ -39,6 +39,7 @@ namespace IEBEEJ.Configuration
             CreateMap<User, SmallUserDTO>();
             CreateMap<User, UserDTO>();
             CreateMap<User, UserForOrderDTO>();
+            CreateMap<User, ActiveUserDTO>();
             CreateMap<UserEntity, User>().ReverseMap();
 
 

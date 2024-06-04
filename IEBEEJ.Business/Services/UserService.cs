@@ -28,7 +28,7 @@ namespace IEBEEJ.Business.Services
             await _userRepository.ChangeUserRoleAsync(userEntity, role);
         }
 
-        public async Task ChangeAccountActiveStatus(User user)
+        public async Task ChangeAccountActiveStatus(int id, User user)
         {
             user.IsActive = !user.IsActive;
             UserEntity userEntity = _mapper.Map<UserEntity>(user);
