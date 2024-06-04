@@ -108,5 +108,20 @@ namespace IEBEEJ.Data.Repositories
             _dbContext.Items.Update(itemEntity);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<List<ItemEntity>> GetItemsBySellerIdAsync(string id)
+        {
+            return await _dbContext.Items.Where(x => x.Seller.Name == id).ToListAsync();
+        }
+
+        /*public async Task<List<ItemEntity>> GetFilteredDataAsync(string category, int skip, int take)
+        {
+            return await _dbContext.Items
+                .Where(x => x.CategoryId = category )
+                .Skip(skip)
+                .Take(take)
+                .OrderByDescending(x => x.Id)
+                .ToListAsync();
+        }*/
     }
 }

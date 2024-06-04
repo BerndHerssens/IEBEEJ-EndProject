@@ -28,7 +28,7 @@ namespace IEBEEJ.Controllers
         [Route("GetAllItems")]
         public async Task<ActionResult<IEnumerable<Item>>> Get()
         {
-            IEnumerable<Item> models = await _itemService.GetAllItemsAsync(); 
+            IEnumerable<Item> models = await _itemService.GetAllItemsAsync();
             IEnumerable<ItemDTO> itemDTOs = _mapper.Map<IEnumerable<ItemDTO>>(models);
             if (itemDTOs != null)
             {
@@ -38,7 +38,6 @@ namespace IEBEEJ.Controllers
             {
                 return NotFound("Cannot find any Item lists");
             }
-            
         }
 
         [HttpGet("{id}")]
@@ -61,7 +60,7 @@ namespace IEBEEJ.Controllers
         [Route("SearchOnCategory")]
         public async Task<ActionResult<IEnumerable<Item>>> SearchOnCategory(int categoryInt)
         {
-            IEnumerable<Item> filteredList =await _itemService.GetItemsByCategoryId(categoryInt);
+            IEnumerable<Item> filteredList = await _itemService.GetItemsByCategoryId(categoryInt);
             if (filteredList != null)
             {
                 IEnumerable<ItemDTO> itemDTO = _mapper.Map<IEnumerable<ItemDTO>>(filteredList);
@@ -137,7 +136,7 @@ namespace IEBEEJ.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
         }
 
         // DELETE api/<ItemController>/5
@@ -206,6 +205,23 @@ namespace IEBEEJ.Controllers
             else
             {
                 return BadRequest(ModelState);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetItemsBySellerID")]
+        public async Task<ActionResult> GetItemsBySellerID(int id)
+        {
+            IEnumerable<Item> items = await _itemService.GetItemsBySellerIDAsync(id);
+            IEnumerable<ItemDTO> itemDTOs = _mapper.Map<IEnumerable<ItemDTO>>(items);
+
+            if (itemDTOs != null)
+            {
+                return Ok(itemDTOs);
+            }
+            else
+            {
+                return NotFound();
             }
         }
     }

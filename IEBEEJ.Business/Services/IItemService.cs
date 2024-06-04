@@ -13,6 +13,8 @@ namespace IEBEEJ.Business.Services
         Task UpdateItemAsync(Item item);
         Task DeleteItemAsync(int id);
         Task<IEnumerable<Item>> GetItemsByCategoryId(int id);
+        Task<IEnumerable<Item>> GetItemsBySellerIDAsync(int id);
         Task<IEnumerable<Item>> SearchOnName(string name);
+
     }
 }
