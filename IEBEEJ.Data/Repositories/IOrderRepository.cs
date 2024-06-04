@@ -12,7 +12,7 @@ namespace IEBEEJ.Data.Repositories
 
         Task<List<OrderEntity>> GetOrdersByBuyerIDAsync(int userId);
 
-        Task RemoveOrderByIdAsync(int id);
+        Task RemoveOrderAsync(OrderEntity orderEntity);
 
         Task UpdateOrderAsync(OrderEntity orderEntity);
     }

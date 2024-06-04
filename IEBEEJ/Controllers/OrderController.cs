@@ -3,6 +3,7 @@ using IEBEEJ.Business.Models;
 using IEBEEJ.Business.Services;
 using IEBEEJ.DTOs.OrderDTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IEBEEJ.Controllers
 {
@@ -23,9 +24,30 @@ namespace IEBEEJ.Controllers
         [Route("CreateOrder")]
         public async Task<ActionResult> Post(AddOrderDTO addOrderDTO)
         {
-            Order order = _mapper.Map<Order>(addOrderDTO);
-            await _orderService.CreateOrderAsync(order);
-            return Created();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Order order = _mapper.Map<Order>(addOrderDTO);
+                    await _orderService.CreateOrderAsync(order);
+                    return Created();
+
+                }
+                catch (KeyNotFoundException ex)
+                {
+                    //LogException(ex); Here we will save it in an internal logger, not yet implemented
+                    return BadRequest(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    //LogException(ex); Here we will save it in an internal logger, not yet implemented
+                    return StatusCode(500, ex);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         [HttpPut]
@@ -36,15 +58,17 @@ namespace IEBEEJ.Controllers
             {
                 Order order = _mapper.Map<Order>(updatedOrderstatusDTO);
                 await _orderService.UpdateOrderAsync(order);
-                return Ok();
+                return Created();
             }
-
-            return BadRequest();
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         [HttpGet]
         [Route("GetOrderById")]
-        public async Task<ActionResult> GetOrderById(int id)
+        public async Task<ActionResult<OrderDTO>> GetOrderById(int id)
         {
             Order order = await _orderService.GetOrderByIdAsync(id);
             OrderDTO orderDTO = _mapper.Map<OrderDTO>(order);
@@ -57,26 +81,35 @@ namespace IEBEEJ.Controllers
 
         [HttpGet]
         [Route("GetAllOrders")]
-        public async Task<ActionResult> GetAllOrders(int skip, int take)
+        public async Task<ActionResult<IEnumerable<Order>>> GetAllOrders(int skip, int take)
         {
             IEnumerable<Order> orders = await _orderService.GetAllOrdersAsync(skip, take);
-            if (orders != null)
+            IEnumerable<OrderDTO> orderDTO = _mapper.Map<IEnumerable<OrderDTO>>(orders);
+            if (orderDTO != null)
             {
-                return Ok(orders);
+                return Ok(orderDTO);
             }
             return NotFound();
         }
 
         [HttpGet]
         [Route("GetOrdersByUserId")]
-        public async Task<ActionResult> GetOrdersByUserId(int userId)
-        {
-            List<Order> orders = await _orderService.GetOrdersByUserIdAsync(userId);
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByUserId(int userId)
+        {   
+            IEnumerable<Order> orders = await _orderService.GetOrdersByUserIdAsync(userId);
             if (orders != null)
             {
-                return Ok(orders);
+                IEnumerable<OrderDTO> orderDTO = _mapper.Map<IEnumerable<OrderDTO>>(orders);
+                return Ok(orderDTO);
             }
             return NotFound();
+        }
+        [HttpDelete]
+        [Route("DeleteOrderById")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _orderService.DeleteItemAsync(id);
+            return Created();
         }
     }
 

@@ -54,6 +54,9 @@ namespace IEBEEJ.Data.Entities
 
         [Required]
         public decimal StartingPrice { get; set; }
+        public int? OrderID { get; set; }
+
+        public OrderEntity Order { get; set; }
 
         //[Required]
         //public int Views { get; set; } = 0;*/ //Nice To Have

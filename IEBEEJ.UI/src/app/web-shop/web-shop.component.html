@@ -1,12 +1,16 @@
 <header class="bg-dark py-5">
   <div class="container px-4 px-lg-5 my-5">
     <div class="text-center text-white">
-      <h1 class="display-4 fw-bolder">Shop in style</h1>
-      <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+      <h1 class="display-4 fw-bolder">Welcome to IEBEEJ</h1>
+      <p class="lead fw-normal text-white-50 mb-0">U definitely won't git scammed</p>
     </div>
   </div>
 </header>
 <section class="py-5">
+  <form (submit)="searchOnName()" [formGroup]="searchQuery" class="px-4 px-lg-5 mt-5 input-group">
+    <input form-control formControlName="searchQuery" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+  </form>
   <div class="container px-4 px-lg-5 mt-5">
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center col-mx-2" >
       <div class="card h-100" *ngFor="let item of items" >
@@ -18,18 +22,20 @@
             <!-- Product name-->
             <h5 class="fw-bolder">{{item.itemName}}</h5>
             <!-- Product price-->
-            <h6>Current highest bid: </h6>
-<<<<<<< Updated upstream
-            <p class="font-italic">€{{item.smallBid.bidValue}} by {{item.smallBid.bidderId}}</p>
-=======
-            <p class="font-italic">€400,00 by {{item.sellerName.at(0)?.toUpperCase()}}</p>
->>>>>>> Stashed changes
-            <p>{{item.sellerName}}</p>
+            @if (item.highestBidPrice != undefined) {
+              <h6>Current highest bid: </h6>
+            <p class="font-italic">${{item.highestBidPrice}}</p>
+            } @else {
+              <h6>Starting price: </h6>
+            <p class="font-italic">${{item.startingPrice}}</p>
+            } 
+            
+            <p>Seller: {{item.sellerName}}</p>
           </div>
         </div>
         <!-- Product actions-->
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-          <div class="text-center"><a class="btn btn-outline-dark mt-auto" routerLink="/items/ + {{item.id}}">View details</a></div>
+          <div class="text-center"><a class="btn btn-outline-dark mt-auto" routerLink="/items/{{item.id}}">View details</a></div>
         </div>
       </div>
     </div>

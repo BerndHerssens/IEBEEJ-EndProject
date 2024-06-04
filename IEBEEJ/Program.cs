@@ -19,7 +19,6 @@ namespace IEBEEJ
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             builder.Services.AddScoped<IItemRepository, ItemRepository>();
             builder.Services.AddScoped<IItemService, ItemService>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();

@@ -1,4 +1,5 @@
-﻿using IEBEEJ.Data.Entities;
+﻿using AutoMapper;
+using IEBEEJ.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace IEBEEJ.Data.Repositories
@@ -6,15 +7,18 @@ namespace IEBEEJ.Data.Repositories
     public class OrderRepository : IOrderRepository
     {
         private IEBEEJDBContext _dbContext;
+        private IMapper _mapper;
 
-        public OrderRepository(IEBEEJDBContext dbcontext)
+        public OrderRepository(IEBEEJDBContext dbcontext, IMapper mapper)
         {
             _dbContext = dbcontext;
+            _mapper = mapper;
         }
 
         public async Task CreateOrderAsync(OrderEntity orderEntity)
         {
-            await _dbContext.Orders.AddAsync(orderEntity);
+            orderEntity.Buyer = null;
+            await _dbContext.AddAsync(orderEntity);
             await _dbContext.SaveChangesAsync();
         }
 
@@ -30,19 +34,16 @@ namespace IEBEEJ.Data.Repositories
         public async Task<OrderEntity> GetOrderByIdAsync(int id)
         {
             return await _dbContext.Orders
-                .Include(x => x.WonBidding)
-                .Include(x => x.WonItem)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<List<OrderEntity>> GetOrdersByBuyerIDAsync(int userId)
         {
-            return await _dbContext.Orders.Where(x => x.WonBidding.BidderId == userId).ToListAsync();
+            return await _dbContext.Orders.Where(x => x.BuyerId == userId).ToListAsync();
         }
 
-        public async Task RemoveOrderByIdAsync(int id)
+        public async Task RemoveOrderAsync(OrderEntity orderEntity)
         {
-            OrderEntity orderEntity = new OrderEntity { Id = id };
             _dbContext.Orders.Remove(orderEntity);
             await _dbContext.SaveChangesAsync();
         }

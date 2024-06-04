@@ -23,6 +23,19 @@ export class ItemsService {
 
   }
 
+  getItemById(id: number): Observable<any> {
+    return this.HttpClient.get(`${this.APIUrl}/${id}`)
+
+  }
+
+  getItemByName(name: string|null|undefined): Observable<any>{
+    if (name == "" || name ==undefined || name == null ){
+      return this.HttpClient.get(`${this.APIUrl}/GetAllItems`)
+    } else {
+      return this.HttpClient.get(`${this.APIUrl}/SearchOnName?name=${name}`)
+    }
+  }
+
   constructor(private HttpClient: HttpClient) { }
   
 }

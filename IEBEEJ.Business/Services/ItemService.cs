@@ -2,18 +2,21 @@
 using IEBEEJ.Business.Models;
 using IEBEEJ.Data.Entities;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace IEBEEJ.Business.Services
 {
     public class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepository;
+        private readonly IBidRepository _bidRepository;
         private IMapper _mapper;
 
-        public ItemService(IItemRepository itemRepository, IMapper mapper)
+        public ItemService(IItemRepository itemRepository, IMapper mapper, IBidRepository bidRepository)
         {
             _itemRepository = itemRepository;
             _mapper = mapper;
+            _bidRepository = bidRepository;
         }
 
         public async Task<Item> GetItemByIdAsync(int id)
@@ -31,37 +34,51 @@ namespace IEBEEJ.Business.Services
             }
         }
 
-
-        public async Task GetHighestBidOnItem(Item item)
+        public async Task<Bid> GetHighestBidOnItem(int id)
         {
-            if (item.AllBids != null || item.AllBids.Count > 0)
+            BidEntity entity = await _bidRepository.GetHighestBidForItem(id);
+            Bid model = _mapper.Map<Bid>(entity);
+            
+            return model;
+        }
+
+        public async Task ChangeItemActiveStatusAsync(Item item)
+        {
+            if (item != null)
             {
-                item.HighestBid = item.AllBids.OrderByDescending(x => x.BidValue).ToList()[0];
+                ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(item.Id);
+                await _itemRepository.ChangeItemActiveStatusAsync(itemEntity);
             }
         }
 
-        public async Task ChangeItemActiveStatus(Item item)
+        public async Task ChangeItemSoldStatusAsync(Item item)
         {
-            item.IsActive = !item.IsActive;
-            ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
-
-            await _itemRepository.UpdateItemAsync(itemEntity);
-        }
-
-        public async Task ChangeItemSoldStatus(Item item)
-        {
-            item.IsSold = !item.IsSold;
-            ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
-
-            await _itemRepository.UpdateItemAsync(itemEntity);
+            if (item != null)
+            {
+                ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(item.Id);
+                await _itemRepository.ChangeItemSoldStatusAsync(itemEntity);
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
         }
 
         public async Task CreateAnItem(Item item)
         {
-            ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
-            itemEntity.Created = DateTime.Now;
-            itemEntity.EndDate = DateTime.Now.AddDays(7);
-            await _itemRepository.CreateItemAsync(itemEntity);
+            if (item != null) // Tip: Extra checks: Positieve prijs. Adres ingevuld. Email geldig.
+            {
+                ItemEntity itemEntity = _mapper.Map<ItemEntity>(item);
+                if (itemEntity == null)
+                {
+                    throw new AutoMapperMappingException("Properties for ItemEntity and Item are not being mapped correctly.");
+                }
+                await _itemRepository.CreateItemAsync(itemEntity);
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
         }
 
         public async Task<IEnumerable<Item>> GetAllItemsAsync()
@@ -75,6 +92,7 @@ namespace IEBEEJ.Business.Services
             ItemEntity itemEntity = await _itemRepository.GetItemByIdAsync(item.Id);
             ItemEntity updatedEntity = _mapper.Map<ItemEntity>(item);
 
+            // Dit kan (lees moet) via AutoMapper
             itemEntity.ItemDescription = updatedEntity.ItemDescription;
             itemEntity.CategoryId = updatedEntity.CategoryId;
             itemEntity.SendingAdress = updatedEntity.SendingAdress;
@@ -91,7 +109,7 @@ namespace IEBEEJ.Business.Services
         {
             ItemEntity entitytoDelete = new ItemEntity { Id = id };
 
-            await _itemRepository.RemoveItemByIDAsync(entitytoDelete);
+            await _itemRepository.RemoveItemAsync(entitytoDelete);
         }
 
         public async Task<IEnumerable<Item>> GetItemsByCategoryId(int id)
@@ -99,7 +117,7 @@ namespace IEBEEJ.Business.Services
             IEnumerable<ItemEntity> itemEntitiess = await _itemRepository.GetItemsByCategoryId(id);
             if (itemEntitiess != null)
             {
-               IEnumerable<Item> items = _mapper.Map<IEnumerable<Item>>(itemEntitiess);
+                IEnumerable<Item> items = _mapper.Map<IEnumerable<Item>>(itemEntitiess);
                 return items;
             }
             else
@@ -108,10 +126,22 @@ namespace IEBEEJ.Business.Services
             }
         }
 
+
         public async Task<IEnumerable<Item>> GetItemsBySellerIDAsync(int id)
         {
             List<ItemEntity> itemEntities = await _itemRepository.GetItemsBySellerIDAsync(id);
             return _mapper.Map<List<Item>>(itemEntities);
+        }
+        public async Task<IEnumerable<Item>> SearchOnName(string name)
+        {
+            IEnumerable<ItemEntity> itemEntity = await _itemRepository.GetAllItemsOnNameAsync(name);
+            if (itemEntity != null)
+            {
+                IEnumerable<Item> items = _mapper.Map<IEnumerable<Item>>(itemEntity);
+                return items;
+            }
+            return null;
+
         }
     }
 }
