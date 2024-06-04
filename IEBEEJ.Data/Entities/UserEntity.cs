@@ -9,18 +9,23 @@ namespace IEBEEJ.Data.Entities
         {
         }
 
-        public UserEntity(int role) 
+        public UserEntity(int role)
         {
             Role = role;
         }
+
         public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
         public string Email { get; set; }
+
+        [Required]
+        [MaxLength(50)] //miminum length invoeren?
         public string Password { get; set; }
 
         [Required]
+        [MaxLength(200)]
         public string Adress { get; set; }
 
         public List<BidEntity> Bids { get; set; }
@@ -34,8 +39,10 @@ namespace IEBEEJ.Data.Entities
 
         [Required]
         public DateTime Birthday { get; set; }
+
         public bool IsActive { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
+
         //[Required]
         public int Role { get; set; }
     }

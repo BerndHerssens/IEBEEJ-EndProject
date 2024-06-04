@@ -15,7 +15,7 @@ namespace IEBEEJ.Business.Services
 
         Task<User> GetUserByNameAsync(string name);
 
-        Task ChangeAccountActiveStatus(User user);
+        Task ChangeAccountActiveStatus(int id, User user);
 
         Task<User> GetUserByLogin(string name, string password);
 
