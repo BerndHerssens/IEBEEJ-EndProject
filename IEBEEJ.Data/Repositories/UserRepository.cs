@@ -49,6 +49,11 @@ namespace IEBEEJ.Data.Repositories
                 .ToListAsync();
         }
 
+        public async Task<UserEntity> GetOnlyUserAsync(int buyerID)
+        {
+            return await _dbContext.Users.FindAsync(buyerID);
+        }
+
         public async Task<UserEntity> GetUserByIdAsync(int id)
         {
             return await _dbContext.Users

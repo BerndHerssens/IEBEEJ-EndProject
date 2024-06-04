@@ -15,31 +15,24 @@ namespace IEBEEJ.Data.Repositories
             _mapper = mapper;
         }
 
-        public async Task CreateOrderAsync(OrderEntity orderEntity, ItemEntity itemEntity)
+        public async Task CreateOrderAsync(OrderEntity orderEntity)
         {
-            try
-            {
-                List<BidEntity> bids = itemEntity.AllBids;
-                orderEntity.TotalCost = bids.Max(x => x.BidValue) *1.21m; //move to bussiness
+            //    try
+            //    {
+            _dbContext.Orders.Attach(orderEntity);
+            _dbContext.Entry(orderEntity).State = EntityState.Added;
+            _dbContext.Entry(orderEntity.Buyer).State = EntityState.Unchanged;
+            // orderEntity.Buyer = null;
+            await _dbContext.SaveChangesAsync();
             }
-            catch (Exception ex)
-            {
-                //logger.Log(ex.message("Something went wrong during creating at the reposity"))
-                throw;
-            }
-            try
-            {
-                await _dbContext.Orders.AddAsync(orderEntity);
-                await _dbContext.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                //logger.Log(ex.message("Could not save and update DataBase.")
-                throw new DbUpdateException("Could not save and update DataBase.", ex);
-            }
-        }
+            //    catch (Exception ex)
+            //    {
+            //        //logger.Log(ex.message("Could not save and update DataBase.")
+            //        throw new DbUpdateException("Could not save and update DataBase.", ex);
+            //    }
+            //}
 
-        public async Task<IEnumerable<OrderEntity>> GetAllOrdersAsync(int skip, int take)
+            public async Task<IEnumerable<OrderEntity>> GetAllOrdersAsync(int skip, int take)
         {
             return await _dbContext.Orders
                 .Skip(skip)

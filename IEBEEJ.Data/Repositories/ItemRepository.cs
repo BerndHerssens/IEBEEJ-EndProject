@@ -91,6 +91,12 @@ namespace IEBEEJ.Data.Repositories
             return await _dbContext.Items.Where(x => x.SellerId == userId).ToListAsync();
         }
 
+        public async Task<ItemEntity> GetOnlyItemAsync(int itemId)
+        {
+            return await _dbContext.Items
+                .FindAsync(itemId);
+        }
+
         public async Task RemoveItemAsync(ItemEntity entity)
         {
             _dbContext.Items.Remove(entity);

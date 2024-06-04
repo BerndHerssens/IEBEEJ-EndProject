@@ -11,25 +11,49 @@ namespace IEBEEJ.Business.Services
         private IMapper _mapper;
         private IItemRepository _itemRepository;
         private IUserRepository _userRepository;
+private IBidRepository _bidRepository;
 
-        public OrderService(IOrderRepository orderRepository, IMapper mapper, IItemRepository itemRepository, IUserRepository userRepository)
+        public OrderService(IOrderRepository orderRepository, IMapper mapper, IItemRepository itemRepository, IUserRepository userRepository, IBidRepository bidRepository)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
             _itemRepository = itemRepository;
             _userRepository = userRepository;
+            _bidRepository = bidRepository;
         }
 
         public async Task CreateOrderAsync(Order order)
         {
+            UserEntity buyerEntity = await _userRepository.GetOnlyUserAsync(order.BuyerID);
+            ItemEntity itemEntity = await _itemRepository.GetOnlyItemAsync(order.ItemId);
+            UserEntity sellerEntity = await _userRepository.GetOnlyUserAsync(itemEntity.SellerId);
+            BidEntity highestBid = await _bidRepository.GetHighestBidForItem(itemEntity.Id);
+           
+
+            if (highestBid.BidderId != buyerEntity.Id)
+            {
+                throw new KeyNotFoundException("This bid was not placed by this buyer.");
+            }
+
+            order.BuyerAdress = buyerEntity.Adress;
+            order.BuyerName = buyerEntity.Name;
+
+            order.SourceAdress = sellerEntity.Adress;
+            order.SellerName = sellerEntity.Name;
+
+            order.IsActive = true;
+            order.PaymentMethod = "Cash";
+
+            order.TotalCost = highestBid.BidValue * 1.21m;
             
+
             OrderEntity orderEntity = _mapper.Map<OrderEntity>(order);
+            orderEntity.Buyer = null;
             if (orderEntity == null)
             {
                 throw new AutoMapperMappingException("Properties for OrderEntity and Order are not being mapped correctly.");
             }
-            ItemEntity tempItemEntity = await _itemRepository.GetItemByIdAsync(order.ItemId);
-            await _orderRepository.CreateOrderAsync(orderEntity, tempItemEntity);
+            await _orderRepository.CreateOrderAsync(orderEntity);
         }
 
         public async Task<Order> GetOrderByIdAsync(int id)
@@ -58,7 +82,7 @@ namespace IEBEEJ.Business.Services
         {
             OrderEntity orderEntity = await _orderRepository.GetOrderByIdAsync(order.Id);
             OrderEntity updatedEntity = _mapper.Map<OrderEntity>(order);
-            orderEntity.ItemEntityId = updatedEntity.ItemEntityId;
+            orderEntity.ItemId = updatedEntity.ItemId;
             orderEntity.BuyerId = updatedEntity.BuyerId;
             orderEntity.SellerName = updatedEntity.SellerName;
             orderEntity.SendAdress = updatedEntity.SendAdress;

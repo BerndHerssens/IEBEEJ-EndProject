@@ -9,12 +9,13 @@ namespace IEBEEJ.Data.Entities
         public string SellerName { get; set; }
         public string SendAdress { get; set; }
         public int BuyerId { get; set; }
+        public UserEntity Buyer { get; set; }
         public bool IsActive { get; set; }
         public string PaymentMethod { get; set; }
         [Required]
         public int StatusId { get; set; }
         public decimal TotalCost { get; set; }
         [Required]
-        public int ItemEntityId { get; set; }
+        public int ItemId { get; set; }
     }
 }

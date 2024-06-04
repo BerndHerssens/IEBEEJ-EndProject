@@ -8,13 +8,6 @@ namespace IEBEEJ.DTOs.OrderDTOs
     {
         [Required]
         public int ItemId { get; set; }
-        public string ItemName { get; set; }
-        public string SellerName { get; set; }
-        public string SendingAdress { get; set; }
         public int BuyerId { get; set; }
-        public string BuyerName { get; set; }
-        public string BuyerAdress { get; set; }
-        public decimal TotalPrice { get; set; }
-        public int StatusId { get; set; }
     }
 }
