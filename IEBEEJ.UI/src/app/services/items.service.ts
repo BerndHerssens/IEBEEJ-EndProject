@@ -23,6 +23,15 @@ export class ItemsService {
 
   }
 
+  getAllItemsFromUser(): Observable<any> {
+    const headers = new HttpHeaders({ 
+      /** Authorization: `bearer ${this.key}`, */
+    })
+
+    return this.HttpClient.get(`${this.APIUrl}/GetAllItems`, { headers })
+
+  }
+
   getItemById(id: number): Observable<any> {
     return this.HttpClient.get(`${this.APIUrl}/${id}`)
 

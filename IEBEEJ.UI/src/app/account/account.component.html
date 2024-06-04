@@ -46,24 +46,29 @@
                 <p class="lead fw-normal mb-0">Recent photos</p>
                 <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
               </div>
-              <div class="row g-2">
-                <div class="col mb-2">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp" alt="image 1"
-                    class="w-100 rounded-3">
+              <div class="card h-100" *ngFor="let item of items" >
+                <!-- Product image-->
+                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                <!-- Product details-->
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">{{item.itemName}}</h5>
+                    <!-- Product price-->
+                    @if (item.highestBidPrice != undefined) {
+                      <h6>Current highest bid: </h6>
+                    <p class="font-italic">${{item.highestBidPrice}}</p>
+                    } @else {
+                      <h6>Starting price: </h6>
+                    <p class="font-italic">${{item.startingPrice}}</p>
+                    } 
+                    
+                    <p>Seller: {{item.sellerName}}</p>
+                  </div>
                 </div>
-                <div class="col mb-2">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp" alt="image 1"
-                    class="w-100 rounded-3">
-                </div>
-              </div>
-              <div class="row g-2">
-                <div class="col">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp" alt="image 1"
-                    class="w-100 rounded-3">
-                </div>
-                <div class="col">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp" alt="image 1"
-                    class="w-100 rounded-3">
+                <!-- Product actions-->
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center"><a class="btn btn-outline-dark mt-auto" routerLink="/items/{{item.id}}">View details</a></div>
                 </div>
               </div>
             </div>
