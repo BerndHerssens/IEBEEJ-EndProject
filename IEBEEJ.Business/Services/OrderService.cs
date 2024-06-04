@@ -35,6 +35,7 @@ private IBidRepository _bidRepository;
                 throw new KeyNotFoundException("This bid was not placed by this buyer.");
             }
 
+            // Tip: This can also be automapped
             order.BuyerAdress = buyerEntity.Adress;
             order.BuyerName = buyerEntity.Name;
 
@@ -46,9 +47,7 @@ private IBidRepository _bidRepository;
 
             order.TotalCost = highestBid.BidValue * 1.21m;
             
-
             OrderEntity orderEntity = _mapper.Map<OrderEntity>(order);
-            orderEntity.Buyer = null;
             if (orderEntity == null)
             {
                 throw new AutoMapperMappingException("Properties for OrderEntity and Order are not being mapped correctly.");

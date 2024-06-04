@@ -17,22 +17,12 @@ namespace IEBEEJ.Data.Repositories
 
         public async Task CreateOrderAsync(OrderEntity orderEntity)
         {
-            //    try
-            //    {
-            _dbContext.Orders.Attach(orderEntity);
-            _dbContext.Entry(orderEntity).State = EntityState.Added;
-            _dbContext.Entry(orderEntity.Buyer).State = EntityState.Unchanged;
-            // orderEntity.Buyer = null;
+            orderEntity.Buyer = null;
+            await _dbContext.AddAsync(orderEntity);
             await _dbContext.SaveChangesAsync();
-            }
-            //    catch (Exception ex)
-            //    {
-            //        //logger.Log(ex.message("Could not save and update DataBase.")
-            //        throw new DbUpdateException("Could not save and update DataBase.", ex);
-            //    }
-            //}
+        }
 
-            public async Task<IEnumerable<OrderEntity>> GetAllOrdersAsync(int skip, int take)
+        public async Task<IEnumerable<OrderEntity>> GetAllOrdersAsync(int skip, int take)
         {
             return await _dbContext.Orders
                 .Skip(skip)

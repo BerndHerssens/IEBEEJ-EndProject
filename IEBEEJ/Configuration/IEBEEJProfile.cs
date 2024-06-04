@@ -44,8 +44,9 @@ namespace IEBEEJ.Configuration
 
             CreateMap<Order, OrderDTO>();
             CreateMap<Order, SmallOrderDTO>();
-            CreateMap<OrderEntity, Order>().ReverseMap();
-                //.ForMember(x => x.ItemEntity, y => y.MapFrom(z => z.Item));
+            CreateMap<OrderEntity, Order>()
+                .ForMember(x => x.SourceAdress, y => y.MapFrom(z => z.SendAdress))
+                .ReverseMap();
 
 
             CreateMap<StatusEntity,StatusType>();
