@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -13,7 +14,7 @@ export class LogInComponent {
     password: new FormControl(''),
   });
 
-  constructor(private userService : UserService) {}
+  constructor(private userService : UserService, private router : Router) {}
 
   login() : void{
 
@@ -21,6 +22,7 @@ export class LogInComponent {
     this.userService.getUserByLogin(obj.username!, obj.password!).subscribe(
       (data) => {
         this.userService.currentUser = data;
+        this.router.navigate(['/shop'])
       }, 
         (error) => {
           alert("Wrong username or password")
