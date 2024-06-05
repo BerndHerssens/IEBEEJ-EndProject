@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -27,17 +28,18 @@ export class RegisterComponent {
     birthday: new FormControl(''),
   });
 
-  constructor(private userService : UserService) {}
+  constructor(private userService : UserService, private router : Router) {}
 
   register() : void{
     console.log(this.registerForm.value)
     this.userService.registerAUser(this.registerForm.value).subscribe(
       (data) => {
-        this.userService.currentUser = data;
+        alert("User has been succesfully added!")
+        this.router.navigate([""])
       }, 
         (error) => {
           console.error(error)
-          alert("Wrong username or password")
+          alert("U didn't fill in the correct data")
         }
       
     )
