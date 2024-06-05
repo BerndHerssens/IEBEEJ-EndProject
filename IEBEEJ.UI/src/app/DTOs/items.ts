@@ -19,8 +19,6 @@ export interface ItemDTO {
 }
 
 export interface AddItemDTO {
-    estimatedValueMax: number;
-    estimatedValueMin: number;
     startingPrice: number;
     category: number;
     sellerId: number;

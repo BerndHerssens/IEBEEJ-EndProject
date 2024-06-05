@@ -1,0 +1,53 @@
+<section class="h-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card card-registration my-4">
+            <div class="row g-0">
+              <div class="col-xl-6 d-none d-xl-block">
+                <img src="https://s3.amazonaws.com/www-inside-design/uploads/2019/03/featureuserpersona-810x810.jpg"
+                  alt="Sample photo" class="img-fluid"
+                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+              </div>
+              <form  (submit)="createItem()" [formGroup]="newItem" class="col-xl-6">
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase">Create an item to sell</h3>
+  
+                  <div class="row">
+                    <div class="col-md-12 mb-4">
+                      <div data-mdb-input-init class="form-outline">
+                        <input formControlName="itemName" type="text" id="name" class="form-control form-control-lg" />
+                        <label class="form-label" for="name">Item name</label>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input formControlName="itemDescription" type="text" id="description" class="form-control form-control-lg" />
+                    <label class="form-label" for="description">Item description</label>
+                  </div>
+  
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input formControlName="sendingAdress" type="text" id="adress" class="form-control form-control-lg" />
+                    <label class="form-label" for="adress">Sending adress</label>
+                  </div>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input formControlName="startingPrice" type="number" id="startingprice" min="0" class="form-control form-control-lg" />
+                    <label class="form-label" for="startingprice">Startingprice</label>
+                  </div>
+  
+                  <div class="d-flex justify-content-end pt-3">  
+                    <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                      class="btn btn-primary btn-lg ms-2">Add Item</button>
+                  </div>
+  
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

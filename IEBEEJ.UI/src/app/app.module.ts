@@ -21,6 +21,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AddItemComponent } from './add-item/add-item.component';
 
 
 
@@ -36,7 +37,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ShoppingCartComponent,
     FooterComponent,
     LogInComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    AddItemComponent
   ],
   imports: [
     BrowserModule,

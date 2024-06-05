@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ItemsService } from '../services/items.service';
 import { BidsService } from '../services/bids.service';
 import { ItemDTO } from '../DTOs/items';
+import { UserService } from '../services/user.service';
+import { UserDTO } from '../DTOs/users';
 
 @Component({
   selector: 'app-account',
@@ -9,15 +11,16 @@ import { ItemDTO } from '../DTOs/items';
   styleUrl: './account.component.css'
 })
 export class AccountComponent {
-  constructor(private itemService: ItemsService, private bidService: BidsService){}
+  constructor(private itemService: ItemsService, private bidService: BidsService, private userService:UserService){}
 
   items: ItemDTO[] = []
 
+  user : UserDTO = this.userService.currentUser
+
   ngOnInit(): void {
-    this.itemService.getAllItems().subscribe(
+    this.itemService.getAllItemsFromUser(this.userService.currentUser.id).subscribe(
       (data) => {
         this.items = data;
-        console.log(this.items);
         this.items.forEach(item => {
           let highestBid = this.bidService.getHighestBid(item.allBids);
           if (highestBid != null) {
@@ -26,6 +29,7 @@ export class AccountComponent {
           else 
             item.highestBidPrice = undefined;
         });
+        console.log(this.items)
       }, 
       (error) => {
         console.error('Error fetching items:', error);
