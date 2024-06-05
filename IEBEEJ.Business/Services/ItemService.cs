@@ -129,8 +129,14 @@ namespace IEBEEJ.Business.Services
 
         public async Task<IEnumerable<Item>> GetItemsBySellerIDAsync(int id)
         {
-            List<ItemEntity> itemEntities = await _itemRepository.GetItemsBySellerIDAsync(id);
-            return _mapper.Map<List<Item>>(itemEntities);
+            IEnumerable<ItemEntity> itemEntity = await _itemRepository.GetItemsBySellerIDAsync(id);
+            if (itemEntity != null)
+            {
+                IEnumerable<Item> items = _mapper.Map<IEnumerable<Item>>(itemEntity);
+                return items;
+            }
+            return null;
+
         }
         public async Task<IEnumerable<Item>> SearchOnName(string name)
         {

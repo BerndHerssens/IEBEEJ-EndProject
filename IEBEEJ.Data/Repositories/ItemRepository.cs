@@ -88,7 +88,9 @@ namespace IEBEEJ.Data.Repositories
 
         public async Task<List<ItemEntity>> GetItemsBySellerIDAsync(int userId)
         {
-            return await _dbContext.Items.Where(x => x.SellerId == userId).ToListAsync();
+            return await _dbContext.Items.Where(x => x.SellerId == userId).Include(x => x.AllBids)
+                .Include(x => x.Seller)
+                .Include(x => x.Category).ToListAsync();
         }
 
         public async Task<ItemEntity> GetOnlyItemAsync(int itemId)
@@ -107,11 +109,6 @@ namespace IEBEEJ.Data.Repositories
         {
             _dbContext.Items.Update(itemEntity);
             await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task<List<ItemEntity>> GetItemsBySellerIdAsync(string id)
-        {
-            return await _dbContext.Items.Where(x => x.Seller.Name == id).ToListAsync();
         }
 
         /*public async Task<List<ItemEntity>> GetFilteredDataAsync(string category, int skip, int take)

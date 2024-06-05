@@ -25,10 +25,10 @@ namespace IEBEEJ.Data.Entities
         [Required]
         public DateTime EndDate { get; set; }
 
-        [Required]
+        
         public decimal EstimatedValueMax { get; set; }
 
-        [Required]
+        
         public decimal EstimatedValueMin { get; set; }
 
         public bool IsActive { get; set; }

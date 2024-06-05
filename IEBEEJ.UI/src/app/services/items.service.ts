@@ -23,6 +23,15 @@ export class ItemsService {
 
   }
 
+  getAllItemsFromUser(id:number): Observable<any> {
+    const headers = new HttpHeaders({ 
+      /** Authorization: `bearer ${this.key}`, */
+    })
+
+    return this.HttpClient.get(`${this.APIUrl}/GetItemsBySellerID?id=${id}`, { headers })
+
+  }
+
   getItemById(id: number): Observable<any> {
     return this.HttpClient.get(`${this.APIUrl}/${id}`)
 
@@ -34,6 +43,10 @@ export class ItemsService {
     } else {
       return this.HttpClient.get(`${this.APIUrl}/SearchOnName?name=${name}`)
     }
+  }
+
+  addItem(obj: any) :Observable<any> {
+    return this.HttpClient.post(`${this.APIUrl}`, obj)
   }
 
   constructor(private HttpClient: HttpClient) { }

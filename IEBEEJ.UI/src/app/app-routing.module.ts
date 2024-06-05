@@ -5,16 +5,19 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { RegisterComponent } from './register/register.component';
+import { AccountComponent } from './account/account.component';
+import { AddItemComponent } from './add-item/add-item.component';
 
 
 const routes: Routes = [
   {path:'',component: LogInComponent},
   {path:'shop', component: WebShopComponent},
   {path:'items/:id', component: ProductDetailsComponent},
-  {path:'account', component: ProductDetailsComponent},
+  {path:'account', component: AccountComponent},
   {path:'login', component: LogInComponent},
   {path:'register', component: RegisterComponent},
-  {path:'shopping-cart', component: ShoppingCartComponent}
+  {path:'shopping-cart', component: ShoppingCartComponent},
+  {path:'add-item', component: AddItemComponent}
 
   
 ]

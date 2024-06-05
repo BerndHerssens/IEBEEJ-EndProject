@@ -19,7 +19,6 @@ export class WebShopComponent {
 
   constructor(private itemService: ItemsService, private bidService: BidsService){}
 
-
   ngOnInit(): void {
     this.itemService.getAllItems().subscribe(
       (data) => {
