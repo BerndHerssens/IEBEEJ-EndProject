@@ -17,7 +17,7 @@ export class UserService {
     name: "Buddy",
     email: "Buddy@hotmail.com",
     password: "1230",
-    address: "Thuis-Straat",
+    adress: "Thuis-Straat",
     phoneNumber: "1234567890",
     birthday: new Date(1980, 9, 10)
   }

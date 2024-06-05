@@ -7,7 +7,7 @@ export interface UserDTO {
     name: string;
     email: string;
     password: string;
-    address: string;
+    adress: string;
     bids: SmallBidDTO[];
     itemsForSale: SmallItemDTO[];
     boughtItems: SmallOrderDTO[];
